@@ -14,7 +14,7 @@ namespace Hotel_Management_System
     /// </summary>
     public partial class App : Application
     {
-        private void ApplicationStart(object sender, StartupEventArgs e)
+        protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             var loginView=new LoginView();
             loginView.Show();
@@ -22,7 +22,9 @@ namespace Hotel_Management_System
             {
                 if (loginView.IsVisible == false && loginView.IsLoaded)
                 {
-                    var mainview=new 
+                    var mainview = new MainWindow();
+                    mainview.Show();
+                    loginView.Close();
                 }
             };
         }
