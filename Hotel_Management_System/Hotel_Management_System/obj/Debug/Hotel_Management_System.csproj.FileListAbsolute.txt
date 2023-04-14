@@ -24,3 +24,7 @@ C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\bin\Debug\F
 C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Views\MainWindow.g.cs
 C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Views\MainWindow.baml
 C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.CopyComplete
+C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Views\CustomerView.g.cs
+C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Views\HomeView.g.cs
+C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Views\CustomerView.baml
+C:\Workspace\winform\Hotel_Management_System\Hotel_Management_System\obj\Debug\Views\HomeView.baml

@@ -78,7 +78,7 @@ namespace Hotel_Management_System.Repositories
                             Username = reader[1].ToString(),
                             Password = string.Empty,
                             Name = reader[3].ToString(),
-                            LastName = reader[4].ToString(),
+                            Lastname = reader[4].ToString(),
                             Email = reader[5].ToString(),
 
                         };

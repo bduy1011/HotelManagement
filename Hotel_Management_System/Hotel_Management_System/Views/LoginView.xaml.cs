@@ -43,5 +43,10 @@ namespace Hotel_Management_System.Views
         {
 
         }
+
+        private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
