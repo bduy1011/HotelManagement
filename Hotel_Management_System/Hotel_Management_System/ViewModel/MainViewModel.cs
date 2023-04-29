@@ -18,11 +18,24 @@ namespace Hotel_Management_System.ViewModel
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 Isloaded = true;
-                
+
+                if (p == null) return;
                 p.Hide();
+
                 LoginWindow loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();
-                p.Show();
+
+                if (loginWindow.DataContext == null) return;
+                var loginVM = loginWindow.DataContext as LoginViewModel;
+
+                if(loginVM.IsLogin)
+                {
+                    p.Show();
+                }
+                else
+                {
+                    p.Close();
+                }
             });
         }
     }
