@@ -5,26 +5,197 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_Management_System"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        DataContext="{StaticResource MainVM}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        
+        Title="MainWindow" Height="700" Width="1300"
+        DataContext="{StaticResource MainVM}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        Name="mainWindow"
         WindowStartupLocation="CenterScreen"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        Name="mainWindow">
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-        
-    </Grid>
+
+    <Border CornerRadius="10"
+            BorderThickness="1">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6D2FFF" Offset="0"/>
+                <GradientStop Color="#FB539B" Offset="0.75"/>
+                <GradientStop Color="#836EFB" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <!--Navigation menu-->
+                <ColumnDefinition Width="250"/>
+                <!--Content section-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Navigation menu-->
+            <Border CornerRadius="10,0,0,10"
+                    Grid.Column="0">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                        <GradientStop Color="#24105F" Offset="0"/>
+                        <GradientStop Color="#210F55" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel>
+
+                    <!--Logo-->
+                    <StackPanel Orientation="Horizontal"
+                                Height="35"
+                                Margin="15,25,0,40">
+
+                        <Image Source="/Images/Logo.png" Height="30"/>
+                        <TextBlock Text="Zy Bear's Hotel"
+                                   Foreground="#D5CFF5"
+                                   FontSize="20"
+                                   FontFamily="Montserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <!--Menu Buttons-->
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#E285DE"
+                                 IsChecked="True"
+                                 Command="{Binding ShowHomeViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Danh sách thuê phòng" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Phiếu dịch vụ" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Hàng hóa" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Dịch vụ" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 Command="{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Phòng" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                </StackPanel>
+            </Border>
+
+            <!--Main Section-->
+            <Border CornerRadius="0,10,10,0"
+                    Grid.Column="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                        <GradientStop Color="#0A003A" Offset="0"/>
+                        <GradientStop Color="#1C0E49" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--Control bar-->
+                        <RowDefinition Height="25"/>
+                        <!--Header / Caption-->
+                        <RowDefinition Height="35"/>
+                        <!--Content section / Child views-->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--Control bar-->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter">
+
+                        <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="#FB539B"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="#FFC047"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="#78A3FC"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+        </Grid>
+    </Border>
 </Window>

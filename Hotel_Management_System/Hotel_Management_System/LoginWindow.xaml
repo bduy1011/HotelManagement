@@ -17,26 +17,26 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource LoginVM}"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        Name="loginWindow">
-    
+        Name="loginWindow"
+        WindowStyle="None">
+
     <Border CornerRadius="12">
-        
+
         <Border CornerRadius="10"                    
-            BorderThickness="2"
-            Opacity="0.95">
+            BorderThickness="2">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="AntiqueWhite" Offset="0"/>
-                    <GradientStop Color="Aqua" Offset="0.75"/>
-                    <GradientStop Color="Azure" Offset="1"/>
+                    <GradientStop Color="#6D2FFF" Offset="0"/>
+                    <GradientStop Color="#FB539B" Offset="0.75"/>
+                    <GradientStop Color="#836EFB" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="DarkBlue" Offset="0"/>
-                    <GradientStop Color="DarkGreen" Offset="1"/>
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -62,6 +62,69 @@
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
+
+                    <Button x:Name="btnMinimize"                           
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimize_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#28AEED"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#278BEF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button x:Name="btnClose"                          
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnClose_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#DA34AE"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C62DAE"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
                 </Grid>
 
                 <StackPanel Width="220"
@@ -176,7 +239,7 @@
                         </Button.Template>
                     </Button>
 
-                    
+
 
                 </StackPanel>
 
