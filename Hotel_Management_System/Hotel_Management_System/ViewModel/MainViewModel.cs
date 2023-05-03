@@ -1,4 +1,5 @@
-﻿using Hotel_Management_System.Model;
+﻿using FontAwesome.Sharp;
+using Hotel_Management_System.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Hotel_Management_System.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
         public bool Isloaded = false;
+        private BaseViewModel _currentChildView;
+        public BaseViewModel CurrentChildView
+        {
+            get
+            {
+                return _currentChildView;
+            }
+            set
+            {
+                _currentChildView = value;
+                OnPropertyChanged(nameof(CurrentChildView));
+            }
+        }
+
         public ICommand LoadedWindowCommand { get; set; }
+        public ICommand ShowStaffViewCommand { get; }
+        public ICommand ShowCustomerViewCommand { get; }
+
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -37,6 +56,22 @@ namespace Hotel_Management_System.ViewModel
                     p.Close();
                 }
             });
+
+            //Initialize commands
+            ShowStaffViewCommand = new ViewModelCommand(ExecuteShowStaffViewCommand);
+            ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
+
+            //Default view
+            ExecuteShowStaffViewCommand(null);
+        }
+
+        private void ExecuteShowCustomerViewCommand(object obj)
+        {
+            CurrentChildView = new CustomerViewModel();
+        }
+        private void ExecuteShowStaffViewCommand(object obj)
+        {
+            CurrentChildView = new StaffViewModel();
         }
     }
 }

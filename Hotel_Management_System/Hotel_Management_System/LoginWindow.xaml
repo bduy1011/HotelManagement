@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_Management_System"
         mc:Ignorable="d"
+        
         Title="LoginWindow" Height="450" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,14 +15,15 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource LoginVM}"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Name="loginWindow"
         WindowStyle="None">
-
+    
     <Border CornerRadius="12">
-
+        
         <Border CornerRadius="10"                    
             BorderThickness="2">
 
@@ -93,7 +95,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
+                    
                     <Button x:Name="btnClose"                          
                             BorderThickness="0"
                             Content="X"
@@ -124,7 +126,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
+                    
                 </Grid>
 
                 <StackPanel Width="220"
@@ -239,7 +241,7 @@
                         </Button.Template>
                     </Button>
 
-
+                    
 
                 </StackPanel>
 

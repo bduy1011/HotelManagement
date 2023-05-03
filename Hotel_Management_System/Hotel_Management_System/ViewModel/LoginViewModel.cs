@@ -19,7 +19,7 @@ namespace Hotel_Management_System.ViewModel
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public ICommand LoginCommand { get; set; }
+        public ICommand LoginCommand { get; set; } 
         public ICommand PasswordChangedCommand { get; set; }
 
         public LoginViewModel()
@@ -31,14 +31,14 @@ namespace Hotel_Management_System.ViewModel
 
         void Login(Window p)
         {
-            if (p == null)
+            if (p== null)
             {
                 return;
             }
 
             var account = DataProvider.Ins.DB.HE_THONG.Where(x => x.username == Username && x.password == Password).Count();
 
-            if (account > 0)
+            if(account > 0)
             {
                 IsLogin = true;
                 p.Close();

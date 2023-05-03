@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_Management_System"
+        xmlns:views="clr-namespace:Hotel_Management_System.View"
+        xmlns:ViewModel="clr-namespace:Hotel_Management_System.ViewModel"
         mc:Ignorable="d"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
@@ -17,11 +20,23 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        
         Name="mainWindow"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True">
+
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type ViewModel:StaffViewModel}">
+            <views:StaffView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModel:CustomerViewModel}">
+            <views:CustomerView/>
+        </DataTemplate>
+
+    </Window.Resources>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -81,7 +96,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#E285DE"
                                  IsChecked="True"
-                                 Command="{Binding ShowHomeViewCommand}">
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
@@ -141,7 +156,7 @@
                             <TextBlock Text="Phòng" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
-
+                    
                 </StackPanel>
             </Border>
 
@@ -164,6 +179,7 @@
                         <!--Content section / Child views-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    
                     <!--Control bar-->
                     <StackPanel x:Name="pnlControlBar"
                                 Grid.Row="0"
@@ -193,8 +209,13 @@
                             <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                     </StackPanel>
-                </Grid>
 
+                    <!--Content section / Child views-->
+                    <ContentControl Content="{Binding CurrentChildView}"
+                                    Grid.Row="2"
+                                    Margin="25"/>
+                </Grid>
+                
             </Border>
         </Grid>
     </Border>
