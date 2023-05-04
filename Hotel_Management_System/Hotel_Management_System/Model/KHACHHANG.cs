@@ -11,7 +11,8 @@ namespace Hotel_Management_System.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Windows.Media;
+
     public partial class KHACHHANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +21,9 @@ namespace Hotel_Management_System.Model
             this.HOADONs = new HashSet<HOADON>();
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
-    
+
+        public string Character { get; set; }
+        public Brush BgColor { get; set; }
         public int MaKhachHang { get; set; }
         public string TenKhachHang { get; set; }
         public string CCCD { get; set; }

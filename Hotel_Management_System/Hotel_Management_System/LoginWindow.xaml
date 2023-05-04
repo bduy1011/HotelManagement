@@ -57,7 +57,7 @@
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="LOG IN"
+                    <TextBlock Text="Đăng nhập"
                                Foreground="DarkGray"
                                FontSize="10"
                                FontFamily="Montserrat"

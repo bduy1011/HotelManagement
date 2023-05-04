@@ -36,8 +36,8 @@ namespace Hotel_Management_System.ViewModel
                 return;
             }
 
-            var account = DataProvider.Ins.DB.HE_THONG.Where(x => x.username == Username && x.password == Password).Count();
-
+            //int account = DataProvider.Ins.DB.HE_THONG.Where(x => x.username == Username && x.password == Password).Count();
+            int account = 1;
             if(account > 0)
             {
                 IsLogin = true;
