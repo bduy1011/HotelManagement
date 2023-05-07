@@ -2,54 +2,51 @@
 using Hotel_Management_System.View;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Hotel_Management_System.ViewModel
 {
-    public class CustomerViewModel : BaseViewModel
+    public class AddCustomerViewModel : BaseViewModel
     {
-        public ObservableCollection<KHACHHANG> customers;
+        public ICommand AddCustomerCommand { get; set; } 
 
-        public ICommand ShowAddCustomerViewCommand { get; set; }
-        public ICommand LoadedUserControlCommand { get; set; }
-
-        public CustomerViewModel()
+        public AddCustomerViewModel()
         {
-            ShowAddCustomerViewCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            AddCustomerCommand = new RelayCommand<UserControl>((p) =>
             {
-                AddCustomerView addCustomerWindow = new AddCustomerView();
-                addCustomerWindow.ShowDialog();
-            });
+                return true;
 
-            LoadedUserControlCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
+            }, (p) =>
             {
-                customers = new ObservableCollection<KHACHHANG>();
-
-                var customerList = DataProvider.Ins.DB.KHACHHANGs;
-
-                foreach (var item in customerList)
+                int i = DataProvider.Ins.DB.KHACHHANGs.Max(cus => cus.MaKhachHang);
+                string name = "Test" + i.ToString();
+                var customer = new KHACHHANG()
                 {
-                    customers.Add(new KHACHHANG
-                    {
-                        MaKhachHang = item.MaKhachHang,
-                        Character = item.TenKhachHang.ToString().Substring(0, 1),
-                        BgColor = brushList(item.MaKhachHang),
-                        TenKhachHang = item.TenKhachHang,
-                        CCCD = item.CCCD,
-                        Email = item.Email,
-                        SDT = item.SDT
-                    });
-                }
-                p.ItemsSource = customers;
+                    MaKhachHang = i + 1,
+                    TenKhachHang = name,
+                    Character = name.ToString().Substring(0, 1),
+                    BgColor = brushList(i),
+                    CCCD = "00000000",
+                    Email = "111111@gmail.com",
+                    SDT = "99999999"
+                };
+
+                DataProvider.Ins.DB.KHACHHANGs.Add(customer);
+                DataProvider.Ins.DB.SaveChanges();
+
+                CustomerView customerView = new CustomerView();
+                if (customerView.DataContext == null) return;
+                var customerVM = customerView.DataContext as CustomerViewModel;
+                customerVM.AddCustomer(customer);
             });
         }
+
         public BrushConverter converter = new BrushConverter();
         public Brush brushList(int i)
         {
@@ -76,11 +73,6 @@ namespace Hotel_Management_System.ViewModel
                 default:
                     return (Brush)converter.ConvertFromString("#FF5252");
             }
-        }
-
-        public void AddCustomer(KHACHHANG customer)
-        {
-            customers.Add(customer);
         }
     }
 }

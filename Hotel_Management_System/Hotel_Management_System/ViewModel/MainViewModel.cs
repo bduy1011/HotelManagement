@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Hotel_Management_System.ViewModel
 {
@@ -29,8 +29,8 @@ namespace Hotel_Management_System.ViewModel
         }
 
         public ICommand LoadedWindowCommand { get; set; }
-        public ICommand ShowStaffViewCommand { get; }
-        public ICommand ShowCustomerViewCommand { get; }
+        public ICommand ShowStaffViewCommand { get; set; }
+        public ICommand ShowCustomerViewCommand { get; set; }
 
         public MainViewModel()
         {
@@ -62,7 +62,7 @@ namespace Hotel_Management_System.ViewModel
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
 
             //Default view
-            ExecuteShowStaffViewCommand(null);
+            ExecuteShowCustomerViewCommand(null);
         }
 
         private void ExecuteShowCustomerViewCommand(object obj)

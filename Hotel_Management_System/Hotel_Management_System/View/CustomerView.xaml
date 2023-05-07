@@ -4,13 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hotel_Management_System"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Name="userControlCustomer"
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{StaticResource CustomerVM}">
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedUserControlCommand}" 
+                                   CommandParameter="{Binding ElementName=membersDataGrid}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -42,13 +51,14 @@
 
             </StackPanel>
             <Button Grid.Column="1"                          
-                    Content="Customer_Search"                            
+                    Content="Thêm"                            
                     FontSize="12"
                     FontFamily="Montserrat"
                     Cursor="Hand"
                     BorderThickness="0"
                     Foreground="White"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Command="{Binding ShowAddCustomerViewCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#773DFF"/>
@@ -79,10 +89,15 @@
                 Background="#200F53"
                 CornerRadius="10" 
                 Padding="10">
-            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}"
+            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      Style="{DynamicResource DataGridStyle1}"
+                      x:Name="membersDataGrid"
                       ColumnWidth="*"
                       Background="#200F53"
-                      BorderThickness="0">
+                      BorderThickness="0"
+                      ItemsSource="{Binding customer}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MaKhachHang}"/>
                     <DataGridTemplateColumn Header="Họ tên" IsReadOnly="True" Width="*">

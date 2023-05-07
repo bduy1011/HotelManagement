@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_Management_System"
         xmlns:views="clr-namespace:Hotel_Management_System.View"
-        xmlns:ViewModel="clr-namespace:Hotel_Management_System.ViewModel"
+        xmlns:viewmodel="clr-namespace:Hotel_Management_System.ViewModel"
         mc:Ignorable="d"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -29,10 +29,10 @@
 
     <Window.Resources>
 
-        <DataTemplate DataType="{x:Type ViewModel:StaffViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:StaffViewModel}">
             <views:StaffView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type ViewModel:CustomerViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:CustomerViewModel}">
             <views:CustomerView/>
         </DataTemplate>
 
@@ -61,7 +61,7 @@
                 <!--Navigation menu-->
                 <ColumnDefinition Width="250"/>
                 <!--Content section-->
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <!--Navigation menu-->
@@ -96,7 +96,7 @@
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#E285DE"
                                  IsChecked="True"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowCustomerViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
@@ -104,59 +104,88 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Tag="#8FD9C4"
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <fa:IconImage Icon="HouseCircleCheck" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Danh sách thuê phòng" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Tag="#B1CAE9"
+                                 >
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <fa:IconImage Icon="MoneyBills" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Phiếu dịch vụ" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Tag="#FFD8B9"
+                                 >
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <fa:IconImage Icon="ChartColumn" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
+
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Tag="#F2B3BF"
+                                 >
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#F99A9C"
+                                 >
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Nhân viên" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#D7E7A9"
+                                 >
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Store" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Hàng hóa" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Tag="#B5DDD1"
+                                 >
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <fa:IconImage Icon="Servicestack" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Dịch vụ" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Tag="#04D9D9"
+                                 >
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource menuButtonIcon}"/>
+                            <fa:IconImage Icon="Bed" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Phòng" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
                     
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD"
+                                 >
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="SignOut" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Đăng xuất" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
                 </StackPanel>
             </Border>
 
@@ -173,7 +202,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <!--Control bar-->
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="35"/>
                         <!--Header / Caption-->
                         <RowDefinition Height="35"/>
                         <!--Content section / Child views-->
@@ -196,6 +225,7 @@
                                 Click="btnClose_Click">
                             <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
+                        
                         <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
                                 Tag="#FFC047"
