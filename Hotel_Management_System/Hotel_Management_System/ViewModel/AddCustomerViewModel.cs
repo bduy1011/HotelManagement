@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,41 +15,40 @@ namespace Hotel_Management_System.ViewModel
 {
     public class AddCustomerViewModel : BaseViewModel
     {
-        public ICommand AddCustomerCommand { get; set; } 
+        public ICommand LoadedWindowCommand { get; set; }
+        public ICommand AddCustomerCommand { get; set; }
+        public ICommand BackCommand { get; set; }
+        public ICommand ClosedWindowCommand { get; set; }
+        public BrushConverter converter = new BrushConverter();
+
+        private int _maKhachHang;
+        private string _tenKhachHang;
+        private string _CCCD;
+        private string _gioiTinh;
+        private Nullable<System.DateTime> _ngaySinh;
+        private string _SDT;
+        private string _email;
+
+        public int MaKhachHang { get; set; }
+        public string TenKhachHang { get; set; }
+        public string CCCD { get; set; }
+        public string GioiTinh { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string SDT { get; set; }
+        public string Email { get; set; }
 
         public AddCustomerViewModel()
         {
-            AddCustomerCommand = new RelayCommand<UserControl>((p) =>
-            {
-                return true;
+            LoadedWindowCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { LoadedWindow(p); });
 
-            }, (p) =>
-            {
-                int i = DataProvider.Ins.DB.KHACHHANGs.Max(cus => cus.MaKhachHang);
-                string name = "Test" + i.ToString();
-                var customer = new KHACHHANG()
-                {
-                    MaKhachHang = i + 1,
-                    TenKhachHang = name,
-                    Character = name.ToString().Substring(0, 1),
-                    BgColor = brushList(i),
-                    CCCD = "00000000",
-                    Email = "111111@gmail.com",
-                    SDT = "99999999"
-                };
+            AddCustomerCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { AddCustomer(); });
 
-                DataProvider.Ins.DB.KHACHHANGs.Add(customer);
-                DataProvider.Ins.DB.SaveChanges();
+            BackCommand = new RelayCommand<AddCustomerView>((p) => { return true; }, (p) => { p.Close(); });
 
-                CustomerView customerView = new CustomerView();
-                if (customerView.DataContext == null) return;
-                var customerVM = customerView.DataContext as CustomerViewModel;
-                customerVM.AddCustomer(customer);
-            });
+            ClosedWindowCommand = new RelayCommand<AddCustomerView>((p) => { return true; }, (p) => { Clear(); });
         }
 
-        public BrushConverter converter = new BrushConverter();
-        public Brush brushList(int i)
+        public Brush BrushList(int i)
         {
             switch (i % 10)
             {
@@ -73,6 +73,53 @@ namespace Hotel_Management_System.ViewModel
                 default:
                     return (Brush)converter.ConvertFromString("#FF5252");
             }
+        }
+        
+        public void LoadedWindow(TextBox tb)
+        {
+            MaKhachHang = DataProvider.Ins.DB.KHACHHANGs.Max(cus => cus.MaKhachHang) + 1;
+            tb.Text = MaKhachHang.ToString();
+        }
+
+        public void AddCustomer()
+        {
+            var customer = new KHACHHANG()
+            {
+                MaKhachHang = MaKhachHang,
+                TenKhachHang = TenKhachHang,
+                Character = TenKhachHang.ToString().Substring(0, 1),
+                BgColor = BrushList(MaKhachHang),
+                CCCD = CCCD,
+                GioiTinh = GioiTinh,
+                NgaySinh = NgaySinh,
+                Email = Email,
+                SDT = SDT
+            };
+
+            DataProvider.Ins.DB.KHACHHANGs.Add(customer);
+            DataProvider.Ins.DB.SaveChanges();
+
+            CustomerView customerView = new CustomerView();
+            if (customerView.DataContext == null) return;
+            var customerVM = customerView.DataContext as CustomerViewModel;
+            customerVM.AddCustomer(customer);
+        }
+
+        public bool CheckAdd()
+        {
+            if (TenKhachHang != "" && CCCD != "" && GioiTinh != "" && NgaySinh != null && SDT != "" && Email != "")
+                return true;
+            else return false;
+        }
+
+        public void Clear()
+        {
+            TenKhachHang = null;
+            CCCD = null;
+            NgaySinh = null;
+            GioiTinh = null;
+            Email = null;
+            SDT = null;
         }
     }
 }

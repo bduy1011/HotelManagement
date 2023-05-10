@@ -14,12 +14,6 @@
         
         Title="MainWindow" Height="700" Width="1300"
         DataContext="{StaticResource MainVM}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        FontFamily="{DynamicResource MaterialDesignFont}"
         
         Name="mainWindow"
         WindowStartupLocation="CenterScreen"
@@ -95,8 +89,7 @@
                     <!--Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#E285DE"
-                                 IsChecked="True"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
@@ -105,7 +98,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#8FD9C4"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 >
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="HouseCircleCheck" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Danh sách thuê phòng" Style="{StaticResource menuButtonText}"/>
@@ -133,7 +126,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F2B3BF"
-                                 >
+                                 IsChecked="True"
+                                 Command="{Binding ShowCustomerViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
@@ -143,7 +137,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F99A9C"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Nhân viên" Style="{StaticResource menuButtonText}"/>

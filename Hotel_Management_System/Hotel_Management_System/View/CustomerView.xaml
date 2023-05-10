@@ -18,6 +18,22 @@
             <i:InvokeCommandAction Command="{Binding LoadedUserControlCommand}" 
                                    CommandParameter="{Binding ElementName=membersDataGrid}"/>
         </i:EventTrigger>
+
+        <i:EventTrigger EventName="KeyUp">
+            <i:InvokeCommandAction Command="{Binding SearchCommand}"
+                                   CommandParameter="{Binding ElementName=textBoxSearch}"/>
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Click">
+            <i:InvokeCommandAction Command="{Binding EditCommand}"
+                                   CommandParameter="{Binding ElementName=editButton}"/>
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Click">
+            <i:InvokeCommandAction Command="{Binding RemoveCommand}"
+                                   CommandParameter="{Binding ElementName=removeButton}"/>
+        </i:EventTrigger>
+
     </i:Interaction.Triggers>
     
     <Grid>
@@ -35,9 +51,11 @@
                         VerticalAlignment="Top"
                         Grid.Column="0">
                 <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="#7376BD"/>
-                <TextBox FontSize="13"
+                <TextBox x:Name="textBoxSearch"
+                         FontSize="13"
                          Height="24"
                          Width="300"
+                         Margin="5,5,0,0"
                          Background="Transparent"
                          FontWeight="Medium"
                          FontFamily="Montserrat"                            
@@ -46,7 +64,6 @@
                          BorderBrush="#7376BD"
                          BorderThickness="0,0,0,1"                             
                          VerticalContentAlignment="Center"
-                         Margin="5,5,0,0"
                          materialDesign:HintAssist.Hint="Search..."/>
 
             </StackPanel>
@@ -95,9 +112,10 @@
                       Style="{DynamicResource DataGridStyle1}"
                       x:Name="membersDataGrid"
                       ColumnWidth="*"
+                      ItemsSource="{Binding customers}"
                       Background="#200F53"
                       BorderThickness="0"
-                      ItemsSource="{Binding customer}">
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MaKhachHang}"/>
                     <DataGridTemplateColumn Header="Họ tên" IsReadOnly="True" Width="*">
@@ -120,10 +138,10 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}">
+                                    <Button Style="{StaticResource gridEditButton}" Name="editButton">
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
-                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Name="removeButton">
                                         <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

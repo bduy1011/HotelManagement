@@ -130,7 +130,6 @@
         </Style.Triggers>
     </Style>
 
-
     <!--#region DataGrid Style-->
 
     <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
@@ -333,4 +332,12 @@
     </Style>
 
     <!--#endregion-->
+
+    <Style x:Key="textFont" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="DarkGray"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>
