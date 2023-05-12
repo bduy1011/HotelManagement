@@ -24,16 +24,6 @@
                                    CommandParameter="{Binding ElementName=textBoxSearch}"/>
         </i:EventTrigger>
 
-        <i:EventTrigger EventName="Click">
-            <i:InvokeCommandAction Command="{Binding EditCommand}"
-                                   CommandParameter="{Binding ElementName=editButton}"/>
-        </i:EventTrigger>
-
-        <i:EventTrigger EventName="Click">
-            <i:InvokeCommandAction Command="{Binding RemoveCommand}"
-                                   CommandParameter="{Binding ElementName=removeButton}"/>
-        </i:EventTrigger>
-
     </i:Interaction.Triggers>
     
     <Grid>
@@ -75,7 +65,7 @@
                     BorderThickness="0"
                     Foreground="White"
                     VerticalAlignment="Top"
-                    Command="{Binding ShowAddCustomerViewCommand}">
+                    Command="{Binding AddCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#773DFF"/>
@@ -138,10 +128,14 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}" Name="editButton">
+                                    <Button Style="{StaticResource gridEditButton}" 
+                                            Command="{Binding EditCommand}" 
+                                            Name="editButton">
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
-                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Name="removeButton">
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" 
+                                            Command="{Binding RemoveCommand}" 
+                                            Name="removeButton">
                                         <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

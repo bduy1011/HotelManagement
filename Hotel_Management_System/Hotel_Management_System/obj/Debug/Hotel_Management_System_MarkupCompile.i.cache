@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\
 Hotel_Management_System
 none
 false
 DEBUG;TRACE
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\App.xaml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\App.xaml
 81058448965
 2739969757
-39681001703
-281859479029
+40-1401086915
+28-107239835
 View\AddCustomerView.xaml;View\EditCustomerView.xaml;View\LoginWindow.xaml;MainWindow.xaml;ResourceXAML\ButtonStyles.xaml;ResourceXAML\MainResource.xaml;View\CustomerView.xaml;View\StaffView.xaml;
 
-False
+True
 

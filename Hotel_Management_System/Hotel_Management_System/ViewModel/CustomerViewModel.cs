@@ -46,47 +46,18 @@ namespace Hotel_Management_System.ViewModel
                 }
             }
         }
-        public ICommand ShowAddCustomerViewCommand { get; set; }
+
+        public BrushConverter converter;
+
         public ICommand LoadedUserControlCommand { get; set; }
+        public ICommand AddCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand RemoveCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+
 
         public CustomerViewModel()
         {
-            SearchCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
-            {
-                if (string.IsNullOrEmpty(p.Text))
-                {
-                    // Hiển thị lại tất cả dữ liệu nếu không có từ khóa tìm kiếm
-                    customers = tmpCustomers;
-                }
-                else
-                {
-                    var result = tmpCustomers.Where(x => x.TenKhachHang.Contains(p.Text));
-
-                    customers = new ObservableCollection<KHACHHANG>();
-
-                    foreach (var item in result)
-                    {
-                        customers.Add(new KHACHHANG
-                        {
-                            MaKhachHang = item.MaKhachHang,
-                            Character = item.TenKhachHang.ToString().Substring(0, 1),
-                            BgColor = brushList(item.MaKhachHang),
-                            TenKhachHang = item.TenKhachHang,
-                            CCCD = item.CCCD,
-                            Email = item.Email,
-                            SDT = item.SDT
-                        });
-                    }
-                }
-            });
-
-            ShowAddCustomerViewCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                AddCustomerView addCustomerWindow = new AddCustomerView();
-                addCustomerWindow.ShowDialog();
-            });
-
             LoadedUserControlCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 customers = new ObservableCollection<KHACHHANG>();
@@ -109,10 +80,66 @@ namespace Hotel_Management_System.ViewModel
                 }
                 tmpCustomers = customers;
             });
+            
+            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                AddCustomerView addCustomerWindow = new AddCustomerView();
+                addCustomerWindow.ShowDialog();
+            });
+            
+            SearchCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                if (string.IsNullOrEmpty(p.Text))
+                {
+                    // Hiển thị lại tất cả dữ liệu nếu không có từ khóa tìm kiếm
+                    customers = tmpCustomers;
+                }
+                else
+                {
+                    var result = tmpCustomers.Where(x =>
+                        x.MaKhachHang.ToString().Contains(p.Text) ||
+                        x.TenKhachHang.Contains(p.Text) ||
+                        x.CCCD.Contains(p.Text) ||
+                        x.Email.Contains(p.Text) ||
+                        x.SDT.Contains(p.Text)
+                    );
+
+                    customers = new ObservableCollection<KHACHHANG>();
+
+                    foreach (var item in result)
+                    {
+                        customers.Add(new KHACHHANG
+                        {
+                            MaKhachHang = item.MaKhachHang,
+                            Character = item.TenKhachHang.ToString().Substring(0, 1),
+                            BgColor = brushList(item.MaKhachHang),
+                            TenKhachHang = item.TenKhachHang,
+                            CCCD = item.CCCD,
+                            Email = item.Email,
+                            SDT = item.SDT
+                        });
+                    }
+                }
+            });
+
+            RemoveCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
+            {
+                
+            });
+
+            EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MessageBox.Show("1111");
+                EditCustomerView editCustomerWindow = new EditCustomerView();
+                editCustomerWindow.ShowDialog();
+            });
+
+
         }
-        public BrushConverter converter = new BrushConverter();
+
         public Brush brushList(int i)
         {
+            converter = new BrushConverter();
             switch (i % 10)
             {
                 case 0:
