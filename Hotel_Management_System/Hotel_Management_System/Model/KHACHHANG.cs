@@ -9,11 +9,12 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel;
     using System;
     using System.Collections.Generic;
     using System.Windows.Media;
 
-    public partial class KHACHHANG
+    public partial class KHACHHANG : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KHACHHANG()
@@ -22,16 +23,24 @@ namespace Hotel_Management_System.Model
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
 
+        private string _maKhachHang;
+        private string _tenKhachHang;
+        private string _CCCD;
+        private string _gioiTinh;
+        private Nullable<System.DateTime> _ngaySinh;
+        private string _SDT;
+        private string _email;
+
         public string Character { get; set; }
         public Brush BgColor { get; set; }
-        public int MaKhachHang { get; set; }
-        public string TenKhachHang { get; set; }
-        public string CCCD { get; set; }
-        public string GioiTinh { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string SDT { get; set; }
-        public string Email { get; set; }
-    
+        public string MaKhachHang { get => _maKhachHang; set { _maKhachHang = value; OnPropertyChanged(); } }
+        public string TenKhachHang { get => _tenKhachHang; set { _tenKhachHang = value; OnPropertyChanged(); } }
+        public string CCCD { get => _CCCD; set { _CCCD = value; OnPropertyChanged(); } }
+        public string GioiTinh { get => _gioiTinh; set { _gioiTinh = value; OnPropertyChanged(); } }
+        public Nullable<System.DateTime> NgaySinh { get => _ngaySinh; set { _ngaySinh = value; OnPropertyChanged(); } }
+        public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
+        public string Email { get => _email; set { _email = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

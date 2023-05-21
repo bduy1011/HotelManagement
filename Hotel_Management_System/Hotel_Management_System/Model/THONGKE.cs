@@ -14,8 +14,8 @@ namespace Hotel_Management_System.Model
     
     public partial class THONGKE
     {
-        public int MaThongKe { get; set; }
-        public Nullable<int> MaLoaiPhong { get; set; }
+        public string MaThongKe { get; set; }
+        public string MaLoaiPhong { get; set; }
         public Nullable<System.DateTime> ThoiGian { get; set; }
         public Nullable<double> DoanhThu { get; set; }
         public Nullable<double> TiLe { get; set; }

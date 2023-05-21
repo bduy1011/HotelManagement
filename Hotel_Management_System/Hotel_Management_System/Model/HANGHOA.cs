@@ -21,16 +21,18 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
         }
     
-        public int MaHangHoa { get; set; }
+        public string MaHangHoa { get; set; }
         public string TenHangHoa { get; set; }
-        public Nullable<int> SLTonKho { get; set; }
+        public Nullable<short> SLTonKho { get; set; }
         public string DonVITinh { get; set; }
         public Nullable<double> DonGiaBan { get; set; }
         public Nullable<double> DonGiaNhap { get; set; }
+        public string MaDonViTinh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUHANGHOA> CT_PHIEUHANGHOA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
+        public virtual DONVITINH DONVITINH1 { get; set; }
     }
 }

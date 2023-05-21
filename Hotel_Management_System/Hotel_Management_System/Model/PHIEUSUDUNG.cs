@@ -21,8 +21,8 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUHANGHOA = new HashSet<CT_PHIEUHANGHOA>();
         }
     
-        public int MaPhieu { get; set; }
-        public Nullable<int> MaPhieuDatPhong { get; set; }
+        public string MaPhieu { get; set; }
+        public string MaPhieuDatPhong { get; set; }
         public Nullable<double> TriGia { get; set; }
         public Nullable<System.DateTime> NgayLap { get; set; }
     

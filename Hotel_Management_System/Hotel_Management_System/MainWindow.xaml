@@ -89,7 +89,7 @@
                     <!--Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#E285DE"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
@@ -98,7 +98,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#8FD9C4"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="HouseCircleCheck" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Danh sách thuê phòng" Style="{StaticResource menuButtonText}"/>
@@ -107,7 +107,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#B1CAE9"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="MoneyBills" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Phiếu dịch vụ" Style="{StaticResource menuButtonText}"/>
@@ -116,7 +116,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#FFD8B9"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ChartColumn" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
@@ -146,7 +146,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#D7E7A9"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Store" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Hàng hóa" Style="{StaticResource menuButtonText}"/>
@@ -155,7 +155,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#B5DDD1"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Servicestack" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Dịch vụ" Style="{StaticResource menuButtonText}"/>
@@ -164,7 +164,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#04D9D9"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Bed" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Phòng" Style="{StaticResource menuButtonText}"/>
@@ -173,7 +173,7 @@
                     
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#784DFD"
-                                 >
+                                 Command="{Binding ShowStaffViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="SignOut" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Đăng xuất" Style="{StaticResource menuButtonText}"/>

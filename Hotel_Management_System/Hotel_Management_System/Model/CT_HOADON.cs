@@ -14,8 +14,8 @@ namespace Hotel_Management_System.Model
     
     public partial class CT_HOADON
     {
-        public int MaHoaDon { get; set; }
-        public int MaPhieuDatPhong { get; set; }
+        public string MaHoaDon { get; set; }
+        public string MaPhieuDatPhong { get; set; }
         public Nullable<double> ThanhTien { get; set; }
     
         public virtual HOADON HOADON { get; set; }

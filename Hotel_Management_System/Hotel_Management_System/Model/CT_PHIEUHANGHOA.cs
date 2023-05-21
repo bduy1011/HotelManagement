@@ -14,9 +14,9 @@ namespace Hotel_Management_System.Model
     
     public partial class CT_PHIEUHANGHOA
     {
-        public int MaPhieu { get; set; }
-        public int MaHangHoa { get; set; }
-        public Nullable<int> SoLuong { get; set; }
+        public string MaPhieu { get; set; }
+        public string MaHangHoa { get; set; }
+        public Nullable<short> SoLuong { get; set; }
         public Nullable<double> ThanhTien { get; set; }
     
         public virtual HANGHOA HANGHOA { get; set; }

@@ -20,8 +20,8 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
         }
     
-        public int MaPhieuNhapHang { get; set; }
-        public Nullable<int> MaNhanVien { get; set; }
+        public string MaPhieuNhapHang { get; set; }
+        public string MaNhanVien { get; set; }
         public Nullable<System.DateTime> NgayLap { get; set; }
         public Nullable<double> TriGia { get; set; }
     

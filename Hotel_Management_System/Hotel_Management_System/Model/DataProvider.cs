@@ -27,6 +27,5 @@ namespace Hotel_Management_System.Model
         {
             DB = new QL_KSEntities();
         }
-
     }
 }

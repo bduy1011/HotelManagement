@@ -7,4 +7,5 @@
     <viewmodel:StaffViewModel x:Key="StaffVM"></viewmodel:StaffViewModel>
     <viewmodel:AddCustomerViewModel x:Key="AddCustomerVM"></viewmodel:AddCustomerViewModel>
     <viewmodel:EditCustomerViewModel x:Key="EditCustomerVM"></viewmodel:EditCustomerViewModel>
+    <viewmodel:RemoveCustomerViewModel x:Key="RemoveCustomerVM"></viewmodel:RemoveCustomerViewModel>
 </ResourceDictionary>

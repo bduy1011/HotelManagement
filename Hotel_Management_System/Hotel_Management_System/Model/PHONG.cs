@@ -20,8 +20,8 @@ namespace Hotel_Management_System.Model
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
     
-        public int MaPhong { get; set; }
-        public Nullable<int> MaLoaiPhong { get; set; }
+        public string MaPhong { get; set; }
+        public string MaLoaiPhong { get; set; }
         public string TrangThai { get; set; }
         public string GhiChu { get; set; }
     

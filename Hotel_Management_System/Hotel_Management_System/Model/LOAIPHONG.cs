@@ -21,7 +21,7 @@ namespace Hotel_Management_System.Model
             this.THONGKEs = new HashSet<THONGKE>();
         }
     
-        public int MaLoaiPhong { get; set; }
+        public string MaLoaiPhong { get; set; }
         public string TenLoaiPhong { get; set; }
         public Nullable<double> DonGia { get; set; }
     

@@ -4,6 +4,7 @@ D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_Syst
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.dll
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.SqlServer.dll
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\FontAwesome.Sharp.dll
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\FontAwesome.WPF.dll
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Core.dll
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Material.dll
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\MaterialDesignColors.dll
@@ -13,6 +14,7 @@ D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_Syst
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\System.Windows.Interactivity.dll
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.xml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.SqlServer.xml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\FontAwesome.WPF.xml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Core.pdb
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Core.xml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Material.pdb
@@ -26,22 +28,15 @@ D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_Syst
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\bin\Debug\System.Windows.Interactivity.xml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.AssemblyReference.cache
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.SuggestedBindingRedirects.cache
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\ResourceXAML\ButtonStyles.baml
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginWindow.g.cs
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\MainWindow.g.cs
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView.g.cs
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView.g.cs
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\App.g.cs
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System_Content.g.cs
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System_MarkupCompile.cache
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System_MarkupCompile.lref
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\App.baml
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginWindow.baml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\MainWindow.baml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\ResourceXAML\MainResource.baml
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView.baml
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView.baml
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.g.resources
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.Properties.Resources.resources
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.GenerateResource.cache
@@ -49,16 +44,26 @@ D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_Syst
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.CopyComplete
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.exe
 D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.pdb
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\AddCustomerView.g.cs
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\AddCustomerView.baml
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\EditCustomerView.g.cs
-D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\EditCustomerView.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\AddCustomerView.g.cs
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\AddCustomerView.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\EditCustomerView.g.cs
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginView\LoginView.g.cs
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\CustomerView.g.cs
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\RemoveCustomerView.g.cs
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\EditCustomerView.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginView\LoginView.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\CustomerView.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\RemoveCustomerView.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\ResourceXAML\StylesResource.baml
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\StaffView.g.cs
+D:\Nam_2\HK2\Nhập môn CNPM\DoAnNMCNPM\SE104.N23_Group21\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\StaffView.baml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\Hotel_Management_System.exe.config
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\Hotel_Management_System.exe
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\Hotel_Management_System.pdb
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.dll
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.SqlServer.dll
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\FontAwesome.Sharp.dll
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\FontAwesome.WPF.dll
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Core.dll
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Material.dll
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\MaterialDesignColors.dll
@@ -68,6 +73,7 @@ D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Manag
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\System.Windows.Interactivity.dll
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.xml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\EntityFramework.SqlServer.xml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\FontAwesome.WPF.xml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Core.pdb
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Core.xml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\MahApps.Metro.IconPacks.Material.pdb
@@ -81,26 +87,28 @@ D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Manag
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\bin\Debug\System.Windows.Interactivity.xml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.AssemblyReference.cache
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.SuggestedBindingRedirects.cache
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\ResourceXAML\ButtonStyles.baml
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\AddCustomerView.g.cs
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\EditCustomerView.g.cs
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginWindow.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\ResourceXAML\StylesResource.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\AddCustomerView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\EditCustomerView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginView\LoginView.g.cs
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\MainWindow.g.cs
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView.g.cs
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\CustomerView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\RemoveCustomerView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\StaffView.g.cs
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\App.g.cs
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System_Content.g.cs
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System_MarkupCompile.cache
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System_MarkupCompile.lref
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\App.baml
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\AddCustomerView.baml
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\EditCustomerView.baml
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginWindow.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\AddCustomerView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\EditCustomerView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\LoginView\LoginView.baml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\MainWindow.baml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\ResourceXAML\MainResource.baml
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView.baml
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\CustomerView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\CustomerView\RemoveCustomerView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\StaffView.baml
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.g.resources
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.Properties.Resources.resources
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.GenerateResource.cache

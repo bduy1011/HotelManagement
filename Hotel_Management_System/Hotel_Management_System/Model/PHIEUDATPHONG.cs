@@ -21,13 +21,13 @@ namespace Hotel_Management_System.Model
             this.PHIEUSUDUNGs = new HashSet<PHIEUSUDUNG>();
         }
     
-        public int MaPhieuDatPhong { get; set; }
-        public Nullable<int> MaPhong { get; set; }
-        public Nullable<int> SoNguoi { get; set; }
+        public string MaPhieuDatPhong { get; set; }
+        public string MaPhong { get; set; }
+        public Nullable<short> SoNguoi { get; set; }
         public Nullable<System.DateTime> NgayDen { get; set; }
         public Nullable<System.DateTime> NgayDi { get; set; }
         public Nullable<double> TienCoc { get; set; }
-        public Nullable<int> MaKhachHang { get; set; }
+        public string MaKhachHang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOADON> CT_HOADON { get; set; }

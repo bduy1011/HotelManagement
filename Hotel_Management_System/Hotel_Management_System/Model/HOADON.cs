@@ -20,9 +20,9 @@ namespace Hotel_Management_System.Model
             this.CT_HOADON = new HashSet<CT_HOADON>();
         }
     
-        public int MaHoaDon { get; set; }
-        public Nullable<int> MaNhanVien { get; set; }
-        public Nullable<int> MaKhachHang { get; set; }
+        public string MaHoaDon { get; set; }
+        public string MaNhanVien { get; set; }
+        public string MaKhachHang { get; set; }
         public Nullable<double> TriGia { get; set; }
         public Nullable<System.DateTime> NgayLap { get; set; }
     
