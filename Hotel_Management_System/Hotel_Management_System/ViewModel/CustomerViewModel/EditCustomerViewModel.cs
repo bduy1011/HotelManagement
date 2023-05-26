@@ -1,20 +1,13 @@
 ﻿using Hotel_Management_System.Model;
-using Hotel_Management_System.View;
+using Hotel_Management_System.View.CustomerView;
+using Hotel_Management_System.ViewModel.Other;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace Hotel_Management_System.ViewModel
+namespace Hotel_Management_System.ViewModel.CustomerViewModel
 {
     public class EditCustomerViewModel : BaseViewModel
     {
@@ -63,7 +56,7 @@ namespace Hotel_Management_System.ViewModel
 
             ClickGenderMaleCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => { p.IsChecked = IsCheckedFemale = false; GioiTinh = "Nam"; });
 
-            ClickGenderFemaleCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => { p.IsChecked = IsCheckedMale = false;  GioiTinh = "Nữ"; });
+            ClickGenderFemaleCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => { p.IsChecked = IsCheckedMale = false; GioiTinh = "Nữ"; });
         }
 
         public EditCustomerViewModel(KHACHHANG SelectedCustomerItem) : this()

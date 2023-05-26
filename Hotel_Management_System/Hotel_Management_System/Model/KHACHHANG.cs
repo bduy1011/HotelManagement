@@ -10,6 +10,7 @@
 namespace Hotel_Management_System.Model
 {
     using Hotel_Management_System.ViewModel;
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
     using System.Windows.Media;
@@ -23,6 +24,7 @@ namespace Hotel_Management_System.Model
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
 
+        private string _STT;
         private string _maKhachHang;
         private string _tenKhachHang;
         private string _CCCD;
@@ -30,6 +32,8 @@ namespace Hotel_Management_System.Model
         private Nullable<System.DateTime> _ngaySinh;
         private string _SDT;
         private string _email;
+        private string _loaiKhachHang;
+        private bool _isLastRow;
 
         public string Character { get; set; }
         public Brush BgColor { get; set; }
@@ -40,6 +44,9 @@ namespace Hotel_Management_System.Model
         public Nullable<System.DateTime> NgaySinh { get => _ngaySinh; set { _ngaySinh = value; OnPropertyChanged(); } }
         public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
         public string Email { get => _email; set { _email = value; OnPropertyChanged(); } }
+        public string LoaiKhachHang { get => _loaiKhachHang; set { _loaiKhachHang = value; OnPropertyChanged(); } }
+        public bool IsLastRow { get => _isLastRow; set { _isLastRow = value; OnPropertyChanged(); } }
+        public string STT { get => _STT; set { _STT = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }

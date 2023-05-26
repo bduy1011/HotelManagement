@@ -14,14 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Hotel_Management_System
+namespace Hotel_Management_System.View.LoginView
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginView : Window
     {
-        public LoginWindow()
+        public LoginView()
         {
             InitializeComponent();
         }

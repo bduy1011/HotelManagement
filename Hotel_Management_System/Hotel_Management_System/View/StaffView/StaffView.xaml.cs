@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hotel_Management_System.View
+namespace Hotel_Management_System.View.StaffView
 {
     /// <summary>
     /// Interaction logic for StaffView.xaml

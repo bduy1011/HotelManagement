@@ -1,36 +1,30 @@
 ﻿using Hotel_Management_System.Model;
-using Hotel_Management_System.View;
-using System;
-using System.Collections.Generic;
+using Hotel_Management_System.View.CustomerView;
+using Hotel_Management_System.ViewModel.Other;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Hotel_Management_System.ViewModel
+namespace Hotel_Management_System.ViewModel.CustomerViewModel
 {
     public class CustomerViewModel : BaseViewModel
     {
         private ObservableCollection<KHACHHANG> _customers;
-        public ObservableCollection<KHACHHANG> customers 
-        { 
-            get { return _customers; } 
-            set 
+        public ObservableCollection<KHACHHANG> customers
+        {
+            get { return _customers; }
+            set
             {
                 if (_customers != value)
                 {
                     _customers = value;
                     OnPropertyChanged();
                 }
-            } 
+            }
         }
 
         private ObservableCollection<KHACHHANG> _tmpCustomers;
@@ -56,7 +50,6 @@ namespace Hotel_Management_System.ViewModel
                 if (_selectedCustomerItem != value)
                 {
                     _selectedCustomerItem = value;
-                    // Thực hiện các xử lý liên quan đến dòng đã chọn ở đây
                     OnPropertyChanged();
                 }
             }
@@ -101,7 +94,8 @@ namespace Hotel_Management_System.ViewModel
                         });
                     }
                     tmpCustomers = customers;
-                } catch { return; }
+                }
+                catch { return; }
             });
 
             AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -109,12 +103,11 @@ namespace Hotel_Management_System.ViewModel
                 addCustomerWindow = new AddCustomerView();
                 addCustomerWindow.ShowDialog();
             });
-            
+
             SearchCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
                 if (string.IsNullOrEmpty(p.Text))
                 {
-                    // Hiển thị lại tất cả dữ liệu nếu không có từ khóa tìm kiếm
                     customers = tmpCustomers;
                 }
                 else
@@ -138,7 +131,7 @@ namespace Hotel_Management_System.ViewModel
                             BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
                             TenKhachHang = item.TenKhachHang,
                             GioiTinh = item.GioiTinh,
-                            NgaySinh=item.NgaySinh,
+                            NgaySinh = item.NgaySinh,
                             CCCD = item.CCCD,
                             Email = item.Email,
                             SDT = item.SDT
@@ -238,7 +231,7 @@ namespace Hotel_Management_System.ViewModel
                 });
             }
             MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            removeCustomerView.Close(); 
+            removeCustomerView.Close();
         }
     }
 }

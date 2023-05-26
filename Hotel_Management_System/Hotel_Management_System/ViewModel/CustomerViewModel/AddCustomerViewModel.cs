@@ -1,5 +1,7 @@
 ﻿using Hotel_Management_System.Model;
 using Hotel_Management_System.View;
+using Hotel_Management_System.ViewModel.Other;
+using Hotel_Management_System.View.CustomerView;
 using System;
 using System.Linq;
 using System.Windows;
@@ -7,9 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace Hotel_Management_System.ViewModel
+namespace Hotel_Management_System.ViewModel.CustomerViewModel
 {
     public class AddCustomerViewModel : BaseViewModel
     {
@@ -76,7 +77,7 @@ namespace Hotel_Management_System.ViewModel
                     return (Brush)converter.ConvertFromString("#FF5252");
             }
         }
-        
+
         public void LoadedWindow(TextBox tb)
         {
             string temp;

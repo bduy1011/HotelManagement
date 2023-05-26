@@ -9,10 +9,11 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEUSUDUNG
+    public partial class PHIEUSUDUNG : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PHIEUSUDUNG()
@@ -20,12 +21,52 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUDICHVU = new HashSet<CT_PHIEUDICHVU>();
             this.CT_PHIEUHANGHOA = new HashSet<CT_PHIEUHANGHOA>();
         }
-    
-        public string MaPhieu { get; set; }
-        public string MaPhieuDatPhong { get; set; }
-        public Nullable<double> TriGia { get; set; }
-        public Nullable<System.DateTime> NgayLap { get; set; }
-    
+
+        private string _maPhieu;
+        private string _maPhieuDatPhong;
+        private double? _triGia;
+        private DateTime? _ngayLap;
+
+        public string MaPhieu
+        {
+            get => _maPhieu;
+            set
+            {
+                _maPhieu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MaPhieuDatPhong
+        {
+            get => _maPhieuDatPhong;
+            set
+            {
+                _maPhieuDatPhong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double? TriGia
+        {
+            get => _triGia;
+            set
+            {
+                _triGia = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? NgayLap
+        {
+            get => _ngayLap;
+            set
+            {
+                _ngayLap = value;
+                OnPropertyChanged();
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDICHVU> CT_PHIEUDICHVU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

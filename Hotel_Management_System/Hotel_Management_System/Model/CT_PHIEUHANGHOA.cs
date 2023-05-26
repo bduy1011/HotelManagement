@@ -9,16 +9,73 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
     
-    public partial class CT_PHIEUHANGHOA
+    public partial class CT_PHIEUHANGHOA : BaseViewModel
     {
-        public string MaPhieu { get; set; }
-        public string MaHangHoa { get; set; }
-        public Nullable<short> SoLuong { get; set; }
-        public Nullable<double> ThanhTien { get; set; }
-    
+        public CT_PHIEUHANGHOA(HANGHOA hh) 
+        {
+            HANGHOA = hh;
+            MaHangHoa = hh.MaHangHoa;
+        }
+
+        private int _stt;
+        public int STT
+        {
+            get { return _stt; }
+            set
+            {
+                _stt = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _maPhieu;
+        public string MaPhieu
+        {
+            get { return _maPhieu; }
+            set
+            {
+                _maPhieu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _maHangHoa;
+        public string MaHangHoa
+        {
+            get { return _maHangHoa; }
+            set
+            {
+                _maHangHoa = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Nullable<short> _soLuong;
+        public Nullable<short> SoLuong
+        {
+            get { return _soLuong; }
+            set
+            {
+                _soLuong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Nullable<double> _thanhTien;
+        public Nullable<double> ThanhTien
+        {
+            get { return _thanhTien; }
+            set
+            {
+                _thanhTien = value;
+                OnPropertyChanged();
+            }
+        }
+
         public virtual HANGHOA HANGHOA { get; set; }
         public virtual PHIEUSUDUNG PHIEUSUDUNG { get; set; }
     }

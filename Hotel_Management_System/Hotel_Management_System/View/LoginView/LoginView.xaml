@@ -1,9 +1,8 @@
-﻿<Window x:Class="Hotel_Management_System.LoginWindow"
+﻿<Window x:Class="Hotel_Management_System.View.LoginView.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hotel_Management_System.View"
         mc:Ignorable="d"
         Title="LoginWindow" Height="400" Width="700"
         ResizeMode="NoResize"
@@ -89,7 +88,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
+
                     <Button x:Name="btnClose"                          
                             BorderThickness="0"
                             Content="X"
@@ -120,7 +119,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
+
                 </Grid>
 
                 <StackPanel Grid.Row="1"
@@ -235,7 +234,7 @@
                         </Button.Template>
                     </Button>
 
-                    
+
 
                 </StackPanel>
 

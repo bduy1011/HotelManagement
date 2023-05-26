@@ -3,15 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hotel_Management_System"
-        xmlns:views="clr-namespace:Hotel_Management_System.View"
-        xmlns:viewmodel="clr-namespace:Hotel_Management_System.ViewModel"
-        mc:Ignorable="d"
         
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:staffviewmodel="clr-namespace:Hotel_Management_System.ViewModel.StaffViewModel"
+        xmlns:staffview="clr-namespace:Hotel_Management_System.View.StaffView"
+        
+        xmlns:customerviewmodel="clr-namespace:Hotel_Management_System.ViewModel.CustomerViewModel"
+        xmlns:customerview="clr-namespace:Hotel_Management_System.View.CustomerView"
+        
+        xmlns:roommapviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomMapViewModel"
+        xmlns:roommapview="clr-namespace:Hotel_Management_System.View.RoomMapView"
+        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         
+        mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1300"
         DataContext="{StaticResource MainVM}"
         
@@ -23,13 +28,15 @@
 
     <Window.Resources>
 
-        <DataTemplate DataType="{x:Type viewmodel:StaffViewModel}">
-            <views:StaffView/>
+        <DataTemplate DataType="{x:Type staffviewmodel:StaffViewModel}">
+            <staffview:StaffView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:CustomerViewModel}">
-            <views:CustomerView/>
+        <DataTemplate DataType="{x:Type customerviewmodel:CustomerViewModel}">
+            <customerview:CustomerView/>
         </DataTemplate>
-
+        <DataTemplate DataType="{x:Type roommapviewmodel:RoomMapViewModel}">
+            <roommapview:RoomMapView/>
+        </DataTemplate>
     </Window.Resources>
 
     <i:Interaction.Triggers>
@@ -89,7 +96,8 @@
                     <!--Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#E285DE"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 IsChecked="True"
+                                 Command="{Binding ShowRoomMapViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
@@ -126,7 +134,6 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F2B3BF"
-                                 IsChecked="True"
                                  Command="{Binding ShowCustomerViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>

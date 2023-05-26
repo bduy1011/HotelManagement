@@ -1,5 +1,9 @@
 ﻿using FontAwesome.Sharp;
 using Hotel_Management_System.Model;
+using Hotel_Management_System.ViewModel.RoomMapViewModel;
+using Hotel_Management_System.View.LoginView;
+using Hotel_Management_System.ViewModel.Other;
+using Hotel_Management_System.ViewModel.CustomerViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +35,7 @@ namespace Hotel_Management_System.ViewModel
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand ShowStaffViewCommand { get; set; }
         public ICommand ShowCustomerViewCommand { get; set; }
+        public ICommand ShowRoomMapViewCommand { get; set; }
 
         public MainViewModel()
         {
@@ -41,7 +46,7 @@ namespace Hotel_Management_System.ViewModel
                 if (p == null) return;
                 p.Hide();
 
-                LoginWindow loginWindow = new LoginWindow();
+                LoginView loginWindow = new LoginView();
                 loginWindow.ShowDialog();
 
                 if (loginWindow.DataContext == null) return;
@@ -60,18 +65,23 @@ namespace Hotel_Management_System.ViewModel
             //Initialize commands
             ShowStaffViewCommand = new ViewModelCommand(ExecuteShowStaffViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
+            ShowRoomMapViewCommand = new ViewModelCommand(ExecuteShowRoomMapViewCommand);
 
             //Default view
-            ExecuteShowCustomerViewCommand(null);
+            ExecuteShowRoomMapViewCommand(null);
         }
 
         private void ExecuteShowCustomerViewCommand(object obj)
         {
-            CurrentChildView = new CustomerViewModel();
+            CurrentChildView = new CustomerViewModel.CustomerViewModel();
         }
         private void ExecuteShowStaffViewCommand(object obj)
         {
-            CurrentChildView = new StaffViewModel();
+            CurrentChildView = new StaffViewModel.StaffViewModel();
+        }
+        private void ExecuteShowRoomMapViewCommand(object obj)
+        {
+            CurrentChildView = new RoomMapViewModel.RoomMapViewModel();
         }
     }
 }

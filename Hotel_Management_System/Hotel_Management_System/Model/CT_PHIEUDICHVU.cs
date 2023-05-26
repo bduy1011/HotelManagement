@@ -9,16 +9,53 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
     
-    public partial class CT_PHIEUDICHVU
+    public partial class CT_PHIEUDICHVU : BaseViewModel
     {
-        public string MaPhieu { get; set; }
-        public string MaDichVu { get; set; }
-        public Nullable<short> SoLuong { get; set; }
-        public Nullable<double> ThanhTien { get; set; }
-    
+        public CT_PHIEUDICHVU(DICHVU dv) 
+        { 
+            DICHVU = dv; 
+            MaDichVu= dv.MaDichVu;
+        }
+
+        private int _stt;
+        public int STT
+        {
+            get { return _stt; }
+            set { _stt = value; OnPropertyChanged(); }
+        }
+
+        private string _maPhieu;
+        public string MaPhieu
+        {
+            get { return _maPhieu; }
+            set { _maPhieu = value; OnPropertyChanged(); }
+        }
+
+        private string _maDichVu;
+        public string MaDichVu
+        {
+            get { return _maDichVu; }
+            set { _maDichVu = value; OnPropertyChanged(); }
+        }
+
+        private Nullable<short> _soLuong;
+        public Nullable<short> SoLuong
+        {
+            get { return _soLuong; }
+            set { _soLuong = value; OnPropertyChanged(); }
+        }
+
+        private Nullable<double> _thanhTien;
+        public Nullable<double> ThanhTien
+        {
+            get { return _thanhTien; }
+            set { _thanhTien = value; OnPropertyChanged(); }
+        }
+
         public virtual DICHVU DICHVU { get; set; }
         public virtual PHIEUSUDUNG PHIEUSUDUNG { get; set; }
     }

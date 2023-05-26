@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Hotel_Management_System.View
+namespace Hotel_Management_System.View.CustomerView
 {
     /// <summary>
     /// Interaction logic for EditCustomerView.xaml

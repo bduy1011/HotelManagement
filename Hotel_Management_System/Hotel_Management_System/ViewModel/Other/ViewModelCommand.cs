@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Hotel_Management_System.ViewModel
+namespace Hotel_Management_System.ViewModel.Other
 {
     internal class ViewModelCommand : ICommand
     {

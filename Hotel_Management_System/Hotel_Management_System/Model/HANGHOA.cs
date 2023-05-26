@@ -9,10 +9,11 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
     
-    public partial class HANGHOA
+    public partial class HANGHOA : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HANGHOA()
@@ -20,15 +21,133 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUHANGHOA = new HashSet<CT_PHIEUHANGHOA>();
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
         }
-    
-        public string MaHangHoa { get; set; }
-        public string TenHangHoa { get; set; }
-        public Nullable<short> SLTonKho { get; set; }
-        public string DonVITinh { get; set; }
-        public Nullable<double> DonGiaBan { get; set; }
-        public Nullable<double> DonGiaNhap { get; set; }
-        public string MaDonViTinh { get; set; }
-    
+
+        public HANGHOA(string maHangHoa, string tenHangHoa, short? sLTonKho, double? donGiaBan, double? donGiaNhap, ICollection<CT_PHIEUHANGHOA> cT_PHIEUHANGHOA, ICollection<CT_PHIEUNHAPHANG> cT_PHIEUNHAPHANG, string maDonViTinh, string donVITinh)
+        {
+            MaHangHoa = maHangHoa;
+            TenHangHoa = tenHangHoa;
+            SLTonKho = sLTonKho;
+            DonGiaBan = donGiaBan;
+            DonGiaNhap = donGiaNhap;
+            CT_PHIEUHANGHOA = cT_PHIEUHANGHOA;
+            CT_PHIEUNHAPHANG = cT_PHIEUNHAPHANG;
+            MaDonViTinh = maDonViTinh;
+            DonVITinh = donVITinh;
+        }
+
+        private int stt;
+        private string maHangHoa;
+        private string tenHangHoa;
+        private short? slTonKho;
+        private double? donGiaBan;
+        private double? donGiaNhap;
+        private string maDonViTinh;
+        private string donVITinh;
+
+        public int STT
+        {
+            get { return stt; }
+            set
+            {
+                if (stt != value)
+                {
+                    stt = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string MaHangHoa
+        {
+            get { return maHangHoa; }
+            set
+            {
+                if (maHangHoa != value)
+                {
+                    maHangHoa = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string TenHangHoa
+        {
+            get { return tenHangHoa; }
+            set
+            {
+                if (tenHangHoa != value)
+                {
+                    tenHangHoa = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public short? SLTonKho
+        {
+            get { return slTonKho; }
+            set
+            {
+                if (slTonKho != value)
+                {
+                    slTonKho = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double? DonGiaBan
+        {
+            get { return donGiaBan; }
+            set
+            {
+                if (donGiaBan != value)
+                {
+                    donGiaBan = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double? DonGiaNhap
+        {
+            get { return donGiaNhap; }
+            set
+            {
+                if (donGiaNhap != value)
+                {
+                    donGiaNhap = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string MaDonViTinh
+        {
+            get { return maDonViTinh; }
+            set
+            {
+                if (maDonViTinh != value)
+                {
+                    maDonViTinh = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string DonVITinh
+        {
+            get { return donVITinh; }
+            set
+            {
+                if (donVITinh != value)
+                {
+                    donVITinh = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUHANGHOA> CT_PHIEUHANGHOA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

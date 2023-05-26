@@ -19,13 +19,23 @@ namespace Hotel_Management_System.Model
         {
             this.CT_PHIEUDICHVU = new HashSet<CT_PHIEUDICHVU>();
         }
-    
+
+        public DICHVU(string maDichVu, string tenDichVu, double? donGia, ICollection<CT_PHIEUDICHVU> cT_PHIEUDICHVU)
+        {
+            MaDichVu = maDichVu;
+            TenDichVu = tenDichVu;
+            DonGia = donGia;
+            CT_PHIEUDICHVU = cT_PHIEUDICHVU;
+        }
+
+        public int STT { get; set; }
         public string MaDichVu { get; set; }
         public string TenDichVu { get; set; }
-        public string DonViTinh { get; set; }
         public Nullable<double> DonGia { get; set; }
+        public string DonViTinh { get; set; }
         public string MaDonViTinh { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDICHVU> CT_PHIEUDICHVU { get; set; }
         public virtual DONVITINH DONVITINH1 { get; set; }

@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace Hotel_Management_System.View
+namespace Hotel_Management_System.View.CustomerView
 {
     /// <summary>
     /// Interaction logic for AddCustomerView.xaml

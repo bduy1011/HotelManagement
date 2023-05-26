@@ -1,11 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:Hotel_Management_System.ViewModel">
+                    xmlns:viewmodel="clr-namespace:Hotel_Management_System.ViewModel"
+                    xmlns:customerviewmodel="clr-namespace:Hotel_Management_System.ViewModel.CustomerViewModel"
+                    xmlns:staffviewmodel="clr-namespace:Hotel_Management_System.ViewModel.StaffViewModel"
+                    xmlns:roommapviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomMapViewModel"
+                    xmlns:bookingroomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.BookingRoomViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
-    <viewmodel:CustomerViewModel x:Key="CustomerVM"></viewmodel:CustomerViewModel>
-    <viewmodel:StaffViewModel x:Key="StaffVM"></viewmodel:StaffViewModel>
-    <viewmodel:AddCustomerViewModel x:Key="AddCustomerVM"></viewmodel:AddCustomerViewModel>
-    <viewmodel:EditCustomerViewModel x:Key="EditCustomerVM"></viewmodel:EditCustomerViewModel>
-    <viewmodel:RemoveCustomerViewModel x:Key="RemoveCustomerVM"></viewmodel:RemoveCustomerViewModel>
+    <customerviewmodel:CustomerViewModel x:Key="CustomerVM"></customerviewmodel:CustomerViewModel>
+    <customerviewmodel:AddCustomerViewModel x:Key="AddCustomerVM"></customerviewmodel:AddCustomerViewModel>
+    <customerviewmodel:EditCustomerViewModel x:Key="EditCustomerVM"></customerviewmodel:EditCustomerViewModel>
+    <customerviewmodel:RemoveCustomerViewModel x:Key="RemoveCustomerVM"></customerviewmodel:RemoveCustomerViewModel>
+    <staffviewmodel:StaffViewModel x:Key="StaffVM"></staffviewmodel:StaffViewModel>
+    <roommapviewmodel:RoomMapViewModel x:Key="RoomMapVM"></roommapviewmodel:RoomMapViewModel>
+    <bookingroomviewmodel:BookingRoomViewModel x:Key="BookingRoomVM"></bookingroomviewmodel:BookingRoomViewModel>
 </ResourceDictionary>

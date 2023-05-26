@@ -9,10 +9,12 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
-    
-    public partial class PHIEUDATPHONG
+    using System.Windows;
+
+    public partial class PHIEUDATPHONG : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PHIEUDATPHONG()
@@ -20,15 +22,96 @@ namespace Hotel_Management_System.Model
             this.CT_HOADON = new HashSet<CT_HOADON>();
             this.PHIEUSUDUNGs = new HashSet<PHIEUSUDUNG>();
         }
-    
-        public string MaPhieuDatPhong { get; set; }
-        public string MaPhong { get; set; }
-        public Nullable<short> SoNguoi { get; set; }
-        public Nullable<System.DateTime> NgayDen { get; set; }
-        public Nullable<System.DateTime> NgayDi { get; set; }
-        public Nullable<double> TienCoc { get; set; }
-        public string MaKhachHang { get; set; }
-    
+
+        private string _maPhieuDatPhong;
+        private string _maPhong;
+        private short? _soNguoi;
+        private DateTime? _ngayDen;
+        private DateTime? _ngayDi;
+        private double? _tienCoc;
+        private DateTime? _ngayLap;
+        private string _maKhachHang;
+
+        public string MaPhieuDatPhong
+        {
+            get => _maPhieuDatPhong;
+            set
+            {
+                _maPhieuDatPhong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MaPhong
+        {
+            get => _maPhong;
+            set
+            {
+                _maPhong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public short? SoNguoi
+        {
+            get => _soNguoi;
+            set
+            {
+                _soNguoi = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? NgayDen
+        {
+            get => _ngayDen;
+            set
+            {
+                _ngayDen = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? NgayDi
+        {
+            get => _ngayDi;
+            set
+            {
+                _ngayDi = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double? TienCoc
+        {
+            get => _tienCoc;
+            set
+            {
+                _tienCoc = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? NgayLap
+        {
+            get => _ngayLap;
+            set
+            {
+                _ngayLap = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MaKhachHang
+        {
+            get => _maKhachHang;
+            set
+            {
+                _maKhachHang = value;
+                OnPropertyChanged();
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOADON> CT_HOADON { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }

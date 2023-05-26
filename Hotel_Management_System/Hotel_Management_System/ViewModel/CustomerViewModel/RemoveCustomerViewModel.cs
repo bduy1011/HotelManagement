@@ -1,5 +1,7 @@
 ﻿using Hotel_Management_System.Model;
 using Hotel_Management_System.View;
+using Hotel_Management_System.ViewModel.Other;
+using Hotel_Management_System.View.CustomerView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace Hotel_Management_System.ViewModel
+namespace Hotel_Management_System.ViewModel.CustomerViewModel
 {
     public class RemoveCustomerViewModel : BaseViewModel
     {

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 
-namespace Hotel_Management_System.View
+namespace Hotel_Management_System.View.CustomerView
 {
     /// <summary>
     /// Interaction logic for CustomerView.xaml
