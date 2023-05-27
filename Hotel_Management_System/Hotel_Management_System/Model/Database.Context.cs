@@ -30,7 +30,6 @@ namespace Hotel_Management_System.Model
         public virtual DbSet<CT_PHIEUHANGHOA> CT_PHIEUHANGHOA { get; set; }
         public virtual DbSet<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
         public virtual DbSet<DICHVU> DICHVUs { get; set; }
-        public virtual DbSet<DONVITINH> DONVITINHs { get; set; }
         public virtual DbSet<HANGHOA> HANGHOAs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }

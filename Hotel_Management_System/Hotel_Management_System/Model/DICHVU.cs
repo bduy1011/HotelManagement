@@ -9,10 +9,11 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
     
-    public partial class DICHVU
+    public partial class DICHVU : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DICHVU()
@@ -20,7 +21,7 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUDICHVU = new HashSet<CT_PHIEUDICHVU>();
         }
 
-        public DICHVU(string maDichVu, string tenDichVu, double? donGia, ICollection<CT_PHIEUDICHVU> cT_PHIEUDICHVU)
+        public DICHVU(string maDichVu, string tenDichVu, int? donGia, ICollection<CT_PHIEUDICHVU> cT_PHIEUDICHVU)
         {
             MaDichVu = maDichVu;
             TenDichVu = tenDichVu;
@@ -28,16 +29,49 @@ namespace Hotel_Management_System.Model
             CT_PHIEUDICHVU = cT_PHIEUDICHVU;
         }
 
-        public int STT { get; set; }
-        public string MaDichVu { get; set; }
-        public string TenDichVu { get; set; }
-        public Nullable<double> DonGia { get; set; }
-        public string DonViTinh { get; set; }
-        public string MaDonViTinh { get; set; }
+        private int _stt;
+        public int STT
+        {
+            get { return _stt; }
+            set { _stt = value; OnPropertyChanged(); }
+        }
 
+        private string _maDichVu;
+        public string MaDichVu
+        {
+            get { return _maDichVu; }
+            set { _maDichVu = value; OnPropertyChanged(); }
+        }
+
+        private string _tenDichVu;
+        public string TenDichVu
+        {
+            get { return _tenDichVu; }
+            set { _tenDichVu = value; OnPropertyChanged(); }
+        }
+
+        private string _donViTinh;
+        public string DonViTinh
+        {
+            get { return _donViTinh; }
+            set { _donViTinh = value; OnPropertyChanged(); }
+        }
+
+        private int? _donGia;
+        public int? DonGia
+        {
+            get { return _donGia; }
+            set { _donGia = value; OnPropertyChanged(); }
+        }
+
+        private string _trangThai;
+        public string TrangThai
+        {
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDICHVU> CT_PHIEUDICHVU { get; set; }
-        public virtual DONVITINH DONVITINH1 { get; set; }
     }
 }

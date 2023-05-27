@@ -16,7 +16,7 @@ namespace Hotel_Management_System.Model
     {
         public string MaHoaDon { get; set; }
         public string MaPhieuDatPhong { get; set; }
-        public Nullable<double> ThanhTien { get; set; }
+        public Nullable<int> ThanhTien { get; set; }
     
         public virtual HOADON HOADON { get; set; }
         public virtual PHIEUDATPHONG PHIEUDATPHONG { get; set; }

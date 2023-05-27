@@ -13,7 +13,7 @@ namespace Hotel_Management_System.Model
     using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class PHONG : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +21,7 @@ namespace Hotel_Management_System.Model
         {
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
-    
+
         public PHONG(string maPhong, string maLoaiPhong, string trangThai, string ghiChu, LOAIPHONG lOAIPHONG, ICollection<PHIEUDATPHONG> pHIEUDATPHONGs)
         {
             _maPhong = maPhong;

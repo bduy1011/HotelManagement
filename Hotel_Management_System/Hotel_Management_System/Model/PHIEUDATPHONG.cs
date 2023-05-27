@@ -20,17 +20,19 @@ namespace Hotel_Management_System.Model
         public PHIEUDATPHONG()
         {
             this.CT_HOADON = new HashSet<CT_HOADON>();
-            this.PHIEUSUDUNGs = new HashSet<PHIEUSUDUNG>();
+            this.KHACHHANGs = new HashSet<KHACHHANG>();
         }
 
         private string _maPhieuDatPhong;
+        private string _maPhieuSuDung;
         private string _maPhong;
-        private short? _soNguoi;
         private DateTime? _ngayDen;
         private DateTime? _ngayDi;
-        private double? _tienCoc;
+        private int? _donGia;
+        private int? _tienCoc;
+        private short? _soNguoi;
         private DateTime? _ngayLap;
-        private string _maKhachHang;
+        private string _trangThai;
 
         public string MaPhieuDatPhong
         {
@@ -38,6 +40,16 @@ namespace Hotel_Management_System.Model
             set
             {
                 _maPhieuDatPhong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MaPhieuSuDung
+        {
+            get => _maPhieuSuDung;
+            set
+            {
+                _maPhieuSuDung = value;
                 OnPropertyChanged();
             }
         }
@@ -82,7 +94,13 @@ namespace Hotel_Management_System.Model
             }
         }
 
-        public double? TienCoc
+        public int? DonGia
+        {
+            get { return _donGia; }
+            set { _donGia = value; OnPropertyChanged(); }
+        }
+
+        public int? TienCoc
         {
             get => _tienCoc;
             set
@@ -102,21 +120,21 @@ namespace Hotel_Management_System.Model
             }
         }
 
-        public string MaKhachHang
+        public string TrangThai
         {
-            get => _maKhachHang;
+            get => _trangThai;
             set
             {
-                _maKhachHang = value;
+                _trangThai = value;
                 OnPropertyChanged();
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOADON> CT_HOADON { get; set; }
-        public virtual KHACHHANG KHACHHANG { get; set; }
         public virtual PHONG PHONG { get; set; }
+        public virtual PHIEUSUDUNG PHIEUSUDUNG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUSUDUNG> PHIEUSUDUNGs { get; set; }
+        public virtual ICollection<KHACHHANG> KHACHHANGs { get; set; }
     }
 }

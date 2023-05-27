@@ -12,7 +12,7 @@ namespace Hotel_Management_System.Model
     using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class PHIEUSUDUNG : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,34 +20,22 @@ namespace Hotel_Management_System.Model
         {
             this.CT_PHIEUDICHVU = new HashSet<CT_PHIEUDICHVU>();
             this.CT_PHIEUHANGHOA = new HashSet<CT_PHIEUHANGHOA>();
+            this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
 
-        private string _maPhieu;
-        private string _maPhieuDatPhong;
-        private double? _triGia;
+        private string _maPhieuSuDung;
+        private int? _triGia;
         private DateTime? _ngayLap;
+        private string _trangThai;
 
-        public string MaPhieu
+
+        public string MaPhieuSuDung
         {
-            get => _maPhieu;
-            set
-            {
-                _maPhieu = value;
-                OnPropertyChanged();
-            }
+            get { return _maPhieuSuDung; }
+            set { _maPhieuSuDung = value; OnPropertyChanged(); }
         }
 
-        public string MaPhieuDatPhong
-        {
-            get => _maPhieuDatPhong;
-            set
-            {
-                _maPhieuDatPhong = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double? TriGia
+        public int? TriGia
         {
             get => _triGia;
             set
@@ -67,10 +55,17 @@ namespace Hotel_Management_System.Model
             }
         }
 
+        public string TrangThai
+        {
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUDICHVU> CT_PHIEUDICHVU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUHANGHOA> CT_PHIEUHANGHOA { get; set; }
-        public virtual PHIEUDATPHONG PHIEUDATPHONG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDATPHONG> PHIEUDATPHONGs { get; set; }
     }
 }

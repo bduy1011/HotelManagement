@@ -26,7 +26,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
         public string GioiTinh { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string SDT { get; set; }
-        public string Email { get; set; }
+        public string LoaiKhachHang { get; set; }
 
         public bool IsCheckedMale { get => _isCheckedMale; set { _isCheckedMale = value; OnPropertyChanged(); } }
         public bool IsCheckedFemale { get => _isCheckedFemale; set { _isCheckedFemale = value; OnPropertyChanged(); } }
@@ -40,7 +40,6 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 if (_selectedCustomerItem != value)
                 {
                     _selectedCustomerItem = value;
-                    // Thực hiện các xử lý liên quan đến dòng đã chọn ở đây
                     OnPropertyChanged();
                 }
             }
@@ -77,8 +76,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 IsCheckedFemale = true;
             }
             this.NgaySinh = SelectedCustomerItem.NgaySinh;
-            this.Email = SelectedCustomerItem.Email;
-            this.SDT = SelectedCustomerItem.SDT;
+            this.LoaiKhachHang = SelectedCustomerItem.LoaiKhachHang;
+            this.SDT = SelectedCustomerItem.SoDienThoai;
         }
 
         public void EditCustomer()
@@ -90,8 +89,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             result.GioiTinh = this.GioiTinh;
             result.TenKhachHang = this.TenKhachHang;
             result.NgaySinh = this.NgaySinh;
-            result.SDT = this.SDT;
-            result.Email = this.Email;
+            result.SoDienThoai = this.SDT;
+            result.LoaiKhachHang = this.LoaiKhachHang;
 
             DataProvider.Ins.DB.KHACHHANGs.AddOrUpdate(result);
             DataProvider.Ins.DB.SaveChanges();
@@ -102,22 +101,9 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             customerVM.UpdateCustomer(result);
         }
 
-        public bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public bool Check()
         {
-            if (TenKhachHang != "" && CCCD != "" && (IsCheckedFemale == true || IsCheckedMale == true) && NgaySinh != null && SDT != "" && Email != "" && IsValidEmail(Email))
+            if (TenKhachHang != "" && CCCD != "" && (IsCheckedFemale == true || IsCheckedMale == true) && NgaySinh != null && SDT != "" && LoaiKhachHang != "")
                 return true;
             else return false;
         }
@@ -128,7 +114,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             this.CCCD = null;
             this.NgaySinh = null;
             this.GioiTinh = null;
-            this.Email = null;
+            this.LoaiKhachHang = null;
             this.SDT = null;
         }
     }

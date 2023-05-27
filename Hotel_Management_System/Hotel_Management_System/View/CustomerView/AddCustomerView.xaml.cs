@@ -61,29 +61,5 @@ namespace Hotel_Management_System.View.CustomerView
             // Kiểm tra xem chuỗi có chứa toàn số hay không
             return text.All(char.IsDigit);
         }
-
-        private void EmailTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            string email = EmailTextBox.Text;
-            if (!IsValidEmail(email) && email != "")
-            {
-                // Thông báo lỗi nếu giá trị không phải là địa chỉ email hợp lệ
-                CheckTextBlockEmail.Text = "Địa chỉ email không hợp lệ!";
-            }
-            else CheckTextBlockEmail.Text = "";
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

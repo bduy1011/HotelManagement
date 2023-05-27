@@ -29,7 +29,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
         public string GioiTinh { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string SDT { get; set; }
-        public string Email { get; set; }
+        public string LoaiKhachHang { get; set; }
 
         public bool IsCheckedMale { get => _isCheckedMale; set { _isCheckedMale = value; OnPropertyChanged(); } }
         public bool IsCheckedFemale { get => _isCheckedFemale; set { _isCheckedFemale = value; OnPropertyChanged(); } }
@@ -45,7 +45,6 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 if (_selectedCustomerItem != value)
                 {
                     _selectedCustomerItem = value;
-                    // Thực hiện các xử lý liên quan đến dòng đã chọn ở đây
                     OnPropertyChanged();
                 }
             }
@@ -82,8 +81,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 IsCheckedFemale = true;
             }
             this.NgaySinh = SelectedCustomerItem.NgaySinh;
-            this.Email = SelectedCustomerItem.Email;
-            this.SDT = SelectedCustomerItem.SDT;
+            this.LoaiKhachHang = SelectedCustomerItem.LoaiKhachHang;
+            this.SDT = SelectedCustomerItem.SoDienThoai;
         }
 
         public void RemoveCustomer()
@@ -105,7 +104,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             this.CCCD = null;
             this.NgaySinh = null;
             this.GioiTinh = null;
-            this.Email = null;
+            this.LoaiKhachHang = null;
             this.SDT = null;
         }
     }

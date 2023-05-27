@@ -270,14 +270,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         {
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
+                UsageBill = new PHIEUSUDUNG();
+                UsageBill.MaPhieuSuDung = "SD1";
+
                 ReservationBill = new PHIEUDATPHONG();
                 ReservationBill.MaPhieuDatPhong = "DP123";
                 ReservationBill.NgayLap = DateTime.Now;
                 ReservationBill.NgayDen = DateTime.UtcNow;
-
-                UsageBill = new PHIEUSUDUNG();
-                UsageBill.MaPhieu = "SD1";
-                UsageBill.MaPhieuDatPhong = ReservationBill.MaPhieuDatPhong;
+                ReservationBill.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
 
                 SelectedServices = new ObservableCollection<CT_PHIEUDICHVU>();
 
@@ -300,7 +300,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
                 catch
                 {
-                    temp = "KH" + (23410000 - 1).ToString();
+                    temp = "KH" + (10000 - 1).ToString();
                 }
                 kh.MaKhachHang = "KH" + (int.Parse(temp.Split('H')[1]) + 1).ToString();
 
@@ -311,7 +311,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
             LoadedServicesCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
-                Services = new ObservableCollection<DICHVU>(DataProvider.Ins.DB.DICHVUs);
+                try
+                {
+                    Services = new ObservableCollection<DICHVU>(DataProvider.Ins.DB.DICHVUs);
+                }
+                catch
+                {
+                    Services = new ObservableCollection<DICHVU>();
+                }
 
                 int i = 1;
                 foreach (var item in Services)
@@ -323,7 +330,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
             LoadedCommoditysCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
-                Commoditys = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs);
+                try
+                {
+                    Commoditys = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs);
+                }
+                catch
+                {
+                    Commoditys = new ObservableCollection<HANGHOA>();
+                }
 
                 int i = 1;
                 foreach (var item in Commoditys)
@@ -347,7 +361,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
 
                 CT_PHIEUDICHVU ctpdv = new CT_PHIEUDICHVU(p);
-                ctpdv.MaPhieu = UsageBill.MaPhieu;
+                ctpdv.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
                 int tmp = ShowSelectedServices.Count;
                 ctpdv.STT = ++tmp;
                 ctpdv.SoLuong = 1;
@@ -380,7 +394,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
 
                 CT_PHIEUHANGHOA ctphh = new CT_PHIEUHANGHOA(p);
-                ctphh.MaPhieu = UsageBill.MaPhieu;
+                ctphh.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
                 int tmp = ShowSelectedServices.Count;
                 ctphh.STT = ++tmp;
                 ctphh.SoLuong = 1;
@@ -418,14 +432,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
             TextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                double sumFee = double.Parse(SumFee);
-                double discount;
-                double downPayment;
-                try { discount = double.Parse(Discount); } catch { discount = 0; };
-                try { downPayment = double.Parse(DownPayment); } catch { downPayment = 0; };
-                double completelyPayment = discount + downPayment;
+                int sumFee = int.Parse(SumFee);
+                int discount;
+                int downPayment;
+                try { discount = int.Parse(Discount); } catch { discount = 0; };
+                try { downPayment = int.Parse(DownPayment); } catch { downPayment = 0; };
+                int completelyPayment = discount + downPayment;
                 CompletelyPayment = completelyPayment.ToString();
-                double remainingCosts = sumFee - completelyPayment;
+                int remainingCosts = sumFee - completelyPayment;
                 RemainingCosts = remainingCosts.ToString();
             });
 
@@ -532,26 +546,34 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
 
             });
+
+            BookingRoomCommand = new RelayCommand<KHACHHANG>((p) => { return true; }, (p) => 
+            {
+                //DataProvider.Ins.DB.CT_PHIEUDICHVU.AddRange(SelectedServices);
+                //DataProvider.Ins.DB.CT_PHIEUHANGHOA.AddRange(SelectedCommoditys);
+                //DataProvider.Ins.DB..AddRange(SelectedCommoditys);
+                //DataProvider.Ins.DB.SaveChanges();
+            });
         }
 
         public void UpdateFee(ObservableCollection<CT_PHIEUDICHVU> ct_PHIEUDICHVUs, ObservableCollection<CT_PHIEUHANGHOA> ct_PHIEUHANGHOAs)
         {
-            double servicesFee = 0;
-            foreach (var item in ct_PHIEUDICHVUs) { servicesFee += (double)item.ThanhTien; }
-            foreach (var item in ct_PHIEUHANGHOAs) { servicesFee += (double)item.ThanhTien; }
+            int servicesFee = 0;
+            foreach (var item in ct_PHIEUDICHVUs) { servicesFee += (int)item.ThanhTien; }
+            foreach (var item in ct_PHIEUHANGHOAs) { servicesFee += (int)item.ThanhTien; }
             ServicesFee = servicesFee.ToString();
 
-            double sumFee = servicesFee + double.Parse(RoomFee);
+            int sumFee = servicesFee + int.Parse(RoomFee);
             SumFee = sumFee.ToString();
 
-            double discount;
-            double downPayment;
-            try { discount = double.Parse(Discount); } catch { discount = 0; };
-            try { downPayment = double.Parse(DownPayment); } catch { downPayment = 0; };
+           int discount;
+           int downPayment;
+            try { discount = int.Parse(Discount); } catch { discount = 0; };
+            try { downPayment = int.Parse(DownPayment); } catch { downPayment = 0; };
 
-            double completelyPayment = discount + downPayment;
+            int completelyPayment = discount + downPayment;
             CompletelyPayment = completelyPayment.ToString();
-            double remainingCosts = sumFee - completelyPayment;
+            int remainingCosts = sumFee - completelyPayment;
             RemainingCosts = remainingCosts.ToString();
         }
 

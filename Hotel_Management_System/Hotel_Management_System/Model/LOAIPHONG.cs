@@ -23,7 +23,8 @@ namespace Hotel_Management_System.Model
     
         public string MaLoaiPhong { get; set; }
         public string TenLoaiPhong { get; set; }
-        public Nullable<double> DonGia { get; set; }
+        public Nullable<int> DonGia { get; set; }
+        public string TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHONG> PHONGs { get; set; }

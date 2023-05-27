@@ -90,7 +90,6 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Mã khách hàng" Style="{StaticResource text}"/>
@@ -99,7 +98,7 @@
                 <TextBlock Grid.Row="3" Text="Giới tính" Style="{StaticResource text}"/>
                 <TextBlock Grid.Row="4" Text="Ngày sinh" Style="{StaticResource text}"/>
                 <TextBlock Grid.Row="5" Text="Số điện thoại" Style="{StaticResource text}"/>
-                <TextBlock Grid.Row="6" Text="Email" Style="{StaticResource text}"/>
+                <TextBlock Grid.Row="6" Text="Loai khách hàng" Style="{StaticResource text}"/>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Height="30" Margin="0 10" VerticalContentAlignment="Center" Foreground="#868686" IsReadOnly="True" Background="LightGray" Name="txtMKH" Style="{StaticResource textBox1}" Text="{Binding MaKhachHang}"/>
                 <TextBox Grid.Column="1" Grid.Row="1" Height="30" Margin="0 10" VerticalContentAlignment="Center" Foreground="#868686" PreviewTextInput="TextBox_PreviewTextInput1" Style="{StaticResource textBox1}" Text="{Binding TenKhachHang}"/>
@@ -123,10 +122,13 @@
                 </StackPanel>
                 <DatePicker Grid.Column="1" Grid.Row="4" Height="30" Margin="0 10" VerticalContentAlignment="Center" BorderThickness="0" Foreground="#868686" SelectedDate="{Binding NgaySinh}"/>
                 <TextBox Grid.Column="1" Grid.Row="5" Height="30" Margin="0 10" VerticalContentAlignment="Center" Foreground="#868686" PreviewTextInput="TextBox_PreviewTextInput2" Style="{StaticResource textBox1}" Text="{Binding SDT}"/>
-                <TextBox Grid.Column="1" Grid.Row="6" Height="30" Margin="0 10 0 0" VerticalContentAlignment="Center" Foreground="#868686" x:Name="EmailTextBox" LostFocus="EmailTextBox_LostFocus" Style="{StaticResource textBox1}" Text="{Binding Email}"/>
-                <TextBlock Grid.Column="1" Grid.Row="7" x:Name="CheckTextBlockEmail" Foreground="Red" Style="{StaticResource text}" FontSize="10" VerticalAlignment="Top"></TextBlock>
+                <ComboBox Grid.Column="1" Grid.Row="6" Height="30" Margin="0 10 0 0" VerticalContentAlignment="Center" Foreground="#868686" SelectedItem="{Binding LoaiKhachHang}">
+                    <ComboBoxItem Content="Trẻ em"/>
+                    <ComboBoxItem Content="Vị thành niên"/>
+                    <ComboBoxItem Content="Người lớn"/>
+                </ComboBox>
 
-                <Grid Grid.Column="1" Grid.Row="8" Margin="0 30 0 0">
+                <Grid Grid.Column="1" Grid.Row="7" Margin="0 30 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

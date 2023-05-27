@@ -16,7 +16,7 @@ namespace Hotel_Management_System.Model
     {
         public string MaThongKe { get; set; }
         public string MaLoaiPhong { get; set; }
-        public Nullable<System.DateTime> ThoiGian { get; set; }
+        public Nullable<System.DateTime> NgayLap { get; set; }
         public Nullable<double> DoanhThu { get; set; }
         public Nullable<double> TiLe { get; set; }
     

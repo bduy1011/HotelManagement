@@ -121,8 +121,8 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="CCCD" Binding="{Binding CCCD}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Loại khách" Binding="{Binding LoaiKhachHang}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Chức năng" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

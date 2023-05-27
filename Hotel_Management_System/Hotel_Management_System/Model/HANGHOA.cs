@@ -22,136 +22,65 @@ namespace Hotel_Management_System.Model
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
         }
 
-        public HANGHOA(string maHangHoa, string tenHangHoa, short? sLTonKho, double? donGiaBan, double? donGiaNhap, ICollection<CT_PHIEUHANGHOA> cT_PHIEUHANGHOA, ICollection<CT_PHIEUNHAPHANG> cT_PHIEUNHAPHANG, string maDonViTinh, string donVITinh)
-        {
-            MaHangHoa = maHangHoa;
-            TenHangHoa = tenHangHoa;
-            SLTonKho = sLTonKho;
-            DonGiaBan = donGiaBan;
-            DonGiaNhap = donGiaNhap;
-            CT_PHIEUHANGHOA = cT_PHIEUHANGHOA;
-            CT_PHIEUNHAPHANG = cT_PHIEUNHAPHANG;
-            MaDonViTinh = maDonViTinh;
-            DonVITinh = donVITinh;
-        }
-
-        private int stt;
-        private string maHangHoa;
-        private string tenHangHoa;
-        private short? slTonKho;
-        private double? donGiaBan;
-        private double? donGiaNhap;
-        private string maDonViTinh;
-        private string donVITinh;
-
+        private int _stt;
         public int STT
         {
-            get { return stt; }
-            set
-            {
-                if (stt != value)
-                {
-                    stt = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _stt; }
+            set { _stt = value; OnPropertyChanged(); }
         }
 
+        private string _maHangHoa;
         public string MaHangHoa
         {
-            get { return maHangHoa; }
-            set
-            {
-                if (maHangHoa != value)
-                {
-                    maHangHoa = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _maHangHoa; }
+            set { _maHangHoa = value; OnPropertyChanged(); }
         }
 
+        private string _tenHangHoa;
         public string TenHangHoa
         {
-            get { return tenHangHoa; }
-            set
-            {
-                if (tenHangHoa != value)
-                {
-                    tenHangHoa = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _tenHangHoa; }
+            set { _tenHangHoa = value; OnPropertyChanged(); }
         }
 
-        public short? SLTonKho
+        private short? _tonKho;
+        public short? TonKho
         {
-            get { return slTonKho; }
-            set
-            {
-                if (slTonKho != value)
-                {
-                    slTonKho = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _tonKho; }
+            set { _tonKho = value; OnPropertyChanged(); }
         }
 
-        public double? DonGiaBan
+        private string _donViTinh;
+        public string DonViTinh
         {
-            get { return donGiaBan; }
-            set
-            {
-                if (donGiaBan != value)
-                {
-                    donGiaBan = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _donViTinh; }
+            set { _donViTinh = value; OnPropertyChanged(); }
         }
 
-        public double? DonGiaNhap
+        private int? _donGiaNhap;
+        public int? DonGiaNhap
         {
-            get { return donGiaNhap; }
-            set
-            {
-                if (donGiaNhap != value)
-                {
-                    donGiaNhap = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _donGiaNhap; }
+            set { _donGiaNhap = value; OnPropertyChanged(); }
         }
 
-        public string MaDonViTinh
+        private int? _donGiaBan;
+        public int? DonGiaBan
         {
-            get { return maDonViTinh; }
-            set
-            {
-                if (maDonViTinh != value)
-                {
-                    maDonViTinh = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _donGiaBan; }
+            set { _donGiaBan = value; OnPropertyChanged(); }
         }
 
-        public string DonVITinh
+        private string _trangThai;
+        public string TrangThai
         {
-            get { return donVITinh; }
-            set
-            {
-                if (donVITinh != value)
-                {
-                    donVITinh = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUHANGHOA> CT_PHIEUHANGHOA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
-        public virtual DONVITINH DONVITINH1 { get; set; }
     }
 }
