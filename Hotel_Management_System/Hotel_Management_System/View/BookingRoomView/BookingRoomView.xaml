@@ -120,76 +120,76 @@
 
                         <Grid Grid.Column="0">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nhận phòng" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedDate="{Binding ReservationBill.NgayDen}" Name="ngayDenDatePicker" IsEnabled="False"/>
+                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='yyyy/MM/dd'}" Name="ngayDenDatePicker" IsEnabled="False"/>
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding ReservationBill.NgayLap, StringFormat='HH:mm'}" FontWeight="Bold" Margin="0,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding ReservationBill.NgayLap, StringFormat='HH:mm'}" FontWeight="Bold" Margin="0,0,0,0"/>
                         </Grid>
 
                         <Grid Grid.Column="2">
-                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="20" Background="#C6C6C6" Width="100" Height="45">
-                                <TextBlock Name="countDayTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Text="#" Margin="0,0,0,0"/>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="20" Background="#C6C6C6" Width="120" Height="45">
+                                <TextBlock Text="{Binding TimeReservation}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
                             </Border>
                         </Grid>
 
                         <Grid Grid.Column="3">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Trả phòng" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Top" Margin="0,35,0,0" SelectedDate="{Binding ReservationBill.NgayDi}" Name="ngayDiDatePicker" SelectedDateChanged="ngayDiDatePicker_SelectedDateChanged"/>
+                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Top" Margin="0,35,0,0" SelectedDate="{Binding ReservationBill.NgayDi}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding DateOfDepartmentSelectedDateChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
                         </Grid>
 
                         <Grid Grid.Column="4">
-                            <TextBlock Name="gioDiTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="12:00" FontWeight="Bold" Margin="0,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="12:00" FontSize="20" FontWeight="Bold" Margin="0,0,0,0"/>
                         </Grid>
 
                     </Grid>
 
-                    <Grid Grid.Row="3" Margin="0 10">
+                    <Grid Grid.Row="3">
                         <DataGrid ItemsSource="{Binding AddCustomers}" AutoGenerateColumns="False" Name="addCustomers"
                                   Style="{DynamicResource DataGridStyle1}">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="#" Width="85" IsReadOnly="True">
+                                <DataGridTextColumn Header="Mã khách" Binding="{Binding MaKhachHang}" Width="90" IsReadOnly="True"/>
+                                <DataGridTemplateColumn Header="CCCD" Width="100">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding MaKhachHang}" Width="85"/>
+                                            <TextBox Text="{Binding CCCD}" Width="70"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="CCCD" Width="80">
+                                <DataGridTemplateColumn Header="Tên khách hàng" Width="130">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding CCCD}" Width="80"/>
+                                            <TextBox Text="{Binding TenKhachHang}" Width="100"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Tên khách hàng" Width="150">
+                                <DataGridTemplateColumn Header="Giới tính" Width="90">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding TenKhachHang}" Width="150"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Giới tính" Width="100">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox HorizontalAlignment="Center" Width="100" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedItem="{Binding GioiTinh}">
+                                            <ComboBox HorizontalAlignment="Center" Width="50" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedItem="{Binding GioiTinh}">
                                                 <ComboBoxItem Content="Nam"/>
                                                 <ComboBoxItem Content="Nữ"/>
                                             </ComboBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Ngày sinh" Width="100">
+                                <DataGridTemplateColumn Header="Ngày sinh" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding NgaySinh, Mode=TwoWay}" />
+                                            <DatePicker SelectedDate="{Binding NgaySinh, Mode=TwoWay}" Width="80"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Điện thoại" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding SDT}" Width="auto"/>
+                                            <TextBox Text="{Binding SoDienThoai}" Width="auto"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -204,7 +204,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Chức năng" IsReadOnly="True" Width="auto">
+                                <DataGridTemplateColumn IsReadOnly="True" Width="auto">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -228,7 +228,6 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-
                     </Grid>
                 </Grid>
 
@@ -237,17 +236,34 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Dịch vụ/Hàng hóa" Binding="{Binding DICHVU.TenDichVu}" Width="200" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}" Width="*" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="Số lượng" Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged}" 
+                                                 PreviewTextInput="TextBox_PreviewTextInput2"
+                                                 PreviewKeyDown="TextBox_PreviewKeyUp">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="TextChanged">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.AmountOfSelectedServicesTextChangedCommand, 
+                                                                           RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                                           CommandParameter="{Binding}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </TextBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Đơn vị" Binding="{Binding DICHVU.DonViTinh}" Width="*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Giá" Binding="{Binding DICHVU.DonGia}" Width="*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Thành tiền" Binding="{Binding ThanhTien}" Width="*" IsReadOnly="True"/>
                             <DataGridTemplateColumn Header="Hủy" IsReadOnly="True" Width="80">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" 
-                                            Command="{Binding DataContext.RemoveSelectedServiceCommand, 
-                                                      RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                            CommandParameter="{Binding}">
+                                            <Button Style="{StaticResource gridRemoveButton}" 
+                                                    Command="{Binding DataContext.RemoveSelectedServiceCommand, 
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                    CommandParameter="{Binding}">
                                                 <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                             </Button>
                                         </StackPanel>
@@ -301,7 +317,7 @@
                         <TextBox Grid.Column="1" Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding TextChangedCommand}" />
+                                    <i:InvokeCommandAction Command="{Binding MoneyTextChangedCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -310,7 +326,7 @@
                         <TextBox Grid.Column="3" Text="{Binding DownPayment, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding TextChangedCommand}" />
+                                    <i:InvokeCommandAction Command="{Binding MoneyTextChangedCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -372,11 +388,11 @@
                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                           Style="{DynamicResource DataGridStyle1}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="60" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Mã" Binding="{Binding MaDichVu}" Width="70" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Dịch vụ" Binding="{Binding TenDichVu}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" Width="*" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Header="Chọn" IsReadOnly="True" Width="80">
+                        <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="40" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã" Binding="{Binding MaDichVu}" Width="75" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Dịch vụ" Binding="{Binding TenDichVu}" Width="140" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" Width="90" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Chọn" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -425,11 +441,11 @@
                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                           Style="{DynamicResource DataGridStyle1}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="60" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Mã" Binding="{Binding MaHangHoa}" Width="70" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Hàng hóa" Binding="{Binding TenHangHoa}" Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGiaBan}" Width="*" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Header="Chọn" IsReadOnly="True" Width="80">
+                        <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="40" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã" Binding="{Binding MaHangHoa}" Width="75" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Hàng hóa" Binding="{Binding TenHangHoa}" Width="140" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGiaBan}" Width="90" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Chọn" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -456,7 +472,7 @@
 
             <Button Grid.Column="0" Width="200" HorizontalAlignment="Right" Style="{StaticResource buttonMain}" Margin="0 0 10 0" Content="Hủy" Command="{Binding BackCommand}" CommandParameter="{Binding ElementName=bookingRoomWindow}"/>
 
-            <Button Grid.Column="1" Width="200" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Đặt phòng" Command="{Binding BookingRoomCommand}"/>
+            <Button Grid.Column="1" Width="200" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Đặt phòng" Command="{Binding BookingRoomCommand}" CommandParameter="{Binding ElementName=bookingRoomWindow}"/>
         </Grid>
     </Grid>
 </Window>

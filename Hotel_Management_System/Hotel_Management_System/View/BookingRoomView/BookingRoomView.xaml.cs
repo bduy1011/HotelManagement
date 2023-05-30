@@ -25,20 +25,26 @@ namespace Hotel_Management_System.View.BookingRoomView
             InitializeComponent();
         }
 
-        private void ngayDiDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void TextBox_PreviewTextInput2(object sender, TextCompositionEventArgs e)
         {
-            DateTime? ngayDen = ngayDenDatePicker.SelectedDate;
-            DateTime? ngayDi = ngayDiDatePicker.SelectedDate;
+            e.Handled = !IsNumeric2(e.Text);
+        }
 
-            if (ngayDen != null && ngayDi != null && ngayDi >= ngayDen)
+        private bool IsNumeric2(string text)
+        {
+            // Kiểm tra xem chuỗi có chứa toàn số hay không
+            return int.TryParse(text, out int result);
+        }
+
+        private void TextBox_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Back && ((System.Windows.Controls.TextBox)sender).Text.Length == 1)
             {
-                gioDiTextBlock.Text = "12:00";
-                int countDay = (ngayDi.Value - ngayDen.Value).Days;
-                countDayTextBox.Text = string.Format("{0} đêm", ++countDay);
+                ((System.Windows.Controls.TextBox)sender).Text = "0";
             }
-            else
+            else if (((System.Windows.Controls.TextBox)sender).Text == "0" && e.Key >= Key.D0 && e.Key <= Key.D9)
             {
-                countDayTextBox.Text = "#";
+                ((System.Windows.Controls.TextBox)sender).Text = "";
             }
         }
     }

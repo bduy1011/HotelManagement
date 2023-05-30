@@ -71,8 +71,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
         {
             LoadedUserControlCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
-                //try
-                //{
+                try
+                {
                     customers = new ObservableCollection<KHACHHANG>();
                     tmpCustomers = new ObservableCollection<KHACHHANG>();
 
@@ -84,7 +84,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                         {
                             MaKhachHang = item.MaKhachHang,
                             Character = item.TenKhachHang.ToString().Substring(0, 1),
-                            BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
+                            BgColor = brushList((int.Parse(item.MaKhachHang.Substring(2)))),
                             TenKhachHang = item.TenKhachHang,
                             GioiTinh = item.GioiTinh,
                             NgaySinh = item.NgaySinh,
@@ -94,8 +94,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                         });
                     }
                     tmpCustomers = customers;
-                //}
-                //catch { return; }
+                }
+                catch { return; }
             });
 
             AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -128,7 +128,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                         {
                             MaKhachHang = item.MaKhachHang,
                             Character = item.TenKhachHang.ToString().Substring(0, 1),
-                            BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
+                            BgColor = brushList((int.Parse(item.MaKhachHang.Substring(2)))),
                             TenKhachHang = item.TenKhachHang,
                             GioiTinh = item.GioiTinh,
                             NgaySinh = item.NgaySinh,
@@ -221,7 +221,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 {
                     MaKhachHang = item.MaKhachHang,
                     Character = item.TenKhachHang.ToString().Substring(0, 1),
-                    BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
+                    BgColor = brushList((int.Parse(item.MaKhachHang.Substring(2)))),
                     TenKhachHang = item.TenKhachHang,
                     GioiTinh = item.GioiTinh,
                     NgaySinh = item.NgaySinh,

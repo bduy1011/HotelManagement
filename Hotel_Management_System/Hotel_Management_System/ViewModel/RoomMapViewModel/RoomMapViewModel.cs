@@ -109,41 +109,43 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             int dirtyNumber = 0;
             int outOfOrderRoomNumber = 0;
 
-            Rooms = new ObservableCollection<PHONG>()
-            {
-                new PHONG("100", "Standard room", "Trống", null, null, null),
-                new PHONG("101", "Standard room", "Trống", null, null, null),
-                new PHONG("102", "Standard room", "Trống", null, null, null),
-                new PHONG("103", "Standard room", "Cần dọn phòng", null, null, null),
-                new PHONG("104", "Standard room", "Được thuê", null, null, null),
-                new PHONG("105", "Standard room", "Được thuê", null, null, null),
-                new PHONG("106", "Standard room", "Được thuê", null, null, null),
-                new PHONG("107", "Standard room", "Được thuê", null, null, null),
-                new PHONG("108", "Deluxe room", "Trống", null, null, null),
-                new PHONG("109", "Deluxe room", "Trống", null, null, null),
-                new PHONG("110", "Deluxe room", "Trống", null, null, null),
-                new PHONG("111", "Deluxe room", "Ngưng hoạt động", null, null, null),
-                new PHONG("112", "Deluxe room", "Cần dọn phòng", null, null, null),
-                new PHONG("113", "Deluxe room", "Được đặt", null, null, null),
-                new PHONG("114", "Deluxe room", "Được đặt", null, null, null),
-                new PHONG("115", "Deluxe room", "Được đặt", null, null, null),
-                new PHONG("201", "Suite room", "Ngưng hoạt động", null, null, null),
-                new PHONG("202", "Suite room", "Được thuê", null, null, null),
-                new PHONG("203", "Suite room", "Được thuê", null, null, null),
-                new PHONG("204", "Suite room", "Trống", null, null, null),
-                new PHONG("205", "Executive room", "Được thuê", null, null, null),
-                new PHONG("206", "Executive room", "Được thuê", null, null, null),
-                new PHONG("207", "Executive room", "Được thuê", null, null, null),
-                new PHONG("208", "Executive room", "Được thuê", null, null, null),
-                new PHONG("301", "View room", "Được thuê", null, null, null),
-                new PHONG("302", "View room", "Được thuê", null, null, null),
-                new PHONG("303", "View room", "Được thuê", null, null, null),
-                new PHONG("304", "View room", "Được thuê", null, null, null),
-                new PHONG("305", "Family room", "Được đặt", null, null, null),
-                new PHONG("306", "Family room", "Được đặt", null, null, null),
-                new PHONG("307", "Family room", "Cần dọn phòng", null, null, null),
-                new PHONG("308", "Family room", "Cần dọn phòng", null, null, null)
-            };
+            //Rooms = new ObservableCollection<PHONG>()
+            //{
+            //    new PHONG("100", "Standard room", "Trống", null, null, null),
+            //    new PHONG("101", "Standard room", "Trống", null, null, null),
+            //    new PHONG("102", "Standard room", "Trống", null, null, null),
+            //    new PHONG("103", "Standard room", "Cần dọn phòng", null, null, null),
+            //    new PHONG("104", "Standard room", "Được thuê", null, null, null),
+            //    new PHONG("105", "Standard room", "Được thuê", null, null, null),
+            //    new PHONG("106", "Standard room", "Được thuê", null, null, null),
+            //    new PHONG("107", "Standard room", "Được thuê", null, null, null),
+            //    new PHONG("108", "Deluxe room", "Trống", null, null, null),
+            //    new PHONG("109", "Deluxe room", "Trống", null, null, null),
+            //    new PHONG("110", "Deluxe room", "Trống", null, null, null),
+            //    new PHONG("111", "Deluxe room", "Ngưng hoạt động", null, null, null),
+            //    new PHONG("112", "Deluxe room", "Cần dọn phòng", null, null, null),
+            //    new PHONG("113", "Deluxe room", "Được đặt", null, null, null),
+            //    new PHONG("114", "Deluxe room", "Được đặt", null, null, null),
+            //    new PHONG("115", "Deluxe room", "Được đặt", null, null, null),
+            //    new PHONG("201", "Suite room", "Ngưng hoạt động", null, null, null),
+            //    new PHONG("202", "Suite room", "Được thuê", null, null, null),
+            //    new PHONG("203", "Suite room", "Được thuê", null, null, null),
+            //    new PHONG("204", "Suite room", "Trống", null, null, null),
+            //    new PHONG("205", "Executive room", "Được thuê", null, null, null),
+            //    new PHONG("206", "Executive room", "Được thuê", null, null, null),
+            //    new PHONG("207", "Executive room", "Được thuê", null, null, null),
+            //    new PHONG("208", "Executive room", "Được thuê", null, null, null),
+            //    new PHONG("301", "View room", "Được thuê", null, null, null),
+            //    new PHONG("302", "View room", "Được thuê", null, null, null),
+            //    new PHONG("303", "View room", "Được thuê", null, null, null),
+            //    new PHONG("304", "View room", "Được thuê", null, null, null),
+            //    new PHONG("305", "Family room", "Được đặt", null, null, null),
+            //    new PHONG("306", "Family room", "Được đặt", null, null, null),
+            //    new PHONG("307", "Family room", "Cần dọn phòng", null, null, null),
+            //    new PHONG("308", "Family room", "Cần dọn phòng", null, null, null)
+            //};
+
+            Rooms = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs);
 
             foreach (var room in Rooms)
             {
@@ -184,7 +186,12 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             { 
                 BookingRoomView bookingRoomView = new BookingRoomView();
                 bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p);
-                bookingRoomView.ShowDialog(); 
+                bookingRoomView.ShowDialog();
+
+                if (bookingRoomView.DataContext == null) return;
+                var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
+
+                p.TrangThai = bookingRoomViewModel.Room.TrangThai;
             });
         }
     }

@@ -36,6 +36,7 @@ namespace Hotel_Management_System.Model
 
         public string Character { get; set; }
         public Brush BgColor { get; set; }
+        public string STT { get => _stt; set { _stt = value; OnPropertyChanged(); } }
         public string MaKhachHang { get => _maKhachHang; set { _maKhachHang = value; OnPropertyChanged(); } }
         public string TenKhachHang { get => _tenKhachHang; set { _tenKhachHang = value; OnPropertyChanged(); } }
         public string CCCD { get => _CCCD; set { _CCCD = value; OnPropertyChanged(); } }
@@ -45,7 +46,6 @@ namespace Hotel_Management_System.Model
         public string LoaiKhachHang { get => _loaiKhachHang; set { _loaiKhachHang = value; OnPropertyChanged(); } }
         public string TrangThai { get => _trangThai; set { _trangThai = value; OnPropertyChanged(); } }
         public bool IsLastRow { get => _isLastRow; set { _isLastRow = value; OnPropertyChanged(); } }
-        public string STT { get => _stt; set { _stt = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
