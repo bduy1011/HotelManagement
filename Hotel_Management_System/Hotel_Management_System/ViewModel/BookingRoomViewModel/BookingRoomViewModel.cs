@@ -166,7 +166,8 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         private string _downPayment;
         private string _discount;
         private double _countDay;
-        private string _timeReservation;
+        private string _totalDayReservation;
+        private string _timeReserved;
 
         public string RemainingCosts
         {
@@ -247,14 +248,41 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
-        public string TimeReservation
+        public string TotalDayReservation
         {
-            get { return _timeReservation; }
+            get { return _totalDayReservation; }
             set
             {
-                if (_timeReservation != value)
+                if (_totalDayReservation != value)
                 {
-                    _timeReservation = value;
+                    _totalDayReservation = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string TimeReserved
+        {
+            get { return _timeReserved; }
+            set
+            {
+                if (_timeReserved != value)
+                {
+                    _timeReserved = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isCheckReserved;
+        public bool IsCheckReserved
+        {
+            get { return _isCheckReserved; }
+            set
+            {
+                if (_isCheckReserved != value)
+                {
+                    _isCheckReserved = value;
                     OnPropertyChanged();
                 }
             }
@@ -277,9 +305,11 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         public ICommand BackCommand { get; set; }
         public ICommand BookingRoomCommand { get; set; }
 
-        public BookingRoomViewModel(PHONG room) : this()
+        public BookingRoomViewModel(PHONG room, bool isCheckReserved) : this()
         {
             Room = room;
+            IsCheckReserved = isCheckReserved;
+            
             RoomFee = "0";
             SumFee = RoomFee;
             RemainingCosts = RoomFee;
@@ -287,7 +317,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             Discount = "";
             DownPayment = "";
             CompletelyPayment = "0";
-            TimeReservation = "#";
+            TotalDayReservation = "#";
             CountDay = 0;
         }
 
@@ -317,7 +347,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 // Thiết lập thông tin phiếu đặt phòng
                 ReservationBill.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
                 ReservationBill.MaPhong = Room.MaPhong;
-                ReservationBill.NgayDen = DateTime.Now;
+                if (IsCheckReserved == false) 
+                { 
+                    ReservationBill.NgayDen = DateTime.Now;
+                }
+                /*
+                Thêm thuộc tính selected chang cho datapicker ngày đến, để đặt phòng chọn ngày nó hiện giờ mặc định 12:00
+                cho giờ binding đến biến TimeReserved
+                */
                 ReservationBill.NgayLap = DateTime.Now;
 
                 // Thiết lập thông tin phiếu sử dụng
@@ -507,15 +544,15 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                         // Phụ thu thêm số tiền = 1/4 giá thuê phòng 1 đêm
                         CountDay += 0.25;
                     }
-                    if (CountDay == Math.Floor(CountDay)) TimeReservation = String.Format("{0} đêm", CountDay);
-                    else TimeReservation = String.Format("{0} đêm có phụ thu", Math.Floor(CountDay));
+                    if (CountDay == Math.Floor(CountDay)) TotalDayReservation = String.Format("{0} đêm", CountDay);
+                    else TotalDayReservation = String.Format("{0} đêm có phụ thu", Math.Floor(CountDay));
                     RoomFee = (CountDay * Room.LOAIPHONG.DonGia).ToString();
                 }
                 else 
                 { 
                     CountDay = 0;
                     RoomFee = "0";
-                    TimeReservation = "#";
+                    TotalDayReservation = "#";
                 }
                 UpdateFee(SelectedServices, SelectedCommoditys);
             });
@@ -634,9 +671,9 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 ReservationBill.DonGia = int.Parse(RoomFee); 
                 ReservationBill.TienCoc = int.Parse(DownPayment);
                 ReservationBill.SoNguoi = (short)ReservationBill.KHACHHANGs.Count();
-                //ReservationBill.TrangThai = ???
+                ReservationBill.TrangThai = "";
 
-                Room.TrangThai = "Được đặt";
+                Room.TrangThai = "Được thuê";
 
                 DataProvider.Ins.DB.PHIEUSUDUNGs.Add(UsageBill);
                 DataProvider.Ins.DB.SaveChanges();

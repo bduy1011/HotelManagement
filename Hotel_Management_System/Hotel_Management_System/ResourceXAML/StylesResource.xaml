@@ -374,7 +374,6 @@
         </Style.Triggers>
     </Style>
 
-
     <Style x:Key="buttonMainGreen" TargetType="Button" BasedOn="{StaticResource buttonMain}">
         <Setter Property="Background" Value="#5FE7C4" />
         <Setter Property="Foreground" Value="#ffffff" />
@@ -385,7 +384,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
 
     <Style x:Key="button" TargetType="ToggleButton">
         <Setter Property="Background" Value="#C6C6C6" />

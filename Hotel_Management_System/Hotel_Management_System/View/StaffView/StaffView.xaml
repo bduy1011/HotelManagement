@@ -3,11 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Hotel_Management_System"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Name="userControlStaff"
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{StaticResource StaffVM}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedUserControlCommand}" 
+                                   CommandParameter="{Binding ElementName=membersDataGrid}"/>
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="KeyUp">
+            <i:InvokeCommandAction Command="{Binding SearchCommand}"
+                                   CommandParameter="{Binding ElementName=textBoxSearch}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -22,7 +39,7 @@
                         VerticalAlignment="Top"
                         Grid.Column="0">
                 <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="#7376BD"/>
-                <TextBox  
+                <TextBox  x:Name="textBoxSearch"
                     FontSize="13"
                          Height="24"
                            Width="300"
@@ -44,7 +61,8 @@
                             Cursor="Hand"
                             BorderThickness="0"
                             Foreground="White"
-                    VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            Command="{Binding AddCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#773DFF"/>
@@ -69,29 +87,67 @@
                 </Button.Style>
             </Button>
         </Grid>
+
+
+
         <Border Grid.Row="1"
                 Background="#200F53"
                 CornerRadius="10" 
                 Padding="10">
-            <DataGrid ColumnWidth="*"
-                  Background="#200F53"
-                  BorderThickness="0">
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="#BCBEE0"/>
-                        <Setter Property="Padding" Value="10,0,0,10"/>
-                        <Setter Property="FontFamily" Value="Montserrat"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
+            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      Style="{DynamicResource DataGridStyle1}"
+                      x:Name="membersDataGrid"
+                      ColumnWidth="*"
+                      ItemsSource="{Binding staffs}"
+                      SelectedItem="{Binding SelectedStaffItem, Mode=TwoWay}"
+                      Background="#200F53"
+                      BorderThickness="0"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID" HeaderStringFormat=""/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="First name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Last name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Phone"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Number"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Address"/>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MaNhanVien}"/>
+                    <DataGridTemplateColumn Header="Họ tên" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                        <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    </Border>
+
+                                    <TextBlock Text="{Binding TenNhanVien}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="CCCD" Binding="{Binding CCCD}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="SĐT" Binding="{Binding SoDienThoai}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Bộ phận" Binding="{Binding BoPhan}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Chức vụ" Binding="{Binding ChucVu}" IsReadOnly="True" Width="*"/>
+                    <!--<DataGridTextColumn Header="Tài khoản" Binding="{Binding TenTaiKhoan}" IsReadOnly="True" Width="*"/>-->
+                    <!--<DataGridTextColumn Header="Mật khẩu" Binding="{Binding MatKhau}" IsReadOnly="True" Width="*"/>-->
+
+                    <DataGridTemplateColumn Header="Chức năng" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" 
+                                           
+                                            Command="{Binding DataContext.EditCommand, 
+                                                      RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" 
+                                            Command="{Binding DataContext.RemoveCommand, 
+                                                      RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

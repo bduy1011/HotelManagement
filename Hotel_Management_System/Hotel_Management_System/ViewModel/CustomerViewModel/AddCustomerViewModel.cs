@@ -40,7 +40,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
         {
             LoadedWindowCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) => { LoadedWindow(p); });
 
-            AddCustomerCommand = new RelayCommand<TextBox>((p) => { return CheckAdd(); }, (p) => { AddCustomer(p); });
+            AddCustomerCommand = new RelayCommand<TextBox>((p) => { return CheckAdd(); }, (p) => { AddCustomer(); });
 
             BackCommand = new RelayCommand<AddCustomerView>((p) => { return true; }, (p) => { p.Close(); });
 
@@ -93,7 +93,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             tb.Text = MaKhachHang;
         }
 
-        public void AddCustomer(TextBox tb)
+        public void AddCustomer()
         {
             var customer = new KHACHHANG()
             {
@@ -105,16 +105,24 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 GioiTinh = this.GioiTinh,
                 NgaySinh = this.NgaySinh,
                 LoaiKhachHang = this.LoaiKhachHang,
-                SoDienThoai = this.SoDienThoai
+                SoDienThoai = this.SoDienThoai,
+                TrangThai = null,
             };
 
-            DataProvider.Ins.DB.KHACHHANGs.Add(customer);
-            DataProvider.Ins.DB.SaveChanges();
+            try
+            {
+                DataProvider.Ins.DB.KHACHHANGs.Add(customer);
+                DataProvider.Ins.DB.SaveChanges();
 
-            CustomerView customerView = new CustomerView();
-            if (customerView.DataContext == null) return;
-            var customerVM = customerView.DataContext as CustomerViewModel;
-            customerVM.AddCustomer(customer);
+                CustomerView customerView = new CustomerView();
+                if (customerView.DataContext == null) return;
+                var customerVM = customerView.DataContext as CustomerViewModel;
+                customerVM.AddCustomer(customer);
+            }
+            catch 
+            {
+                MessageBox.Show("Thêm không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         public bool CheckAdd()

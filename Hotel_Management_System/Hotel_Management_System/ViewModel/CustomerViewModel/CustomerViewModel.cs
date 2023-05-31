@@ -90,8 +90,9 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                             NgaySinh = item.NgaySinh,
                             CCCD = item.CCCD,
                             LoaiKhachHang = item.LoaiKhachHang,
-                            SoDienThoai = item.SoDienThoai
-                        });
+                            SoDienThoai = item.SoDienThoai,
+                            TrangThai = item.TrangThai,
+                        }) ;
                     }
                     tmpCustomers = customers;
                 }
@@ -134,7 +135,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                             NgaySinh = item.NgaySinh,
                             CCCD = item.CCCD,
                             LoaiKhachHang = item.LoaiKhachHang,
-                            SoDienThoai = item.SoDienThoai
+                            SoDienThoai = item.SoDienThoai,
+                            TrangThai = item.TrangThai,
                         });
                     }
                 }
@@ -202,6 +204,7 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 customerToFind.NgaySinh = customer.NgaySinh;
                 customerToFind.SoDienThoai = customer.SoDienThoai;
                 customerToFind.LoaiKhachHang = customer.LoaiKhachHang;
+                customerToFind.TrangThai = customer.TrangThai;
                 MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -227,7 +230,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                     NgaySinh = item.NgaySinh,
                     CCCD = item.CCCD,
                     LoaiKhachHang = item.LoaiKhachHang,
-                    SoDienThoai = item.SoDienThoai
+                    SoDienThoai = item.SoDienThoai,
+                    TrangThai = item.TrangThai,
                 });
             }
             MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);

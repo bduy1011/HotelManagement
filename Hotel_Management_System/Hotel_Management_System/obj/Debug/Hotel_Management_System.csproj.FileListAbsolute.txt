@@ -61,3 +61,9 @@ D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Manag
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.csproj.CopyComplete
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.exe
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\Hotel_Management_System.pdb
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\AddStaffView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\AddStaffView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\EditStaffView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\RemoveStaffView.g.cs
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\EditStaffView.baml
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\View\StaffView\RemoveStaffView.baml

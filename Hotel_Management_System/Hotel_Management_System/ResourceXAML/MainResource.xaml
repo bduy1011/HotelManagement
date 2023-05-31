@@ -7,11 +7,18 @@
                     xmlns:bookingroomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.BookingRoomViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    
     <customerviewmodel:CustomerViewModel x:Key="CustomerVM"></customerviewmodel:CustomerViewModel>
     <customerviewmodel:AddCustomerViewModel x:Key="AddCustomerVM"></customerviewmodel:AddCustomerViewModel>
     <customerviewmodel:EditCustomerViewModel x:Key="EditCustomerVM"></customerviewmodel:EditCustomerViewModel>
     <customerviewmodel:RemoveCustomerViewModel x:Key="RemoveCustomerVM"></customerviewmodel:RemoveCustomerViewModel>
+
     <staffviewmodel:StaffViewModel x:Key="StaffVM"></staffviewmodel:StaffViewModel>
+    <staffviewmodel:AddStaffViewModel x:Key="AddStaffVM"></staffviewmodel:AddStaffViewModel>
+    <staffviewmodel:EditStaffViewModel x:Key="EditStaffVM"></staffviewmodel:EditStaffViewModel>
+    <staffviewmodel:RemoveStaffViewModel x:Key="RemoveStaffVM"></staffviewmodel:RemoveStaffViewModel>
+    
     <roommapviewmodel:RoomMapViewModel x:Key="RoomMapVM"></roommapviewmodel:RoomMapViewModel>
+    
     <bookingroomviewmodel:BookingRoomViewModel x:Key="BookingRoomVM"></bookingroomviewmodel:BookingRoomViewModel>
 </ResourceDictionary>

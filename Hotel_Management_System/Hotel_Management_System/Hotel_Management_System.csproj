@@ -164,6 +164,9 @@
     <Compile Include="ViewModel\Other\BaseViewModel.cs" />
     <Compile Include="ViewModel\Other\ViewModelCommand.cs" />
     <Compile Include="ViewModel\RoomMapViewModel\RoomMapViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel\AddStaffViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel\EditStaffViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel\RemoveStaffViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel\StaffViewModel.cs" />
     <Compile Include="View\BookingRoomView\BookingRoomView.xaml.cs">
       <DependentUpon>BookingRoomView.xaml</DependentUpon>
@@ -187,6 +190,15 @@
     </Compile>
     <Compile Include="View\RoomMapView\RoomMapView.xaml.cs">
       <DependentUpon>RoomMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaffView\AddStaffView.xaml.cs">
+      <DependentUpon>AddStaffView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaffView\EditStaffView.xaml.cs">
+      <DependentUpon>EditStaffView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaffView\RemoveStaffView.xaml.cs">
+      <DependentUpon>RemoveStaffView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StaffView\StaffView.xaml.cs">
       <DependentUpon>StaffView.xaml</DependentUpon>
@@ -236,6 +248,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RoomMapView\RoomMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaffView\AddStaffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaffView\EditStaffView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaffView\RemoveStaffView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

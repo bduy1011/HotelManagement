@@ -17,8 +17,25 @@ namespace Hotel_Management_System.ViewModel
         private string _username;
         private string _password;
 
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Username 
+        {
+            get { return _username; }
+            set
+            {
+                _username = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand LoginCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }

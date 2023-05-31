@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\App.xaml
-11819125693
+14-2045892477
 2-1797966213
-431485952759
+491846744034
 29148006518
-View\BookingRoomView\BookingRoomView.xaml;View\CustomerView\AddCustomerView.xaml;View\CustomerView\EditCustomerView.xaml;MainWindow.xaml;ResourceXAML\StylesResource.xaml;ResourceXAML\MainResource.xaml;View\CustomerView\CustomerView.xaml;View\CustomerView\RemoveCustomerView.xaml;View\LoginView\LoginView.xaml;View\RoomMapView\RoomMapView.xaml;View\StaffView\StaffView.xaml;
+View\BookingRoomView\BookingRoomView.xaml;View\CustomerView\AddCustomerView.xaml;View\CustomerView\EditCustomerView.xaml;MainWindow.xaml;ResourceXAML\StylesResource.xaml;ResourceXAML\MainResource.xaml;View\CustomerView\CustomerView.xaml;View\CustomerView\RemoveCustomerView.xaml;View\LoginView\LoginView.xaml;View\RoomMapView\RoomMapView.xaml;View\StaffView\AddStaffView.xaml;View\StaffView\EditStaffView.xaml;View\StaffView\RemoveStaffView.xaml;View\StaffView\StaffView.xaml;
 
 False
 

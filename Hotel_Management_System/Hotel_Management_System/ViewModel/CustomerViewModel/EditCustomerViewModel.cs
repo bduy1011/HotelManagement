@@ -3,8 +3,11 @@ using Hotel_Management_System.View.CustomerView;
 using Hotel_Management_System.ViewModel.Other;
 using System;
 using System.Data.Entity.Migrations;
+using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Hotel_Management_System.ViewModel.CustomerViewModel
@@ -45,6 +48,39 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             }
         }
 
+        private bool _isChildrenSelected;
+        public bool IsChildrenSelected
+        {
+            get { return _isChildrenSelected; }
+            set
+            {
+                _isChildrenSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isTeenagersSelected;
+        public bool IsTeenagersSelected
+        {
+            get { return _isChildrenSelected; }
+            set
+            {
+                _isTeenagersSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isAdultsSelected;
+        public bool IsAdultsSelected
+        {
+            get { return _isAdultsSelected; }
+            set
+            {
+                _isAdultsSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
         public EditCustomerViewModel()
         {
             EditCustomerCommand = new RelayCommand<object>((p) => { return Check(); }, (p) => { EditCustomer(); });
@@ -77,6 +113,22 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             }
             this.NgaySinh = SelectedCustomerItem.NgaySinh;
             this.LoaiKhachHang = SelectedCustomerItem.LoaiKhachHang;
+            if (this.LoaiKhachHang == "Trẻ em")
+            {
+                this.IsChildrenSelected = true;
+            }
+            else this.IsChildrenSelected = false;
+            if (this.LoaiKhachHang == "Trẻ vị thành niên")
+            {
+                this.IsTeenagersSelected = true;
+            }
+            else this.IsTeenagersSelected = false;
+            if (this.LoaiKhachHang == "Người lớn")
+            {
+                this.IsAdultsSelected = true;
+            }
+            else this.IsAdultsSelected = false;
+            
             this.SoDienThoai = SelectedCustomerItem.SoDienThoai;
         }
 
@@ -92,13 +144,20 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             result.SoDienThoai = this.SoDienThoai;
             result.LoaiKhachHang = this.LoaiKhachHang;
 
-            DataProvider.Ins.DB.KHACHHANGs.AddOrUpdate(result);
-            DataProvider.Ins.DB.SaveChanges();
+            try
+            {
+                DataProvider.Ins.DB.KHACHHANGs.AddOrUpdate(result);
+                DataProvider.Ins.DB.SaveChanges();
 
-            CustomerView customerView = new CustomerView();
-            if (customerView.DataContext == null) return;
-            var customerVM = customerView.DataContext as CustomerViewModel;
-            customerVM.UpdateCustomer(result);
+                CustomerView customerView = new CustomerView();
+                if (customerView.DataContext == null) return;
+                var customerVM = customerView.DataContext as CustomerViewModel;
+                customerVM.UpdateCustomer(result);
+            }
+            catch
+            {
+                MessageBox.Show("Sửa thông tin không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         public bool Check()
