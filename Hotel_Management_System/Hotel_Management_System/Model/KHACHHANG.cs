@@ -33,9 +33,11 @@ namespace Hotel_Management_System.Model
         private string _loaiKhachHang;
         private string _trangThai;
         private bool _isLastRow;
+        private string _character;
+        private Brush _bgColor;
 
-        public string Character { get; set; }
-        public Brush BgColor { get; set; }
+        public string Character { get => _character; set { _character = value; OnPropertyChanged(); } }
+        public Brush BgColor { get => _bgColor; set { _bgColor = value; OnPropertyChanged(); } }
         public string STT { get => _stt; set { _stt = value; OnPropertyChanged(); } }
         public string MaKhachHang { get => _maKhachHang; set { _maKhachHang = value; OnPropertyChanged(); } }
         public string TenKhachHang { get => _tenKhachHang; set { _tenKhachHang = value; OnPropertyChanged(); } }

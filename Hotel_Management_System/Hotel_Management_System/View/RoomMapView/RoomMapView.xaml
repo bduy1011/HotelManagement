@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="700" d:DesignWidth="900"
              DataContext="{StaticResource RoomMapVM}">
 
     <i:Interaction.Triggers>
@@ -23,6 +24,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
@@ -30,29 +33,42 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top"
-                        Grid.Column="0">
-                <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="#7376BD"/>
-                <TextBox FontSize="13"
-                         Height="24"
-                         Width="150"
-                         Background="Transparent"
-                         FontWeight="Medium"
-                         FontFamily="Montserrat"                            
-                         Foreground="#7376BD"
-                         CaretBrush="#7376BD"
-                         BorderBrush="#7376BD"
-                         BorderThickness="0,0,0,1"                             
-                         VerticalContentAlignment="Center"
-                         Margin="5,5,0,0"
-                         materialDesign:HintAssist.Hint="Search..."></TextBox>
-            </StackPanel>
-            
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock FontSize="15"
+                           FontFamily="Montserrat"
+                           Foreground="White"
+                           Text="Ngày"
+                           HorizontalAlignment="Center"/>
+
+                <DatePicker Grid.Row="1"
+                            FontSize="15"
+                            Height="24"
+                            Margin="10,5,0,0"
+                            Width="120"
+                            Background="Transparent"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                            
+                            Foreground="#7376BD"
+                            BorderBrush="#7376BD"
+                            BorderThickness="0,0,0,2"  
+                            HorizontalAlignment="Left"
+                            VerticalContentAlignment="Center"
+                            SelectedDate="{Binding SelectedDate, StringFormat='dd/MM/yyyy'}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDateChanged">
+                            <i:InvokeCommandAction Command="{Binding CheckDateSelectedDateChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
+            </Grid>
+
             <Button Grid.Column="3"                           
                     Content="{Binding NumberOfRoom}"                            
                     FontSize="10"
@@ -65,7 +81,7 @@
                     Margin="5 0 5 0"
                     Padding="0"
                     VerticalAlignment="Top"/>
-            
+
             <Button Grid.Column="4"                           
                     Content="{Binding VacantNumber}"                            
                     FontSize="10"
@@ -78,7 +94,7 @@
                     FontWeight="Bold"
                     Foreground="White"
                     Background="{Binding Vacant}"/>
-            
+
             <Button Grid.Column="5"                           
                     Content="{Binding OccupiedNumber}"                            
                     FontSize="10"
@@ -131,37 +147,186 @@
                     FontWeight="Bold"
                     Background="{Binding OutOfOrderRoom}"/>
 
-        </Grid>
-        <Border Grid.Row="1"
+        </Grid >
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
                 Background="#200F53"
                 CornerRadius="10" 
-                Padding="10">
-            <ScrollViewer>
-                <StackPanel HorizontalAlignment="Center">
-                    <ItemsControl x:Name="RoomsList" ItemsSource="{Binding Rooms}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Margin="15 10 15 10" Width="150" Height="180" Background="{Binding StateColor}" CornerRadius="10" Padding="10, 0">
-                                    <Border.InputBindings>
-                                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.BookingRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
-                                        <MouseBinding Gesture="RightClick" Command="{Binding DataContext.ReservedRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
-                                    </Border.InputBindings>
-                                    <StackPanel>
-                                        <TextBlock Margin="5 20" Text="{Binding MaLoaiPhong}" Foreground="White" FontSize="15" FontFamily="Helvetica" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                        <TextBlock Margin="5 5 5 15" Text="{Binding MaPhong}" Foreground="White" FontSize="50" FontFamily="Helvetica" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                        <fa:IconImage Icon="CheckCircle" Height="30" Width="30" Foreground="White"/>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
-        </Border>
+                Padding="10"
+                Margin="0 0 5 0">
+                <ScrollViewer>
+                    <StackPanel HorizontalAlignment="Center">
+                        <ItemsControl x:Name="RoomsList" ItemsSource="{Binding Rooms}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="15 10 15 10" Width="150" Height="180" Background="{Binding StateColor}" CornerRadius="10" Padding="10, 0">
+                                        <Border.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.BookingRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}"/>
+                                        </Border.InputBindings>
+                                        <StackPanel>
+                                            <TextBlock Margin="5 20" Text="{Binding MaLoaiPhong}" Foreground="White" FontSize="15" FontFamily="Helvetica" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Margin="5 5 5 15" Text="{Binding MaPhong}" Foreground="White" FontSize="50" FontFamily="Helvetica" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <fa:IconImage Icon="CheckCircle" Height="30" Width="30" Foreground="White"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                Background="#200F53"
+                CornerRadius="10" 
+                Padding="10"
+                Margin="5 0 0 5">
+                    <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      Style="{DynamicResource DataGridStyle1}"
+                      ColumnWidth="*"
+                      ItemsSource="{Binding ReservedBills}"
+                      SelectedItem="{Binding SelectedReservedBillItem, Mode=TwoWay}"
+                      Background="#200F53"
+                      BorderThickness="0"
+                      AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Phiếu" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaPhieuSuDung}"/>
+                            <DataGridTextColumn Header="Phòng" IsReadOnly="True" Width="auto" Binding="{Binding MaPhong}"/>
+                            <DataGridTextColumn Header="Ngày đến" Binding="{Binding NgayDen, StringFormat='dd/MM'}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Ngày đi" Binding="{Binding NgayDi, StringFormat='dd/MM'}" IsReadOnly="True" Width="*"/>
+                            <DataGridTemplateColumn IsReadOnly="True" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource gridEditButton}" 
+                                            Command="{Binding DataContext.EditCommand, 
+                                                      RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                                <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                            <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" 
+                                            Command="{Binding DataContext.RemoveCommand, 
+                                                      RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                                <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+                <Border Grid.Row="1"
+                            Background="#200F53"
+                            CornerRadius="10" 
+                            Padding="10"
+                            Margin="5 5 0 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="Từ ngày" 
+                                       Foreground="#D5CFF5"
+                                       FontSize="15"
+                                       FontFamily="Montserrat"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0"/>
+
+                            <TextBlock Grid.Column="2" Text="Đến ngày" 
+                                       Foreground="#D5CFF5"
+                                       FontSize="15"
+                                       FontFamily="Montserrat"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0"/>
+
+                            <DatePicker Grid.Column="1" 
+                                        FontSize="15"
+                                        Height="24"
+                                        Margin="10,5,0,0"
+                                        Width="120"
+                                        Background="Transparent"
+                                        FontWeight="Medium"
+                                        FontFamily="Montserrat"                            
+                                        Foreground="#7376BD"
+                                        BorderBrush="#7376BD"
+                                        BorderThickness="0,0,0,2"    
+                                        HorizontalAlignment="Left"
+                                        VerticalContentAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding DateOfCheckInSelectedDateChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
+
+                            <DatePicker Grid.Column="3" 
+                                        FontSize="15"
+                                        Height="24"
+                                        Margin="10,5,0,0"
+                                        Width="120"
+                                        Background="Transparent"
+                                        FontWeight="Medium"
+                                        FontFamily="Montserrat"                            
+                                        Foreground="#7376BD"
+                                        BorderBrush="#7376BD"
+                                        BorderThickness="0,0,0,2"  
+                                        HorizontalAlignment="Left"
+                                        VerticalContentAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding DateOfCheckOutSelectedDateChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
+                        </Grid>
+
+                        <DataGrid Grid.Row="1" Margin="0 15 0 0" ItemsSource="{Binding EmptyRoomList}" AutoGenerateColumns="False"
+                                  RowStyle="{DynamicResource DataGridRowStyle1}" 
+                                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                                  Style="{DynamicResource DataGridStyle1}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Phòng" Binding="{Binding MaPhong}" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Loại phòng" Binding="{Binding LOAIPHONG.TenLoaiPhong}" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Đơn giá" Binding="{Binding LOAIPHONG.DonGia}" Width="*" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -13,6 +13,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Hotel_Management_System.View.CustomerView;
+using Hotel_Management_System.ViewModel.CustomerViewModel;
+using System.Net.NetworkInformation;
 
 namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 {
@@ -168,6 +171,17 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             }
         }
 
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<PHONG> _rooms;
         public ObservableCollection<PHONG> Rooms
         {
@@ -179,9 +193,53 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             }
         }
 
+        private ObservableCollection<PHONG> _emptyRoomList;
+        public ObservableCollection<PHONG> EmptyRoomList
+        {
+            get { return _emptyRoomList; }
+            set
+            {
+                _emptyRoomList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<PHIEUDATPHONG> _reservedBills;
+        public ObservableCollection<PHIEUDATPHONG> ReservedBills
+        {
+            get { return _reservedBills; }
+            set
+            {
+                if (_reservedBills != value)
+                {
+                    _reservedBills = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private KHACHHANG _selectedReservedBillItem;
+        public KHACHHANG SelectedReservedBillItem
+        {
+            get { return _selectedReservedBillItem; }
+            set
+            {
+                if (_selectedReservedBillItem != value)
+                {
+                    _selectedReservedBillItem = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand BookingRoomCommand { get; set; }
         public ICommand ReservedRoomCommand { get; set; }
+        public ICommand CheckDateSelectedDateChangedCommand { get; set; }
+        public ICommand DateOfCheckOutSelectedDateChangedCommand { get; set; }
+        public ICommand DateOfCheckInSelectedDateChangedCommand { get; set; }
+        public ICommand RemoveCommand { get; set; }
+        public ICommand EditCommand { get; set; }
 
         public int numberOfRoom = 0;
         public int vacantNumber = 0;
@@ -237,17 +295,19 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                     ReservedNumber = string.Format("Được đặt ({0})", occupiedNumber);
                     DirtyNumber = string.Format("Phòng bẩn ({0})", dirtyNumber);
                     OutOfOrderRoomNumber = string.Format("Đang sửa ({0})", outOfOrderRoomNumber);
+                    AddDataReseredBills();
+
+                    EmptyRoomList = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs);
                 }
             });
                 
-
             BookingRoomCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) => 
             {
                 switch (p.TrangThai)
                 {
                     case "Trống":
                         BookingRoomView bookingRoomView = new BookingRoomView();
-                        bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p, false);
+                        bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p);
                         bookingRoomView.ShowDialog();
 
                         if (bookingRoomView.DataContext == null) return;
@@ -270,34 +330,155 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 }
             });
 
-            ReservedRoomCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) =>
+            RemoveCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                switch (p.TrangThai)
-                {
-                    case "Trống":
-                        BookingRoomView bookingRoomView = new BookingRoomView();
-                        bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p, true);
-                        bookingRoomView.ShowDialog();
-
-                        if (bookingRoomView.DataContext == null) return;
-                        var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
-
-                        p.TrangThai = bookingRoomViewModel.Room.TrangThai;
-                        break;
-                    case "Được đặt":
-                        
-                        break;
-                    case "Được thuê":
-                        
-                        break;
-                    case "Cần dọn phòng":
-                        
-                        break;
-                    case "Ngưng hoạt động":
-                        
-                        break;
-                }
+                //removeCustomerView = new RemoveCustomerView();
+                //removeCustomerView.DataContext = new RemoveCustomerViewModel(SelectedCustomerItem);
+                //removeCustomerView.ShowDialog();
             });
+
+            EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //editCustomerView = new EditCustomerView();
+                //editCustomerView.DataContext = new EditCustomerViewModel(SelectedCustomerItem);
+                //editCustomerView.ShowDialog();
+            });
+        }
+
+        public void AddDataReseredBills()
+        {
+            ReservedBills = new ObservableCollection<PHIEUDATPHONG> {
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0001",
+                MaPhieuSuDung = "PSD0001",
+                MaPhong = "P001",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 15),
+                DonGia = 1000000,
+                TienCoc = 500000,
+                SoNguoi = 2,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0002",
+                MaPhieuSuDung = "PSD0002",
+                MaPhong = "P002",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 15),
+                DonGia = 1200000,
+                TienCoc = 600000,
+                SoNguoi = 3,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0003",
+                MaPhieuSuDung = "PSD0003",
+                MaPhong = "P002",
+                NgayDen = new DateTime(2023, 6, 16),
+                NgayDi = new DateTime(2023, 6, 20),
+                DonGia = 1500000,
+                TienCoc = 750000,
+                SoNguoi = 4,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0004",
+                MaPhieuSuDung = "PSD0004",
+                MaPhong = "P003",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 14),
+                DonGia = 800000,
+                TienCoc = 400000,
+                SoNguoi = 2,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0005",
+                MaPhieuSuDung = "PSD0005",
+                MaPhong = "P004",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 13),
+                DonGia = 900000,
+                TienCoc = 450000,
+                SoNguoi = 2,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0006",
+                MaPhieuSuDung = "PSD0006",
+                MaPhong = "P005",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 12),
+                DonGia = 500000,
+                TienCoc = 250000,
+                SoNguoi = 1,
+                NgayLap = new DateTime(2023, 6,1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0007",
+                MaPhieuSuDung = "PSD0007",
+                MaPhong = "P006",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 11),
+                DonGia = 400000,
+                TienCoc = 200000,
+                SoNguoi = 1,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0008",
+                MaPhieuSuDung = "PSD0008",
+                MaPhong = "P007",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 11),
+                DonGia = 500000,
+                TienCoc = 250000,
+                SoNguoi = 2,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+new         PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0009",
+                MaPhieuSuDung = "PSD0009",
+                MaPhong = "P008",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 11),
+                DonGia = 600000,
+                TienCoc = 300000,
+                SoNguoi = 2,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            },
+            new PHIEUDATPHONG
+            {
+                MaPhieuDatPhong = "PDP0010",
+                MaPhieuSuDung = "PSD0010",
+                MaPhong = "P009",
+                NgayDen = new DateTime(2023, 6, 10),
+                NgayDi = new DateTime(2023, 6, 11),
+                DonGia = 700000,
+                TienCoc = 350000,
+                SoNguoi = 2,
+                NgayLap = new DateTime(2023, 6, 1),
+                TrangThai = "Đã đặt"
+            }
+            };
         }
     }
 }

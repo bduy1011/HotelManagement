@@ -120,11 +120,17 @@
 
                         <Grid Grid.Column="0">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nhận phòng" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='yyyy/MM/dd'}" Name="ngayDenDatePicker" IsEnabled="{Binding IsCheckReserved}"/>
+                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='yyyy/MM/dd'}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding DateOfCheckInSelectedDateChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding ReservationBill.NgayDen, StringFormat='HH:mm'}" FontWeight="Bold" Margin="0,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding TimeReserved}" FontWeight="Bold"/>
                         </Grid>
 
                         <Grid Grid.Column="2">
@@ -138,7 +144,7 @@
                             <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Top" Margin="0,35,0,0" SelectedDate="{Binding ReservationBill.NgayDi}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">
-                                        <i:InvokeCommandAction Command="{Binding DateOfDepartmentSelectedDateChangedCommand}"/>
+                                        <i:InvokeCommandAction Command="{Binding DateOfCheckOutSelectedDateChangedCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </DatePicker>

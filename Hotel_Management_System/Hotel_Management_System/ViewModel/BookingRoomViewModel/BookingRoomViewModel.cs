@@ -299,16 +299,16 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         public ICommand RemoveCustomerCommand { get; set; }
         public ICommand MoneyTextChangedCommand { get; set; }
         public ICommand AmountOfSelectedServicesTextChangedCommand { get; set; }
-        public ICommand DateOfDepartmentSelectedDateChangedCommand { get; set; }
+        public ICommand DateOfCheckOutSelectedDateChangedCommand { get; set; }
+        public ICommand DateOfCheckInSelectedDateChangedCommand { get; set; }
         public ICommand SearchServicesCommand { get; set; }
         public ICommand SearchCommoditysCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand BookingRoomCommand { get; set; }
 
-        public BookingRoomViewModel(PHONG room, bool isCheckReserved) : this()
+        public BookingRoomViewModel(PHONG room) : this()
         {
             Room = room;
-            IsCheckReserved = isCheckReserved;
             
             RoomFee = "0";
             SumFee = RoomFee;
@@ -347,15 +347,9 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 // Thiết lập thông tin phiếu đặt phòng
                 ReservationBill.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
                 ReservationBill.MaPhong = Room.MaPhong;
-                if (IsCheckReserved == false) 
-                { 
-                    ReservationBill.NgayDen = DateTime.Now;
-                }
-                /*
-                Thêm thuộc tính selected chang cho datapicker ngày đến, để đặt phòng chọn ngày nó hiện giờ mặc định 12:00
-                cho giờ binding đến biến TimeReserved
-                */
+                ReservationBill.NgayDen = DateTime.Now;
                 ReservationBill.NgayLap = DateTime.Now;
+                TimeReserved = ReservationBill.NgayDen.Value.ToString("HH:mm");
 
                 // Thiết lập thông tin phiếu sử dụng
                 UsageBill.NgayLap = ReservationBill.NgayLap;
@@ -529,31 +523,25 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 UpdateFee(SelectedServices, SelectedCommoditys);
             });
 
-            DateOfDepartmentSelectedDateChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            DateOfCheckInSelectedDateChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
-                if (ReservationBill.NgayDi >= ReservationBill.NgayDen)
+                if (ReservationBill.NgayDen.Value.Day == DateTime.Now.Day)
                 {
-                    CountDay = (ReservationBill.NgayDi.Value.Date - ReservationBill.NgayDen.Value.Date).Days;
-                    if (ReservationBill.NgayDen.Value.Hour >= 0 && ReservationBill.NgayDen.Value.Hour < 7)
-                    {
-                        // Thuê phòng khoảng từ 0 giờ - 7 giờ sáng và ở đến 12 giờ trưa cùng ngày được tính là 1 đêm
-                        CountDay += 1;
-                    }
-                    else if (ReservationBill.NgayDen.Value.Hour >= 7 && ReservationBill.NgayDen.Value.Hour < 12)
-                    {
-                        // Phụ thu thêm số tiền = 1/4 giá thuê phòng 1 đêm
-                        CountDay += 0.25;
-                    }
-                    if (CountDay == Math.Floor(CountDay)) TotalDayReservation = String.Format("{0} đêm", CountDay);
-                    else TotalDayReservation = String.Format("{0} đêm có phụ thu", Math.Floor(CountDay));
-                    RoomFee = (CountDay * Room.LOAIPHONG.DonGia).ToString();
+                    ReservationBill.NgayDen = new DateTime(ReservationBill.NgayDen.Value.Year, ReservationBill.NgayDen.Value.Month, ReservationBill.NgayDen.Value.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                    TimeReserved = DateTime.Now.ToString("HH:mm");
                 }
-                else 
-                { 
-                    CountDay = 0;
-                    RoomFee = "0";
-                    TotalDayReservation = "#";
+                else
+                {
+                    ReservationBill.NgayDen = new DateTime(ReservationBill.NgayDen.Value.Year, ReservationBill.NgayDen.Value.Month, ReservationBill.NgayDen.Value.Day, 14, 0, 0);
+                    TimeReserved = "14:00";
                 }
+                TotalCountDay();
+                UpdateFee(SelectedServices, SelectedCommoditys);
+            });
+
+            DateOfCheckOutSelectedDateChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                TotalCountDay();
                 UpdateFee(SelectedServices, SelectedCommoditys);
             });
 
@@ -671,9 +659,10 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 ReservationBill.DonGia = int.Parse(RoomFee); 
                 ReservationBill.TienCoc = int.Parse(DownPayment);
                 ReservationBill.SoNguoi = (short)ReservationBill.KHACHHANGs.Count();
-                ReservationBill.TrangThai = "";
+                if(ReservationBill.NgayDen.Value.Date == DateTime.Now.Date) ReservationBill.TrangThai = "Được thuê";
+                else ReservationBill.TrangThai = "Được đặt";
 
-                Room.TrangThai = "Được thuê";
+                Room.TrangThai = ReservationBill.TrangThai;
 
                 DataProvider.Ins.DB.PHIEUSUDUNGs.Add(UsageBill);
                 DataProvider.Ins.DB.SaveChanges();
@@ -733,7 +722,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             return ctpdv;
         }
 
-        private void AddCustomers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void AddCustomers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
@@ -743,6 +732,33 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                     var item = AddCustomers[i];
                     item.IsLastRow = (i == AddCustomers.Count - 1);
                 }
+            }
+        }
+
+        public void TotalCountDay()
+        {
+            if (ReservationBill.NgayDi >= ReservationBill.NgayDen && ReservationBill.NgayDi != null && ReservationBill.NgayDen != null)
+            {
+                CountDay = (ReservationBill.NgayDi.Value.Date - ReservationBill.NgayDen.Value.Date).Days;
+                if (ReservationBill.NgayDen.Value.Hour >= 0 && ReservationBill.NgayDen.Value.Hour < 7)
+                {
+                    // Thuê phòng khoảng từ 0 giờ - 7 giờ sáng và ở đến 12 giờ trưa cùng ngày được tính là 1 đêm
+                    CountDay += 1;
+                }
+                else if (ReservationBill.NgayDen.Value.Hour >= 7 && ReservationBill.NgayDen.Value.Hour < 12)
+                {
+                    // Phụ thu thêm số tiền = 1/4 giá thuê phòng 1 đêm
+                    CountDay += 0.25;
+                }
+                if (CountDay == Math.Floor(CountDay)) TotalDayReservation = String.Format("{0} đêm", CountDay);
+                else TotalDayReservation = String.Format("{0} đêm có phụ thu", Math.Floor(CountDay));
+                RoomFee = (CountDay * Room.LOAIPHONG.DonGia).ToString();
+            }
+            else
+            {
+                CountDay = 0;
+                RoomFee = "0";
+                TotalDayReservation = "#";
             }
         }
     }

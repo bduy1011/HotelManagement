@@ -83,7 +83,7 @@ namespace Hotel_Management_System.ViewModel.StaffViewModel
                         {
                             MaNhanVien = item.MaNhanVien,
                             Character = item.TenNhanVien.ToString().Substring(0, 1),
-                            BgColor = brushList((int.Parse(item.MaNhanVien.Substring(2)))),
+                            BgColor = BrushList((int.Parse(item.MaNhanVien.Substring(2)))),
                             TenNhanVien = item.TenNhanVien,
                             CCCD = item.CCCD,
                             SoDienThoai = item.SoDienThoai,
@@ -132,7 +132,7 @@ namespace Hotel_Management_System.ViewModel.StaffViewModel
                         {
                             MaNhanVien = item.MaNhanVien,
                             Character = item.TenNhanVien.ToString().Substring(0, 1),
-                            BgColor = brushList((int.Parse(item.MaNhanVien.Substring(2)))),
+                            BgColor = BrushList((int.Parse(item.MaNhanVien.Substring(2)))),
                             TenNhanVien = item.TenNhanVien,
                             CCCD = item.CCCD,
                             SoDienThoai = item.SoDienThoai,
@@ -162,7 +162,7 @@ namespace Hotel_Management_System.ViewModel.StaffViewModel
             });
         }
 
-        public Brush brushList(int i)
+        public Brush BrushList(int i)
         {
             converter = new BrushConverter();
             switch (i % 10)

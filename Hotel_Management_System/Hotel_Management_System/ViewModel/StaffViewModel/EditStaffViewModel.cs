@@ -29,7 +29,6 @@ namespace Hotel_Management_System.ViewModel.StaffViewModel
         private bool _isCheckedMale;
         private bool _isCheckedFemale;
 
-        //public BrushConverter converter = new BrushConverter();
         public string MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public string CCCD { get; set; }
