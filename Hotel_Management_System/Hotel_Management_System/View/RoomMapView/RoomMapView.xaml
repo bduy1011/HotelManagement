@@ -60,7 +60,7 @@
                             BorderThickness="0,0,0,2"  
                             HorizontalAlignment="Left"
                             VerticalContentAlignment="Center"
-                            SelectedDate="{Binding SelectedDate, StringFormat='dd/MM/yyyy'}">
+                            SelectedDate="{Binding SelectedCheckDate, StringFormat='dd/MM/yyyy'}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedDateChanged">
                             <i:InvokeCommandAction Command="{Binding CheckDateSelectedDateChangedCommand}"/>
@@ -209,10 +209,10 @@
                       BorderThickness="0"
                       AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Phiếu" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaPhieuSuDung}"/>
+                            <DataGridTextColumn Header="Phiếu" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding MaPhieuDatPhong}"/>
                             <DataGridTextColumn Header="Phòng" IsReadOnly="True" Width="auto" Binding="{Binding MaPhong}"/>
-                            <DataGridTextColumn Header="Ngày đến" Binding="{Binding NgayDen, StringFormat='dd/MM'}" IsReadOnly="True" Width="*"/>
-                            <DataGridTextColumn Header="Ngày đi" Binding="{Binding NgayDi, StringFormat='dd/MM'}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Ngày đến" Binding="{Binding NgayDen, StringFormat='dd/MM/yyyy'}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Ngày đi" Binding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}" IsReadOnly="True" Width="*"/>
                             <DataGridTemplateColumn IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -284,10 +284,11 @@
                                         BorderBrush="#7376BD"
                                         BorderThickness="0,0,0,2"    
                                         HorizontalAlignment="Left"
-                                        VerticalContentAlignment="Center">
+                                        VerticalContentAlignment="Center"
+                                        SelectedDate="{Binding DateOfCheckIn, StringFormat='dd/MM/yyyy'}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">
-                                        <i:InvokeCommandAction Command="{Binding DateOfCheckInSelectedDateChangedCommand}"/>
+                                        <i:InvokeCommandAction Command="{Binding SearchDateSelectedDateChangedCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </DatePicker>
@@ -304,10 +305,11 @@
                                         BorderBrush="#7376BD"
                                         BorderThickness="0,0,0,2"  
                                         HorizontalAlignment="Left"
-                                        VerticalContentAlignment="Center">
+                                        VerticalContentAlignment="Center"
+                                        SelectedDate="{Binding DateOfCheckOut, StringFormat='dd/MM/yyyy'}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">
-                                        <i:InvokeCommandAction Command="{Binding DateOfCheckOutSelectedDateChangedCommand}"/>
+                                        <i:InvokeCommandAction Command="{Binding SearchDateSelectedDateChangedCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </DatePicker>

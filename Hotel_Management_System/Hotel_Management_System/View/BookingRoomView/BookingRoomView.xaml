@@ -120,7 +120,7 @@
 
                         <Grid Grid.Column="0">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nhận phòng" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='yyyy/MM/dd'}">
+                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='dd/MM/yyyy'}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">
                                         <i:InvokeCommandAction Command="{Binding DateOfCheckInSelectedDateChangedCommand}"/>

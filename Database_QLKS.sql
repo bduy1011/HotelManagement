@@ -214,3 +214,45 @@ INSERT INTO KHACHHANG VALUES (N'KH10011', N'Hoang Thi Q', N'260126852140', N'N�
 INSERT INTO KHACHHANG VALUES (N'KH10012', N'Dang Van T', N'271027123640', N'Nam', '1978/10/27', N'0367123648', N'Người lớn', null)
 INSERT INTO KHACHHANG VALUES (N'KH10013', N'Ngo Thi E', N'280827539620', N'Nữ', '1975/8/28', N'0367539621', N'Người lớn', null)
 INSERT INTO KHACHHANG VALUES (N'KH10014', N'Pham Van D', N'290929874530', N'Nam', '1972/9/29', N'0369258147', N'Người lớn', null)
+
+
+INSERT INTO PHIEUSUDUNG (MaPhieuSuDung, TriGia, NgayLap, TrangThai)
+VALUES ('PSD001', 1330000, '2023-06-10', N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUDICHVU (MaPhieuSuDung, MaDichVu, SoLuong, DonGia, ThanhTien, TrangThai)
+VALUES ('PSD001', 'DV101', 2, 150000, 300000, N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUDICHVU (MaPhieuSuDung, MaDichVu, SoLuong, DonGia, ThanhTien, TrangThai)
+VALUES ('PSD001', 'DV102', 2, 500000, 1000000, N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUHANGHOA (MaPhieuSuDung, MaHangHoa, SoLuong, DonGia, ThanhTien, TrangThai)
+VALUES ('PSD001', 'HH101', 3, 10000, 30000, N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUDATPHONG (MaPhieuDatPhong, MaKhachHang)
+VALUES ('PD001', 'KH10001')
+INSERT INTO CT_PHIEUDATPHONG (MaPhieuDatPhong, MaKhachHang)
+VALUES ('PD001', 'KH10002')
+
+INSERT INTO PHIEUDATPHONG (MaPhieuDatPhong, MaPhieuSuDung, MaPhong, NgayDen, NgayDi, DonGia, TienCoc, SoNguoi, NgayLap, TrangThai)
+VALUES ('PD001', 'PSD001', 'P101', '2023-06-05', '2023-06-10', 500000, 20000, 2, '2023-06-01', N'Chưa thanh toán')
+
+
+
+
+INSERT INTO PHIEUSUDUNG (MaPhieuSuDung, TriGia, NgayLap, TrangThai)
+VALUES ('PSD002', 680000, '2023-06-10', N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUDICHVU (MaPhieuSuDung, MaDichVu, SoLuong, DonGia, ThanhTien, TrangThai)
+VALUES ('PSD002', 'DV101', 1, 150000, 150000, N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUDICHVU (MaPhieuSuDung, MaDichVu, SoLuong, DonGia, ThanhTien, TrangThai)
+VALUES ('PSD002', 'DV102', 1, 500000, 500000, N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUHANGHOA (MaPhieuSuDung, MaHangHoa, SoLuong, DonGia, ThanhTien, TrangThai)
+VALUES ('PSD002', 'HH101', 3, 10000, 30000, N'Đã thanh toán')
+
+INSERT INTO CT_PHIEUDATPHONG (MaPhieuDatPhong, MaKhachHang)
+VALUES ('PD002', 'KH10006')
+
+INSERT INTO PHIEUDATPHONG (MaPhieuDatPhong, MaPhieuSuDung, MaPhong, NgayDen, NgayDi, DonGia, TienCoc, SoNguoi, NgayLap, TrangThai)
+VALUES ('PD002', 'PSD002', 'P201', '2023-06-10', '2023-06-11', 700000, 20000, 2, '2023-06-10', N'Chưa thanh toán')

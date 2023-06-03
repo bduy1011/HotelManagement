@@ -171,13 +171,35 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             }
         }
 
-        private DateTime _selectedDate;
-        public DateTime SelectedDate
+        private DateTime? _selectedCheckDate = null;
+        public DateTime? SelectedCheckDate
         {
-            get { return _selectedDate; }
+            get { return _selectedCheckDate; }
             set
             {
-                _selectedDate = value;
+                _selectedCheckDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime? _dateOfCheckIn = null;
+        public DateTime? DateOfCheckIn
+        {
+            get { return _dateOfCheckIn; }
+            set
+            {
+                _dateOfCheckIn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime? _dateOfCheckOut = null;
+        public DateTime? DateOfCheckOut
+        {
+            get { return _dateOfCheckOut; }
+            set
+            {
+                _dateOfCheckOut = value;
                 OnPropertyChanged();
             }
         }
@@ -234,10 +256,8 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand BookingRoomCommand { get; set; }
-        public ICommand ReservedRoomCommand { get; set; }
         public ICommand CheckDateSelectedDateChangedCommand { get; set; }
-        public ICommand DateOfCheckOutSelectedDateChangedCommand { get; set; }
-        public ICommand DateOfCheckInSelectedDateChangedCommand { get; set; }
+        public ICommand SearchDateSelectedDateChangedCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand EditCommand { get; set; }
 
@@ -297,7 +317,10 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                     OutOfOrderRoomNumber = string.Format("Đang sửa ({0})", outOfOrderRoomNumber);
                     AddDataReseredBills();
 
-                    EmptyRoomList = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs);
+                    
+
+
+                    EmptyRoomList = new ObservableCollection<PHONG>();
                 }
             });
                 
@@ -342,6 +365,29 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 //editCustomerView = new EditCustomerView();
                 //editCustomerView.DataContext = new EditCustomerViewModel(SelectedCustomerItem);
                 //editCustomerView.ShowDialog();
+            });
+
+            CheckDateSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                
+            });
+
+            SearchDateSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (DateOfCheckOut >= DateOfCheckIn && DateOfCheckIn != null && DateOfCheckOut != null)
+                { 
+                    var ListRoom = DataProvider.Ins.DB.PHIEUDATPHONGs.Where(
+                        x => (x.NgayDen < DateOfCheckIn && DateOfCheckIn < x.NgayDi) 
+                          || (x.NgayDen < DateOfCheckOut && DateOfCheckOut < x.NgayDi)
+                          || (x.NgayDen >= DateOfCheckIn && DateOfCheckOut >= x.NgayDi)
+                          || (x.NgayDen <= DateOfCheckIn && DateOfCheckOut <= x.NgayDi)).Select(x => x.MaPhong).Distinct();
+                    EmptyRoomList = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs
+                            .Where(x => !ListRoom.Contains(x.MaPhong)));
+                }
+                else
+                {
+                    EmptyRoomList.Clear();
+                }
             });
         }
 
