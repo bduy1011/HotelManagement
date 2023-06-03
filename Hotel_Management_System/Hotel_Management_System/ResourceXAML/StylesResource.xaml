@@ -141,7 +141,6 @@
     </Style>
     
     <!--#region DataGrid Style-->
-
     <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
@@ -340,7 +339,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <!--#endregion-->
 
     <Style x:Key="text" TargetType="TextBlock">

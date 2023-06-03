@@ -279,49 +279,13 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 Dirty = "#FFB347";
                 OutOfOrderRoom = "#AF69EE";
 
+                SelectedCheckDate = DateTime.Now;
+
                 Rooms = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs);
+                ReservedBills = new ObservableCollection<PHIEUDATPHONG>(DataProvider.Ins.DB.PHIEUDATPHONGs);
+                EmptyRoomList = new ObservableCollection<PHONG>();
 
-                foreach (var room in Rooms)
-                {
-                    switch (room.TrangThai)
-                    {
-                        case "Trống":
-                            room.StateColor = Vacant;
-                            vacantNumber++;
-                            break;
-                        case "Được đặt":
-                            room.StateColor = Reserved;
-                            reservedNumber++;
-                            break;
-                        case "Được thuê":
-                            room.StateColor = Occupied;
-                            occupiedNumber++;
-                            break;
-                        case "Cần dọn phòng":
-                            room.StateColor = Dirty;
-                            dirtyNumber++;
-                            break;
-                        case "Ngưng hoạt động":
-                            room.StateColor = OutOfOrderRoom;
-                            outOfOrderRoomNumber++;
-                            break;
-                    }
-
-                    numberOfRoom = vacantNumber + reservedNumber + occupiedNumber + dirtyNumber + outOfOrderRoomNumber;
-
-                    NumberOfRoom = string.Format("Tất cả ({0})", numberOfRoom);
-                    VacantNumber = string.Format("Trống ({0})", vacantNumber);
-                    OccupiedNumber = string.Format("Được thuê ({0})", reservedNumber);
-                    ReservedNumber = string.Format("Được đặt ({0})", occupiedNumber);
-                    DirtyNumber = string.Format("Phòng bẩn ({0})", dirtyNumber);
-                    OutOfOrderRoomNumber = string.Format("Đang sửa ({0})", outOfOrderRoomNumber);
-                    AddDataReseredBills();
-
-                    
-
-
-                    EmptyRoomList = new ObservableCollection<PHONG>();
-                }
+                UpdateRoomColor();
             });
                 
             BookingRoomCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) => 
@@ -369,7 +333,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
             CheckDateSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
+                UpdateRoomState();
             });
 
             SearchDateSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -382,7 +346,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                           || (x.NgayDen >= DateOfCheckIn && DateOfCheckOut >= x.NgayDi)
                           || (x.NgayDen <= DateOfCheckIn && DateOfCheckOut <= x.NgayDi)).Select(x => x.MaPhong).Distinct();
                     EmptyRoomList = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs
-                            .Where(x => !ListRoom.Contains(x.MaPhong)));
+                        .Where(x => !ListRoom.Contains(x.MaPhong)));
                 }
                 else
                 {
@@ -391,140 +355,76 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             });
         }
 
-        public void AddDataReseredBills()
+        public void UpdateRoomColor()
         {
-            ReservedBills = new ObservableCollection<PHIEUDATPHONG> {
-            new PHIEUDATPHONG
+            foreach (var room in Rooms)
             {
-                MaPhieuDatPhong = "PDP0001",
-                MaPhieuSuDung = "PSD0001",
-                MaPhong = "P001",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 15),
-                DonGia = 1000000,
-                TienCoc = 500000,
-                SoNguoi = 2,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0002",
-                MaPhieuSuDung = "PSD0002",
-                MaPhong = "P002",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 15),
-                DonGia = 1200000,
-                TienCoc = 600000,
-                SoNguoi = 3,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0003",
-                MaPhieuSuDung = "PSD0003",
-                MaPhong = "P002",
-                NgayDen = new DateTime(2023, 6, 16),
-                NgayDi = new DateTime(2023, 6, 20),
-                DonGia = 1500000,
-                TienCoc = 750000,
-                SoNguoi = 4,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0004",
-                MaPhieuSuDung = "PSD0004",
-                MaPhong = "P003",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 14),
-                DonGia = 800000,
-                TienCoc = 400000,
-                SoNguoi = 2,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0005",
-                MaPhieuSuDung = "PSD0005",
-                MaPhong = "P004",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 13),
-                DonGia = 900000,
-                TienCoc = 450000,
-                SoNguoi = 2,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0006",
-                MaPhieuSuDung = "PSD0006",
-                MaPhong = "P005",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 12),
-                DonGia = 500000,
-                TienCoc = 250000,
-                SoNguoi = 1,
-                NgayLap = new DateTime(2023, 6,1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0007",
-                MaPhieuSuDung = "PSD0007",
-                MaPhong = "P006",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 11),
-                DonGia = 400000,
-                TienCoc = 200000,
-                SoNguoi = 1,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0008",
-                MaPhieuSuDung = "PSD0008",
-                MaPhong = "P007",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 11),
-                DonGia = 500000,
-                TienCoc = 250000,
-                SoNguoi = 2,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-new         PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0009",
-                MaPhieuSuDung = "PSD0009",
-                MaPhong = "P008",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 11),
-                DonGia = 600000,
-                TienCoc = 300000,
-                SoNguoi = 2,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
-            },
-            new PHIEUDATPHONG
-            {
-                MaPhieuDatPhong = "PDP0010",
-                MaPhieuSuDung = "PSD0010",
-                MaPhong = "P009",
-                NgayDen = new DateTime(2023, 6, 10),
-                NgayDi = new DateTime(2023, 6, 11),
-                DonGia = 700000,
-                TienCoc = 350000,
-                SoNguoi = 2,
-                NgayLap = new DateTime(2023, 6, 1),
-                TrangThai = "Đã đặt"
+                switch (room.TrangThai)
+                {
+                    case "Trống":
+                        room.StateColor = Vacant;
+                        vacantNumber++;
+                        break;
+                    case "Được đặt":
+                        room.StateColor = Reserved;
+                        reservedNumber++;
+                        break;
+                    case "Được thuê":
+                        room.StateColor = Occupied;
+                        occupiedNumber++;
+                        break;
+                    case "Cần dọn phòng":
+                        room.StateColor = Dirty;
+                        dirtyNumber++;
+                        break;
+                    case "Ngưng hoạt động":
+                        room.StateColor = OutOfOrderRoom;
+                        outOfOrderRoomNumber++;
+                        break;
+                    default:
+                        room.StateColor = Reserved;
+                        reservedNumber++;
+                        break;
+                }
             }
-            };
+
+            numberOfRoom = vacantNumber + reservedNumber + occupiedNumber + dirtyNumber + outOfOrderRoomNumber;
+
+            NumberOfRoom = string.Format("Tất cả ({0})", numberOfRoom);
+            VacantNumber = string.Format("Trống ({0})", vacantNumber);
+            OccupiedNumber = string.Format("Được thuê ({0})", reservedNumber);
+            ReservedNumber = string.Format("Được đặt ({0})", occupiedNumber);
+            DirtyNumber = string.Format("Phòng bẩn ({0})", dirtyNumber);
+            OutOfOrderRoomNumber = string.Format("Đang sửa ({0})", outOfOrderRoomNumber);
+        }
+
+        public void UpdateRoomState()
+        {
+            if (SelectedCheckDate != null)
+            {
+                var ListRoomHaveReservedBillInCheckDate = DataProvider.Ins.DB.PHIEUDATPHONGs
+                    .Where(x => x.NgayDen <= SelectedCheckDate && SelectedCheckDate <= x.NgayDi)
+                    .Select(x => new { x.MaPhong, x.TrangThai });
+
+                var RoomStatusList = DataProvider.Ins.DB.PHONGs
+                    .Select(x => new
+                    {
+                        x.MaPhong,
+                        TrangThai = ListRoomHaveReservedBillInCheckDate
+                        .Any(y => y.MaPhong == x.MaPhong) ? ListRoomHaveReservedBillInCheckDate
+                        .Where(y => y.MaPhong == x.MaPhong).FirstOrDefault().TrangThai : "Trống"
+                    })
+                    .ToList();
+
+                Rooms = new ObservableCollection<PHONG>(RoomStatusList.Select(x =>
+                {
+                    var room = DataProvider.Ins.DB.PHONGs.Where(y => y.MaPhong == x.MaPhong).FirstOrDefault();
+                    room.TrangThai = x.TrangThai;
+                    return room;
+                }));
+
+                UpdateRoomColor();
+            }
         }
     }
 }
