@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Hotel_Management_System.ViewModel
+namespace Hotel_Management_System.ViewModel.LoginViewModel
 {
     public class LoginViewModel : BaseViewModel
     {

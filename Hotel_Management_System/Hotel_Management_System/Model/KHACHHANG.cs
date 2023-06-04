@@ -23,31 +23,88 @@ namespace Hotel_Management_System.Model
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
 
-        private string _stt;
-        private string _maKhachHang;
-        private string _tenKhachHang;
-        private string _CCCD;
-        private string _gioiTinh;
-        private Nullable<System.DateTime> _ngaySinh;
-        private string _soDienThoai;
-        private string _loaiKhachHang;
-        private string _trangThai;
-        private bool _isLastRow;
         private string _character;
-        private Brush _bgColor;
+        public string Character 
+        {
+            get { return _character; }
+            set { _character = value; OnPropertyChanged(); } 
+        }
 
-        public string Character { get => _character; set { _character = value; OnPropertyChanged(); } }
-        public Brush BgColor { get => _bgColor; set { _bgColor = value; OnPropertyChanged(); } }
-        public string STT { get => _stt; set { _stt = value; OnPropertyChanged(); } }
-        public string MaKhachHang { get => _maKhachHang; set { _maKhachHang = value; OnPropertyChanged(); } }
-        public string TenKhachHang { get => _tenKhachHang; set { _tenKhachHang = value; OnPropertyChanged(); } }
-        public string CCCD { get => _CCCD; set { _CCCD = value; OnPropertyChanged(); } }
-        public string GioiTinh { get => _gioiTinh; set { _gioiTinh = value; OnPropertyChanged(); } }
-        public Nullable<System.DateTime> NgaySinh { get => _ngaySinh; set { _ngaySinh = value; OnPropertyChanged(); } }
-        public string SoDienThoai { get => _soDienThoai; set { _soDienThoai = value; OnPropertyChanged(); } }
-        public string LoaiKhachHang { get => _loaiKhachHang; set { _loaiKhachHang = value; OnPropertyChanged(); } }
-        public string TrangThai { get => _trangThai; set { _trangThai = value; OnPropertyChanged(); } }
-        public bool IsLastRow { get => _isLastRow; set { _isLastRow = value; OnPropertyChanged(); } }
+        private Brush _bgColor;
+        public Brush BgColor 
+        {
+            get { return _bgColor; } 
+            set { _bgColor = value; OnPropertyChanged(); } 
+        }
+        
+        private string _stt;
+        public string STT 
+        {
+            get { return _stt; }
+            set { _stt = value; OnPropertyChanged(); } 
+        }
+        private string _maKhachHang;
+        public string MaKhachHang 
+        {
+            get { return _maKhachHang; }
+            set { _maKhachHang = value; OnPropertyChanged(); } 
+        }
+
+        private string _tenKhachHang;
+        public string TenKhachHang 
+        {
+            get { return _tenKhachHang; }
+            set { _tenKhachHang = value; OnPropertyChanged(); } 
+        }
+
+        private string _CCCD;
+        public string CCCD 
+        {
+            get { return _CCCD; }
+            set { _CCCD = value; OnPropertyChanged(); } 
+        }
+
+        private string _gioiTinh;
+        public string GioiTinh 
+        {
+            get { return _gioiTinh; } 
+            set { _gioiTinh = value; OnPropertyChanged(); } 
+        }
+
+        private DateTime? _ngaySinh;
+        public DateTime? NgaySinh 
+        {
+            get { return _ngaySinh; }
+            set { _ngaySinh = value; OnPropertyChanged(); } 
+        }
+        
+        private string _soDienThoai;
+        public string SoDienThoai 
+        {
+            get { return _soDienThoai; } 
+            set { _soDienThoai = value; OnPropertyChanged(); } 
+        }
+
+        private string _loaiKhachHang;
+        public string LoaiKhachHang 
+        {
+            get { return _loaiKhachHang; }
+            set { _loaiKhachHang = value; OnPropertyChanged(); } 
+        }
+
+        private string _trangThai;
+        public string TrangThai 
+        {
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); } 
+        }
+
+        private bool _isLastRow;
+        public bool IsLastRow 
+        {
+            get { return _isLastRow; }
+            set { _isLastRow = value; OnPropertyChanged(); } 
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }

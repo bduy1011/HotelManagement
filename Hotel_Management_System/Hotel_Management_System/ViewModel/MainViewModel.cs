@@ -50,7 +50,7 @@ namespace Hotel_Management_System.ViewModel
                 loginWindow.ShowDialog();
 
                 if (loginWindow.DataContext == null) return;
-                var loginVM = loginWindow.DataContext as LoginViewModel;
+                var loginVM = loginWindow.DataContext as LoginViewModel.LoginViewModel;
 
                 if(loginVM.IsLogin)
                 {

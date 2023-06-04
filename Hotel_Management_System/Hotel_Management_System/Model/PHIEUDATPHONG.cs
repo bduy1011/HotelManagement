@@ -12,7 +12,6 @@ namespace Hotel_Management_System.Model
     using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
-    using System.Windows;
 
     public partial class PHIEUDATPHONG : BaseViewModel
     {
@@ -24,110 +23,72 @@ namespace Hotel_Management_System.Model
         }
 
         private string _maPhieuDatPhong;
-        private string _maPhieuSuDung;
-        private string _maPhong;
-        private DateTime? _ngayDen;
-        private DateTime? _ngayDi;
-        private int? _donGia;
-        private int? _tienCoc;
-        private short? _soNguoi;
-        private DateTime? _ngayLap;
-        private string _trangThai;
-
         public string MaPhieuDatPhong
         {
-            get => _maPhieuDatPhong;
-            set
-            {
-                _maPhieuDatPhong = value;
-                OnPropertyChanged();
-            }
+            get { return _maPhieuDatPhong; }
+            set { _maPhieuDatPhong = value; OnPropertyChanged(); }
         }
 
+        private string _maPhieuSuDung;
         public string MaPhieuSuDung
         {
-            get => _maPhieuSuDung;
-            set
-            {
-                _maPhieuSuDung = value;
-                OnPropertyChanged();
-            }
+            get { return _maPhieuSuDung; }
+            set { _maPhieuSuDung = value; OnPropertyChanged(); }
         }
 
+        private string _maPhong;
         public string MaPhong
         {
-            get => _maPhong;
-            set
-            {
-                _maPhong = value;
-                OnPropertyChanged();
-            }
+            get { return _maPhong; }
+            set { _maPhong = value; OnPropertyChanged(); }
         }
 
+        private short? _soNguoi;
         public short? SoNguoi
         {
-            get => _soNguoi;
-            set
-            {
-                _soNguoi = value;
-                OnPropertyChanged();
-            }
+            get { return _soNguoi; }
+            set { _soNguoi = value; OnPropertyChanged(); }
         }
 
+        private DateTime? _ngayDen;
         public DateTime? NgayDen
         {
-            get => _ngayDen;
-            set
-            {
-                _ngayDen = value;
-                OnPropertyChanged();
-            }
+            get { return _ngayDen; }
+            set { _ngayDen = value; OnPropertyChanged(); } 
         }
 
+        private DateTime? _ngayDi;
         public DateTime? NgayDi
         {
-            get => _ngayDi;
-            set
-            {
-                _ngayDi = value;
-                OnPropertyChanged();
-            }
+            get { return _ngayDi; }
+            set { _ngayDi = value; OnPropertyChanged(); } 
         }
-
+        private int? _donGia;
         public int? DonGia
         {
             get { return _donGia; }
             set { _donGia = value; OnPropertyChanged(); }
         }
 
+        private int? _tienCoc;
         public int? TienCoc
         {
-            get => _tienCoc;
-            set
-            {
-                _tienCoc = value;
-                OnPropertyChanged();
-            }
+            get { return _tienCoc; }
+            set { _tienCoc = value; OnPropertyChanged(); } 
         }
 
+        private DateTime? _ngayLap;
         public DateTime? NgayLap
         {
-            get => _ngayLap;
-            set
-            {
-                _ngayLap = value;
-                OnPropertyChanged();
-            }
+            get { return _ngayLap; }
+            set { _ngayLap = value; OnPropertyChanged(); }
         }
 
+        private string _trangThai;
         public string TrangThai
         {
-            get => _trangThai;
-            set
-            {
-                _trangThai = value;
-                OnPropertyChanged();
-            }
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

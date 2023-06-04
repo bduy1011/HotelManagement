@@ -156,6 +156,7 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BookingRoomViewModel\BookingRoomViewModel.cs" />
+    <Compile Include="ViewModel\BookingRoomViewModel\RemoveBookingRoomViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\EditCustomerViewModel.cs" />
@@ -170,6 +171,9 @@
     <Compile Include="ViewModel\StaffViewModel\StaffViewModel.cs" />
     <Compile Include="View\BookingRoomView\BookingRoomView.xaml.cs">
       <DependentUpon>BookingRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingRoomView\RemoveBookingRoomView.xaml.cs">
+      <DependentUpon>RemoveBookingRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\AddCustomerView.xaml.cs">
       <DependentUpon>AddCustomerView.xaml</DependentUpon>
@@ -204,6 +208,10 @@
       <DependentUpon>StaffView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\BookingRoomView\BookingRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingRoomView\RemoveBookingRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

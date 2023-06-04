@@ -10,14 +10,13 @@
 namespace Hotel_Management_System.Model
 {
     using System;
-    using System.Collections.Generic;
     
     public partial class CT_PHIEUNHAPHANG
     {
         public string MaPhieuNhapHang { get; set; }
         public string MaHangHoa { get; set; }
-        public Nullable<short> SoLuong { get; set; }
-        public Nullable<int> ThanhTien { get; set; }
+        public short? SoLuong { get; set; }
+        public int? ThanhTien { get; set; }
     
         public virtual HANGHOA HANGHOA { get; set; }
         public virtual PHIEUNHAPHANG PHIEUNHAPHANG { get; set; }

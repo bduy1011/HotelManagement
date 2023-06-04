@@ -32,17 +32,39 @@ namespace Hotel_Management_System.Model
             PHIEUDATPHONGs = pHIEUDATPHONGs;
         }
 
-        private string _maPhong { get; set; }
-        private string _maLoaiPhong { get; set; }
-        private string _trangThai { get; set; }
-        private string _ghiChu { get; set; }
-        private string _stateColor { get; set; }
-
-        public string MaPhong { get => _maPhong; set { _maPhong = value; OnPropertyChanged(); } }
-        public string MaLoaiPhong { get => _maLoaiPhong; set { _maLoaiPhong = value; OnPropertyChanged(); } }
-        public string TrangThai { get => _trangThai; set { _trangThai = value; OnPropertyChanged(); } }
-        public string GhiChu { get => _ghiChu; set { _ghiChu = value; OnPropertyChanged(); } }
-        public string StateColor { get => _stateColor; set { _stateColor = value; OnPropertyChanged(); } }
+        private string _maPhong;
+        public string MaPhong 
+        {
+            get { return _maPhong; }
+            set { _maPhong = value; OnPropertyChanged(); } 
+        }
+        
+        private string _maLoaiPhong;
+        public string MaLoaiPhong 
+        {
+            get { return _maLoaiPhong; }
+            set { _maLoaiPhong = value; OnPropertyChanged(); } 
+        }
+        
+        private string _trangThai;
+        public string TrangThai 
+        {
+            get { return _trangThai; } 
+            set { _trangThai = value; OnPropertyChanged(); } 
+        }
+        
+        private string _ghiChu;
+        public string GhiChu 
+        {
+            get { return _ghiChu; }
+            set { _ghiChu = value; OnPropertyChanged(); } }
+        
+        private string _stateColor;
+        public string StateColor 
+        {
+            get { return _stateColor; }
+            set { _stateColor = value; OnPropertyChanged(); } 
+        }
 
         public virtual LOAIPHONG LOAIPHONG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

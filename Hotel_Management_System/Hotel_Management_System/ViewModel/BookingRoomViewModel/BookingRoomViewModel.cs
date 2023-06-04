@@ -17,33 +17,21 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         public ObservableCollection<DICHVU> Services
         {
             get { return _services; }
-            set
-            {
-                _services = value;
-                OnPropertyChanged();
-            }
+            set { _services = value; OnPropertyChanged(); }
         }
 
         private ObservableCollection<HANGHOA> _commoditys;
         public ObservableCollection<HANGHOA> Commoditys
         {
             get { return _commoditys; }
-            set
-            {
-                _commoditys = value;
-                OnPropertyChanged();
-            }
+            set { _commoditys = value; OnPropertyChanged(); }
         }
 
         private ObservableCollection<CT_PHIEUDICHVU> _selectedServices;
         public ObservableCollection<CT_PHIEUDICHVU> SelectedServices
         {
             get { return _selectedServices; }
-            protected set
-            {
-                _selectedServices = value;
-                OnPropertyChanged();
-            }
+            set { _selectedServices = value; OnPropertyChanged(); }
         }
 
         private ObservableCollection<CT_PHIEUHANGHOA> _selectedCommoditys;
@@ -164,7 +152,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         private string _remainingCosts;
         private string _completelyPayment;
         private string _downPayment;
-        private string _discount;
         private double _countDay;
         private string _totalDayReservation;
         private string _timeReserved;
@@ -203,19 +190,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 if (_downPayment != value)
                 {
                     _downPayment = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Discount
-        {
-            get { return _discount; }
-            set
-            {
-                if (_discount != value)
-                {
-                    _discount = value;
                     OnPropertyChanged();
                 }
             }
@@ -314,7 +288,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             SumFee = RoomFee;
             RemainingCosts = RoomFee;
             ServicesFee = "0";
-            Discount = "";
             DownPayment = "";
             CompletelyPayment = "0";
             TotalDayReservation = "#";
@@ -332,7 +305,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 {
                     string t = DataProvider.Ins.DB.PHIEUDATPHONGs.OrderByDescending(x => x.MaPhieuDatPhong).FirstOrDefault().MaPhieuDatPhong;
 
-                    ReservationBill.MaPhieuDatPhong = "PDP" + int.Parse(t.Substring(3));
+                    ReservationBill.MaPhieuDatPhong = "PDP" + (int.Parse(t.Substring(3)) + 1);
                 }
                 else ReservationBill.MaPhieuDatPhong = "PDP10001";
 
@@ -340,7 +313,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 {
                     string t = DataProvider.Ins.DB.PHIEUSUDUNGs.OrderByDescending(x => x.MaPhieuSuDung).FirstOrDefault().MaPhieuSuDung;
 
-                    UsageBill.MaPhieuSuDung = "PSD" + int.Parse(t.Substring(3));
+                    UsageBill.MaPhieuSuDung = "PSD" + (int.Parse(t.Substring(3)) + 1);
                 }
                 else UsageBill.MaPhieuSuDung = "PSD10001";
 
@@ -367,17 +340,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 AddCustomers = new ObservableCollection<KHACHHANG>();
 
                 KHACHHANG kh = new KHACHHANG();
-
-                string temp;
-                try
-                {
-                    temp = DataProvider.Ins.DB.KHACHHANGs.OrderByDescending(cus => cus.MaKhachHang).FirstOrDefault().MaKhachHang;
-                }
-                catch
-                {
-                    temp = "KH" + 10000.ToString();
-                }
-                kh.MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
 
                 AddCustomers.Add(kh);
 
@@ -514,6 +476,11 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                     {
                         if (item.MaHangHoa == p.MaDichVu)
                         {
+                            if(p.SoLuong > item.HANGHOA.TonKho)
+                            {
+                                MessageBox.Show(string.Format("Không đủ cung cấp! Số lượng tồn kho: {0} {1}", item.HANGHOA.TonKho, item.HANGHOA.DonViTinh), "Thông báo không đủ số lượng", MessageBoxButton.OK, MessageBoxImage.Information);
+                                p.SoLuong = item.HANGHOA.TonKho;
+                            }
                             item.SoLuong = p.SoLuong;
                             item.ThanhTien = item.SoLuong * item.HANGHOA.DonGiaBan;
                             p.ThanhTien = item.ThanhTien;
@@ -607,18 +574,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             AddCustomerCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 KHACHHANG kh = new KHACHHANG();
-
-                string temp;
-                try
-                {
-                    temp = AddCustomers[AddCustomers.Count - 1].MaKhachHang;
-                }
-                catch
-                {
-                    temp = "KH" + 10000.ToString();
-                }
-                kh.MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
-
                 AddCustomers.Add(kh);
             });
 
@@ -632,14 +587,11 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                         break;
                     }
                 }
-                string temp = DataProvider.Ins.DB.KHACHHANGs.OrderByDescending(cus => cus.MaKhachHang).FirstOrDefault().MaKhachHang;
-                AddCustomers[0].MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
+          
                 for (int i = 0; i < AddCustomers.Count; i++)
                 {
                     var item = AddCustomers[i];
                     item.IsLastRow = (i == AddCustomers.Count - 1);
-                    if (i != 0)
-                        item.MaKhachHang = "KH" + (int.Parse(AddCustomers[i - 1].MaKhachHang.Substring(2)) + 1).ToString();
                 }
             });
 
@@ -649,16 +601,34 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 foreach (var item in AddCustomers)
                 {
-                    // Chưa check khách hàng trùng lặp
-                    ReservationBill.KHACHHANGs.Add(item);
+                    // Check khách hàng trùng lặp
+                    if (!DataProvider.Ins.DB.KHACHHANGs.Select(x => x.CCCD).Contains(item.CCCD))
+                    {
+                        string temp;
+                        try
+                        {
+                            temp = AddCustomers[AddCustomers.Count - 1].MaKhachHang;
+                        }
+                        catch
+                        {
+                            temp = "KH" + 10000.ToString();
+                        }
+                        item.MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
+                        ReservationBill.KHACHHANGs.Add(item);
+                    }
+                    else ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.CCCD == item.CCCD).SingleOrDefault());
                 }
 
                 UsageBill.TriGia = int.Parse(ServicesFee);
                 UsageBill.TrangThai = "Chưa giao";
 
-                ReservationBill.DonGia = int.Parse(RoomFee); 
-                ReservationBill.TienCoc = int.Parse(DownPayment);
+                ReservationBill.DonGia = int.Parse(SumFee);
+
+                if (DownPayment == "") ReservationBill.TienCoc = 0;
+                else ReservationBill.TienCoc = int.Parse(DownPayment);
+
                 ReservationBill.SoNguoi = (short)ReservationBill.KHACHHANGs.Count();
+
                 if(ReservationBill.NgayDen.Value.Date == DateTime.Now.Date) ReservationBill.TrangThai = "Được thuê";
                 else ReservationBill.TrangThai = "Được đặt";
 
@@ -668,11 +638,11 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 
                 DataProvider.Ins.DB.CT_PHIEUDICHVU.AddRange(SelectedServices);
-                DataProvider.Ins.DB.SaveChanges();
-
-                // Chưa trừ số lượng tồn kho
                 DataProvider.Ins.DB.CT_PHIEUHANGHOA.AddRange(SelectedCommoditys);
-                DataProvider.Ins.DB.SaveChanges();
+                foreach(CT_PHIEUHANGHOA item in SelectedCommoditys)
+                {
+                    item.HANGHOA.TonKho -= item.SoLuong;
+                }
 
                 DataProvider.Ins.DB.PHIEUDATPHONGs.Add(ReservationBill);
                 DataProvider.Ins.DB.SaveChanges();
@@ -693,18 +663,12 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             int sumFee = servicesFee + int.Parse(RoomFee);
             SumFee = sumFee.ToString();
 
-            int discount;
             int downPayment;
-            try { discount = int.Parse(Discount); } catch { discount = 0; };
             try { downPayment = int.Parse(DownPayment); } catch { downPayment = 0; };
             
-            // Tổng tiền giảm giá + tiền cọc
-            int completelyPayment = discount + downPayment;
-            CompletelyPayment = completelyPayment.ToString();
-
             // Tổng tiền còn lại phải thanh toán
             int remainingCosts = 0;
-            if (sumFee > completelyPayment) remainingCosts = sumFee - completelyPayment;
+            if (sumFee > downPayment) remainingCosts = sumFee - downPayment;
             RemainingCosts = remainingCosts.ToString();
         }
 

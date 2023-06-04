@@ -22,8 +22,8 @@ namespace Hotel_Management_System.Model
     
         public string MaPhieuNhapHang { get; set; }
         public string MaNhanVien { get; set; }
-        public Nullable<System.DateTime> NgayLap { get; set; }
-        public Nullable<int> TriGia { get; set; }
+        public DateTime? NgayLap { get; set; }
+        public int? TriGia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }

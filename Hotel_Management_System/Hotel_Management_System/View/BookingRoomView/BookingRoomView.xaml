@@ -9,7 +9,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Name="bookingRoomWindow"
-        Title="BookingRoomView" Height="750" Width="1300"
+        Title="Booking Room" Height="750" Width="1300"
         DataContext="{StaticResource BookingRoomVM}">
 
     <i:Interaction.Triggers>
@@ -160,18 +160,17 @@
                         <DataGrid ItemsSource="{Binding AddCustomers}" AutoGenerateColumns="False" Name="addCustomers"
                                   Style="{DynamicResource DataGridStyle1}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã khách" Binding="{Binding MaKhachHang}" Width="90" IsReadOnly="True"/>
-                                <DataGridTemplateColumn Header="CCCD" Width="100">
+                                <DataGridTemplateColumn Header="CCCD" Width="130">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding CCCD}" Width="70"/>
+                                            <TextBox Text="{Binding CCCD, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Tên khách hàng" Width="130">
+                                <DataGridTemplateColumn Header="Tên khách hàng" Width="150">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding TenKhachHang}" Width="100"/>
+                                            <TextBox Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -188,21 +187,21 @@
                                 <DataGridTemplateColumn Header="Ngày sinh" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding NgaySinh, Mode=TwoWay}" Width="80"/>
+                                            <DatePicker SelectedDate="{Binding NgaySinh, Mode=TwoWay}" Width="85"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Điện thoại" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding SoDienThoai}" Width="auto"/>
+                                            <TextBox Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged}" Width="auto"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Loại khách" IsReadOnly="True" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" Margin="0,0,0,0" SelectedItem="{Binding LoaiKhachHang}">
+                                            <ComboBox HorizontalAlignment="Center" Width="95" VerticalAlignment="Bottom" SelectedItem="{Binding LoaiKhachHang}">
                                                 <ComboBoxItem Content="Trẻ em"/>
                                                 <ComboBoxItem Content="Vị thành niên"/>
                                                 <ComboBoxItem Content="Người lớn"/>
@@ -238,7 +237,8 @@
                 </Grid>
 
                 <Grid Grid.Row="1">
-                    <DataGrid ItemsSource="{Binding ShowSelectedServices}" AutoGenerateColumns="False">
+                    <DataGrid ItemsSource="{Binding ShowSelectedServices}" AutoGenerateColumns="False"
+                              Style="{DynamicResource DataGridStyle1}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Dịch vụ/Hàng hóa" Binding="{Binding DICHVU.TenDichVu}" Width="200" IsReadOnly="True"/>
@@ -318,28 +318,14 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="0" TextAlignment="Center" TextWrapping="Wrap" Text="Giảm giá: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
+                        <TextBlock Grid.Column="4" TextAlignment="Center" TextWrapping="Wrap" Text="Tiền cọc: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBox Grid.Column="5" Text="{Binding DownPayment, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
                                     <i:InvokeCommandAction Command="{Binding MoneyTextChangedCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
-
-                        <TextBlock Grid.Column="2" TextAlignment="Center" TextWrapping="Wrap" Text="Tiền cọc: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <TextBox Grid.Column="3" Text="{Binding DownPayment, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding MoneyTextChangedCommand}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-
-                        <TextBlock Grid.Column="4" TextAlignment="Center" TextWrapping="Wrap" Text="Đã thanh toán: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <TextBlock Grid.Column="5" Text="{Binding CompletelyPayment}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-
                     </Grid>
 
                     <Grid Grid.Row="2">

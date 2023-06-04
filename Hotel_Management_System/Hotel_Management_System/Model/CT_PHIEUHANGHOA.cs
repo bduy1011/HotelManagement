@@ -14,6 +14,11 @@ namespace Hotel_Management_System.Model
     
     public partial class CT_PHIEUHANGHOA : BaseViewModel
     {
+        public CT_PHIEUHANGHOA()
+        {
+
+        }
+
         public CT_PHIEUHANGHOA(HANGHOA hh)
         {
             HANGHOA = hh;
@@ -24,55 +29,39 @@ namespace Hotel_Management_System.Model
         public int STT
         {
             get { return _stt; }
-            set
-            {
-                _stt = value;
-                OnPropertyChanged();
-            }
+            set { _stt = value; OnPropertyChanged(); }
         }
 
         private string _maPhieuSuDung;
         public string MaPhieuSuDung
         {
             get { return _maPhieuSuDung; }
-            set
-            {
-                _maPhieuSuDung = value;
-                OnPropertyChanged();
-            }
+            set { _maPhieuSuDung = value; OnPropertyChanged(); }
         }
 
         private string _maHangHoa;
         public string MaHangHoa
         {
             get { return _maHangHoa; }
-            set
-            {
-                _maHangHoa = value;
-                OnPropertyChanged();
-            }
+            set { _maHangHoa = value; OnPropertyChanged(); }
         }
 
-        private Nullable<short> _soLuong;
-        public Nullable<short> SoLuong
+        private short? _soLuong;
+        public short? SoLuong
         {
             get { return _soLuong; }
-            set
-            {
-                _soLuong = value;
-                OnPropertyChanged();
-            }
+            set { _soLuong = value; OnPropertyChanged(); }
         }
 
-        private Nullable<int> _donGia;
-        public Nullable<int> DonGia
+        private int? _donGia;
+        public int? DonGia
         {
             get { return _donGia; }
             set { _donGia = value; OnPropertyChanged(); }
         }
 
-        private Nullable<int> _thanhTien;
-        public Nullable<int> ThanhTien
+        private int? _thanhTien;
+        public int? ThanhTien
         {
             get { return _thanhTien; }
             set { _thanhTien = value; OnPropertyChanged(); }

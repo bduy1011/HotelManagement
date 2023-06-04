@@ -10,15 +10,14 @@
 namespace Hotel_Management_System.Model
 {
     using System;
-    using System.Collections.Generic;
     
     public partial class THONGKE
     {
         public string MaThongKe { get; set; }
         public string MaLoaiPhong { get; set; }
-        public Nullable<System.DateTime> NgayLap { get; set; }
-        public Nullable<double> DoanhThu { get; set; }
-        public Nullable<double> TiLe { get; set; }
+        public DateTime? NgayLap { get; set; }
+        public double? DoanhThu { get; set; }
+        public double? TiLe { get; set; }
     
         public virtual LOAIPHONG LOAIPHONG { get; set; }
     }

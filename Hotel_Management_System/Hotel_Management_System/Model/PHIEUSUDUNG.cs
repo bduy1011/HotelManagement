@@ -24,37 +24,27 @@ namespace Hotel_Management_System.Model
         }
 
         private string _maPhieuSuDung;
-        private int? _triGia;
-        private DateTime? _ngayLap;
-        private string _trangThai;
-
-
         public string MaPhieuSuDung
         {
             get { return _maPhieuSuDung; }
             set { _maPhieuSuDung = value; OnPropertyChanged(); }
         }
 
+        private int? _triGia;
         public int? TriGia
         {
-            get => _triGia;
-            set
-            {
-                _triGia = value;
-                OnPropertyChanged();
-            }
+            get { return _triGia; }
+            set { _triGia = value; OnPropertyChanged(); } 
         }
 
+        private DateTime? _ngayLap;
         public DateTime? NgayLap
         {
-            get => _ngayLap;
-            set
-            {
-                _ngayLap = value;
-                OnPropertyChanged();
-            }
+            get { return _ngayLap; }
+            set { _ngayLap = value; OnPropertyChanged(); } 
         }
 
+        private string _trangThai;
         public string TrangThai
         {
             get { return _trangThai; }

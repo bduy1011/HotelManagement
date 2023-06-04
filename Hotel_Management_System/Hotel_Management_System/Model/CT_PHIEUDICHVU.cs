@@ -14,6 +14,11 @@ namespace Hotel_Management_System.Model
     
     public partial class CT_PHIEUDICHVU : BaseViewModel
     {
+        public CT_PHIEUDICHVU()
+        {
+
+        }
+
         public CT_PHIEUDICHVU(DICHVU dv)
         {
             DICHVU = dv;
@@ -21,52 +26,52 @@ namespace Hotel_Management_System.Model
         }
 
         private int _stt;
-        public int STT
-        {
-            get { return _stt; }
-            set { _stt = value; OnPropertyChanged(); }
+        public int STT 
+        { 
+            get { return _stt; } 
+            set { _stt = value; OnPropertyChanged(); } 
         }
 
         private string _maPhieuSuDung;
-        public string MaPhieuSuDung
-        {
-            get { return _maPhieuSuDung; }
-            set { _maPhieuSuDung = value; OnPropertyChanged(); }
+        public string MaPhieuSuDung 
+        { 
+            get { return _maPhieuSuDung; } 
+            set { _maPhieuSuDung = value; OnPropertyChanged(); } 
         }
 
         private string _maDichVu;
-        public string MaDichVu
-        {
-            get { return _maDichVu; }
-            set { _maDichVu = value; OnPropertyChanged(); }
+        public string MaDichVu 
+        { 
+            get { return _maDichVu; } 
+            set { _maDichVu = value; OnPropertyChanged(); } 
         }
 
-        private Nullable<short> _soLuong;
-        public Nullable<short> SoLuong
-        {
-            get { return _soLuong; }
-            set { _soLuong = value; OnPropertyChanged(); }
+        private short? _soLuong;
+        public short? SoLuong 
+        { 
+            get { return _soLuong; } 
+            set { _soLuong = value; OnPropertyChanged(); } 
         }
 
-        private Nullable<int> _donGia;
-        public Nullable<int> DonGia
-        {
-            get { return _donGia; }
-            set { _donGia = value; OnPropertyChanged(); }
+        private int? _donGia;
+        public int? DonGia 
+        { 
+            get { return _donGia; } 
+            set { _donGia = value; OnPropertyChanged(); } 
         }
 
-        private Nullable<int> _thanhTien;
-        public Nullable<int> ThanhTien
-        {
-            get { return _thanhTien; }
-            set { _thanhTien = value; OnPropertyChanged(); }
+        private int? _thanhTien;
+        public int? ThanhTien 
+        { 
+            get { return _thanhTien; } 
+            set { _thanhTien = value; OnPropertyChanged(); } 
         }
-
+ 
         private string _trangThai;
-        public string TrangThai
-        {
-            get { return _trangThai; }
-            set { _trangThai = value; OnPropertyChanged(); }
+        public string TrangThai 
+        { 
+            get { return _trangThai; } 
+            set { _trangThai = value; OnPropertyChanged(); } 
         }
 
         public virtual DICHVU DICHVU { get; set; }

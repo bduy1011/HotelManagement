@@ -12,7 +12,6 @@ namespace Hotel_Management_System.Model
     using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
-    using System.Windows.Controls;
     using System.Windows.Media;
 
     public partial class NHANVIEN : BaseViewModel

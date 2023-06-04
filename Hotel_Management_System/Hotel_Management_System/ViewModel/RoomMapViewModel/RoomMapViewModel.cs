@@ -240,8 +240,8 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             }
         }
 
-        private KHACHHANG _selectedReservedBillItem;
-        public KHACHHANG SelectedReservedBillItem
+        private PHIEUDATPHONG _selectedReservedBillItem;
+        public PHIEUDATPHONG SelectedReservedBillItem
         {
             get { return _selectedReservedBillItem; }
             set
@@ -261,12 +261,10 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
         public ICommand RemoveCommand { get; set; }
         public ICommand EditCommand { get; set; }
 
-        public int numberOfRoom = 0;
-        public int vacantNumber = 0;
-        public int occupiedNumber = 0;
-        public int reservedNumber = 0;
-        public int dirtyNumber = 0;
-        public int outOfOrderRoomNumber = 0;
+        public int numberOfRoom;
+        public int vacantNumber;
+        public int occupiedNumber;
+        public int reservedNumber;
 
         public RoomMapViewModel()
         {
@@ -301,6 +299,8 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                         var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
 
                         p.TrangThai = bookingRoomViewModel.Room.TrangThai;
+                        ReservedBills.Clear();
+                        ReservedBills = new ObservableCollection<PHIEUDATPHONG>(DataProvider.Ins.DB.PHIEUDATPHONGs);
                         break;
                     case "Được đặt":
 
@@ -308,20 +308,14 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                     case "Được thuê":
 
                         break;
-                    case "Cần dọn phòng":
-
-                        break;
-                    case "Ngưng hoạt động":
-
-                        break;
                 }
             });
 
             RemoveCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //removeCustomerView = new RemoveCustomerView();
-                //removeCustomerView.DataContext = new RemoveCustomerViewModel(SelectedCustomerItem);
-                //removeCustomerView.ShowDialog();
+                RemoveBookingRoomView removeBookingRoomView = new RemoveBookingRoomView();
+                removeBookingRoomView.DataContext = new RemoveBookingRoomViewModel(SelectedReservedBillItem);
+                removeBookingRoomView.ShowDialog();
             });
 
             EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -345,6 +339,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                           || (x.NgayDen < DateOfCheckOut && DateOfCheckOut < x.NgayDi)
                           || (x.NgayDen >= DateOfCheckIn && DateOfCheckOut >= x.NgayDi)
                           || (x.NgayDen <= DateOfCheckIn && DateOfCheckOut <= x.NgayDi)).Select(x => x.MaPhong).Distinct();
+                    
                     EmptyRoomList = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs
                         .Where(x => !ListRoom.Contains(x.MaPhong)));
                 }
@@ -357,6 +352,11 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
         public void UpdateRoomColor()
         {
+            numberOfRoom = 0;
+            vacantNumber = 0;
+            occupiedNumber = 0;
+            reservedNumber = 0;
+            
             foreach (var room in Rooms)
             {
                 switch (room.TrangThai)
@@ -373,29 +373,15 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                         room.StateColor = Occupied;
                         occupiedNumber++;
                         break;
-                    case "Cần dọn phòng":
-                        room.StateColor = Dirty;
-                        dirtyNumber++;
-                        break;
-                    case "Ngưng hoạt động":
-                        room.StateColor = OutOfOrderRoom;
-                        outOfOrderRoomNumber++;
-                        break;
-                    default:
-                        room.StateColor = Reserved;
-                        reservedNumber++;
-                        break;
                 }
             }
 
-            numberOfRoom = vacantNumber + reservedNumber + occupiedNumber + dirtyNumber + outOfOrderRoomNumber;
+            numberOfRoom = vacantNumber + reservedNumber + occupiedNumber;
 
             NumberOfRoom = string.Format("Tất cả ({0})", numberOfRoom);
             VacantNumber = string.Format("Trống ({0})", vacantNumber);
             OccupiedNumber = string.Format("Được thuê ({0})", reservedNumber);
             ReservedNumber = string.Format("Được đặt ({0})", occupiedNumber);
-            DirtyNumber = string.Format("Phòng bẩn ({0})", dirtyNumber);
-            OutOfOrderRoomNumber = string.Format("Đang sửa ({0})", outOfOrderRoomNumber);
         }
 
         public void UpdateRoomState()
@@ -403,7 +389,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             if (SelectedCheckDate != null)
             {
                 var ListRoomHaveReservedBillInCheckDate = DataProvider.Ins.DB.PHIEUDATPHONGs
-                    .Where(x => x.NgayDen <= SelectedCheckDate && SelectedCheckDate <= x.NgayDi)
+                    .Where(x => x.NgayDen <= SelectedCheckDate.Value.Date && SelectedCheckDate <= x.NgayDi)
                     .Select(x => new { x.MaPhong, x.TrangThai });
 
                 var RoomStatusList = DataProvider.Ins.DB.PHONGs
@@ -411,8 +397,8 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                     {
                         x.MaPhong,
                         TrangThai = ListRoomHaveReservedBillInCheckDate
-                        .Any(y => y.MaPhong == x.MaPhong) ? ListRoomHaveReservedBillInCheckDate
-                        .Where(y => y.MaPhong == x.MaPhong).FirstOrDefault().TrangThai : "Trống"
+                            .Any(y => y.MaPhong == x.MaPhong) ? ListRoomHaveReservedBillInCheckDate
+                            .Where(y => y.MaPhong == x.MaPhong).FirstOrDefault().TrangThai : "Trống"
                     })
                     .ToList();
 
