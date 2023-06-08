@@ -297,27 +297,50 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 switch (p.TrangThai)
                 {
                     case "Trống":
-                        DateTime dateTime = DateTime.Now;
-                        if (SelectedCheckDate.Value.Date == DateTime.Now.Date)
+                        try
                         {
-                            dateTime = SelectedCheckDate.Value.Date + DateTime.Now.TimeOfDay;
+                            DateTime dateTime = DateTime.Now;
+                            if (SelectedCheckDate.Value.Date == DateTime.Now.Date)
+                            {
+                                dateTime = SelectedCheckDate.Value.Date + DateTime.Now.TimeOfDay;
+                            }
+                            else dateTime = SelectedCheckDate.Value.Date + new TimeSpan(14, 0, 0);
+                            BookingRoomView bookingRoomView = new BookingRoomView();
+                            bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p, dateTime);
+                            bookingRoomView.ShowDialog();
+
+                            if (bookingRoomView.DataContext == null) return;
+                            var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
+
+                            p.TrangThai = bookingRoomViewModel.Room.TrangThai;
+                            MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
-                        else dateTime = SelectedCheckDate.Value.Date + new TimeSpan(14, 0, 0);
-                        BookingRoomView bookingRoomView = new BookingRoomView();
-                        bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p, dateTime);
-                        bookingRoomView.ShowDialog();
-
-                        if (bookingRoomView.DataContext == null) return;
-                        var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
-
-                        p.TrangThai = bookingRoomViewModel.Room.TrangThai;
-                        
+                        catch
+                        {
+                            MessageBox.Show("Đặt phòng không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                         break;
                     case "Được đặt":
-
+                        try
+                        {
+                            
+                            MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Hủy không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                         break;
                     case "Được thuê":
+                        try
+                        {
 
+                            MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Hủy không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                         break;
                 }
                 UpdateRoomState();
@@ -326,68 +349,84 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
             RemoveCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                RemoveBookingRoomView removeBookingRoomView = new RemoveBookingRoomView();
-                removeBookingRoomView.DataContext = new RemoveBookingRoomViewModel(SelectedReservedBillItem);
-                removeBookingRoomView.ShowDialog();
-                LoadReservedBill();
+                try
+                {
+                    RemoveBookingRoomView removeBookingRoomView = new RemoveBookingRoomView();
+                    removeBookingRoomView.DataContext = new RemoveBookingRoomViewModel(SelectedReservedBillItem);
+                    removeBookingRoomView.ShowDialog();
+                    LoadReservedBill();
+                    MessageBox.Show("Hủy thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Hủy không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
 
             EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DateTime ngayDen = SelectedReservedBillItem.NgayDen.Value;
-                DateTime ngayDi = SelectedReservedBillItem.NgayDi.Value;
-                List<KHACHHANG> tmpCustomers = new List<KHACHHANG>();
-                for (int i = 0; i < SelectedReservedBillItem.KHACHHANGs.Count; i++)
+                try
                 {
-                    KHACHHANG customer = new KHACHHANG();
-                    customer.STT = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).STT;
-                    customer.MaKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).MaKhachHang;
-                    customer.CCCD = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).CCCD;
-                    customer.TenKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).TenKhachHang;
-                    customer.GioiTinh = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).GioiTinh;
-                    customer.NgaySinh = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).NgaySinh;
-                    customer.SoDienThoai = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).SoDienThoai;
-                    customer.LoaiKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).LoaiKhachHang;
-                    tmpCustomers.Add(customer);
-                }
-                List<short> tmpAmountServices = new List<short>();
-                for (int i = 0; i < SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.Count; i++)
-                {
-                    short? soLuong = SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.ElementAt(i).SoLuong;
-                    tmpAmountServices.Add((short)soLuong);
-                }
-                List<short> tmpAmountCommoditys = new List<short>();
-                for (int i = 0; i < SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.Count; i++)
-                {
-                    short? soLuong = SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.ElementAt(i).SoLuong;
-                    tmpAmountCommoditys.Add((short)soLuong);
-                }
-                EditBookingRoomView editBookingRoomView = new EditBookingRoomView();
-                editBookingRoomView.DataContext = new EditBookingRoomViewModel(SelectedReservedBillItem);
-                editBookingRoomView.ShowDialog();
-
-                if (editBookingRoomView.DataContext == null) return;
-                var editBookingRoomVM = editBookingRoomView.DataContext as EditBookingRoomViewModel;
-
-                if (!editBookingRoomVM.IsEditBookingRoom)
-                {
-                    // Load lại ngày đến và ngày đi trước đó
-                    SelectedReservedBillItem.NgayDen = ngayDen;
-                    SelectedReservedBillItem.NgayDi = ngayDi;
-                    // Load lại danh sách khách hàng trước đó
-                    SelectedReservedBillItem.KHACHHANGs.Clear();
-                    SelectedReservedBillItem.KHACHHANGs = new List<KHACHHANG>(tmpCustomers);
-                    // Load lại số lượng hàng hóa/dịch vụ đã chọn trước đó
-                    for (int i = 0; i < tmpAmountServices.Count; i++)
+                    DateTime ngayDen = SelectedReservedBillItem.NgayDen.Value;
+                    DateTime ngayDi = SelectedReservedBillItem.NgayDi.Value;
+                    List<KHACHHANG> tmpCustomers = new List<KHACHHANG>();
+                    for (int i = 0; i < SelectedReservedBillItem.KHACHHANGs.Count; i++)
                     {
-                        SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.ElementAt(i).SoLuong = tmpAmountServices[i];
+                        KHACHHANG customer = new KHACHHANG();
+                        customer.STT = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).STT;
+                        customer.MaKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).MaKhachHang;
+                        customer.CCCD = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).CCCD;
+                        customer.TenKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).TenKhachHang;
+                        customer.GioiTinh = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).GioiTinh;
+                        customer.NgaySinh = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).NgaySinh;
+                        customer.SoDienThoai = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).SoDienThoai;
+                        customer.LoaiKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).LoaiKhachHang;
+                        tmpCustomers.Add(customer);
                     }
-                    for (int i = 0; i < tmpAmountCommoditys.Count; i++)
+                    List<short> tmpAmountServices = new List<short>();
+                    for (int i = 0; i < SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.Count; i++)
                     {
-                        SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.ElementAt(i).SoLuong = tmpAmountCommoditys[i];
+                        short? soLuong = SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.ElementAt(i).SoLuong;
+                        tmpAmountServices.Add((short)soLuong);
                     }
+                    List<short> tmpAmountCommoditys = new List<short>();
+                    for (int i = 0; i < SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.Count; i++)
+                    {
+                        short? soLuong = SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.ElementAt(i).SoLuong;
+                        tmpAmountCommoditys.Add((short)soLuong);
+                    }
+                    EditBookingRoomView editBookingRoomView = new EditBookingRoomView();
+                    editBookingRoomView.DataContext = new EditBookingRoomViewModel(SelectedReservedBillItem);
+                    editBookingRoomView.ShowDialog();
+
+                    if (editBookingRoomView.DataContext == null) return;
+                    var editBookingRoomVM = editBookingRoomView.DataContext as EditBookingRoomViewModel;
+
+                    if (!editBookingRoomVM.IsEditBookingRoom)
+                    {
+                        // Load lại ngày đến và ngày đi trước đó
+                        SelectedReservedBillItem.NgayDen = ngayDen;
+                        SelectedReservedBillItem.NgayDi = ngayDi;
+                        // Load lại danh sách khách hàng trước đó
+                        SelectedReservedBillItem.KHACHHANGs.Clear();
+                        SelectedReservedBillItem.KHACHHANGs = new List<KHACHHANG>(tmpCustomers);
+                        // Load lại số lượng hàng hóa/dịch vụ đã chọn trước đó
+                        for (int i = 0; i < tmpAmountServices.Count; i++)
+                        {
+                            SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.ElementAt(i).SoLuong = tmpAmountServices[i];
+                        }
+                        for (int i = 0; i < tmpAmountCommoditys.Count; i++)
+                        {
+                            SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.ElementAt(i).SoLuong = tmpAmountCommoditys[i];
+                        }
+                    }
+                    else MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadReservedBill();
                 }
-                LoadReservedBill();
+                catch
+                {
+                    MessageBox.Show("Cập nhật thông tin không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
 
             CheckDateSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -418,7 +457,9 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             });
 
             TraPhongCommand = new RelayCommand<object>((p) => { return true; }, (p) => { MessageBox.Show("1"); });
+
             HuyPhongCommand = new RelayCommand<object>((p) => { return true; }, (p) => { MessageBox.Show("2"); });
+
             NhanPhongCommand = new RelayCommand<object>((p) => { return true; }, (p) => { MessageBox.Show("3"); });
     }
 

@@ -610,12 +610,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 if (CheckInformReservation())
                 {
+                    ReservationBill.KHACHHANGs.Clear();
                     foreach (var item in Customers)
                     {
                         // Check khách hàng trùng lặp
                         if (item.MaKhachHang != null && item.MaKhachHang != "")
                         {
                             DataProvider.Ins.DB.KHACHHANGs.AddOrUpdate(item);
+                            ReservationBill.KHACHHANGs.Add(item);
                         }
                         else
                         {
