@@ -619,28 +619,28 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 {
                     foreach (var item in AddCustomers)
                     {
-                        // Nếu là khách hàng rỗng thì bỏ qua, không thêm vào CSDL
-                        if (item.TrangThai == null) continue;
                         // Check khách hàng trùng lặp
-                        if (!DataProvider.Ins.DB.KHACHHANGs.Select(x => x.CCCD).Contains(item.CCCD))
+                        if (item.LoaiKhachHang == ">= 15 tuổi")
                         {
-                            string temp;
-                            try
+                            if (!DataProvider.Ins.DB.KHACHHANGs.Select(x => x.CCCD).Contains(item.CCCD))
                             {
-                                temp = AddCustomers[AddCustomers.Count - 1].MaKhachHang;
+                                item.MaKhachHang = CreateIdCustomer();
+                                ReservationBill.KHACHHANGs.Add(item);
                             }
-                            catch
-                            {
-                                temp = "KH" + 10000.ToString();
-                            }
-                            item.MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
-                            ReservationBill.KHACHHANGs.Add(item);
+                            else ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.CCCD == item.CCCD).SingleOrDefault());
                         }
-                        else ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.CCCD == item.CCCD).SingleOrDefault());
+                        else if (item.LoaiKhachHang == "< 15 tuổi")
+                        {
+                            if (!DataProvider.Ins.DB.KHACHHANGs.Where(x => x.TenKhachHang == item.TenKhachHang).Select(x => x.NgaySinh).Contains(item.NgaySinh))
+                            {
+                                item.MaKhachHang = CreateIdCustomer();
+                                ReservationBill.KHACHHANGs.Add(item);
+                            }
+                            else ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.TenKhachHang == item.TenKhachHang && x.NgaySinh == item.NgaySinh).SingleOrDefault());
+                        }
                     }
 
                     UsageBill.TriGia = int.Parse(ServicesFee);
-                    UsageBill.TrangThai = "Chưa giao";
 
                     ReservationBill.DonGia = int.Parse(SumFee);
 
@@ -798,6 +798,20 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 return false;
             }
             return true;
+        }
+
+        public string CreateIdCustomer()
+        {
+            string temp;
+            try
+            {
+                temp = DataProvider.Ins.DB.KHACHHANGs.OrderByDescending(cus => cus.MaKhachHang).FirstOrDefault().MaKhachHang;
+            }
+            catch
+            {
+                temp = "KH" + 10000.ToString();
+            }
+            return "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
         }
     }
 }

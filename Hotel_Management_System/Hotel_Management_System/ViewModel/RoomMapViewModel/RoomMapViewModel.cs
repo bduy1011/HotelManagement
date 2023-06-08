@@ -321,6 +321,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                         break;
                 }
                 UpdateRoomState();
+                LoadReservedBill();
             });
 
             RemoveCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -333,9 +334,60 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
             EditCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //editCustomerView = new EditCustomerView();
-                //editCustomerView.DataContext = new EditCustomerViewModel(SelectedCustomerItem);
-                //editCustomerView.ShowDialog();
+                DateTime ngayDen = SelectedReservedBillItem.NgayDen.Value;
+                DateTime ngayDi = SelectedReservedBillItem.NgayDi.Value;
+                List<KHACHHANG> tmpCustomers = new List<KHACHHANG>();
+                for (int i = 0; i < SelectedReservedBillItem.KHACHHANGs.Count; i++)
+                {
+                    KHACHHANG customer = new KHACHHANG();
+                    customer.STT = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).STT;
+                    customer.MaKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).MaKhachHang;
+                    customer.CCCD = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).CCCD;
+                    customer.TenKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).TenKhachHang;
+                    customer.GioiTinh = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).GioiTinh;
+                    customer.NgaySinh = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).NgaySinh;
+                    customer.SoDienThoai = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).SoDienThoai;
+                    customer.LoaiKhachHang = SelectedReservedBillItem.KHACHHANGs.ElementAt(i).LoaiKhachHang;
+                    tmpCustomers.Add(customer);
+                }
+                List<short> tmpAmountServices = new List<short>();
+                for (int i = 0; i < SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.Count; i++)
+                {
+                    short? soLuong = SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.ElementAt(i).SoLuong;
+                    tmpAmountServices.Add((short)soLuong);
+                }
+                List<short> tmpAmountCommoditys = new List<short>();
+                for (int i = 0; i < SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.Count; i++)
+                {
+                    short? soLuong = SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.ElementAt(i).SoLuong;
+                    tmpAmountCommoditys.Add((short)soLuong);
+                }
+                EditBookingRoomView editBookingRoomView = new EditBookingRoomView();
+                editBookingRoomView.DataContext = new EditBookingRoomViewModel(SelectedReservedBillItem);
+                editBookingRoomView.ShowDialog();
+
+                if (editBookingRoomView.DataContext == null) return;
+                var editBookingRoomVM = editBookingRoomView.DataContext as EditBookingRoomViewModel;
+
+                if (!editBookingRoomVM.IsEditBookingRoom)
+                {
+                    // Load lại ngày đến và ngày đi trước đó
+                    SelectedReservedBillItem.NgayDen = ngayDen;
+                    SelectedReservedBillItem.NgayDi = ngayDi;
+                    // Load lại danh sách khách hàng trước đó
+                    SelectedReservedBillItem.KHACHHANGs.Clear();
+                    SelectedReservedBillItem.KHACHHANGs = new List<KHACHHANG>(tmpCustomers);
+                    // Load lại số lượng hàng hóa/dịch vụ đã chọn trước đó
+                    for (int i = 0; i < tmpAmountServices.Count; i++)
+                    {
+                        SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUDICHVU.ElementAt(i).SoLuong = tmpAmountServices[i];
+                    }
+                    for (int i = 0; i < tmpAmountCommoditys.Count; i++)
+                    {
+                        SelectedReservedBillItem.PHIEUSUDUNG.CT_PHIEUHANGHOA.ElementAt(i).SoLuong = tmpAmountCommoditys[i];
+                    }
+                }
+                LoadReservedBill();
             });
 
             CheckDateSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>

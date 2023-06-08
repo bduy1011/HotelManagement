@@ -8,15 +8,11 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Name="bookingRoomWindow"
+        Name="editBookingRoomWindow"
         Title="Booking Room" Height="750" Width="1300"
         DataContext="{StaticResource EditBookingRoomVM}">
 
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-        </i:EventTrigger>
-
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedServicesCommand}" 
                                    CommandParameter="{Binding ElementName=servicesDatagrid}"/>
@@ -130,7 +126,7 @@
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding TimeReserved}" FontWeight="Bold"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding ReservationBill.NgayDen, StringFormat='HH:mm'}" FontWeight="Bold"/>
                         </Grid>
 
                         <Grid Grid.Column="2">
@@ -151,13 +147,13 @@
                         </Grid>
 
                         <Grid Grid.Column="4">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="12:00" FontSize="20" FontWeight="Bold" Margin="0,0,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding ReservationBill.NgayDi, StringFormat='HH:mm'}" FontSize="20" FontWeight="Bold" Margin="0,0,0,0"/>
                         </Grid>
 
                     </Grid>
 
                     <Grid Grid.Row="3">
-                        <DataGrid ItemsSource="{Binding AddCustomers}" AutoGenerateColumns="False" Name="addCustomers"
+                        <DataGrid ItemsSource="{Binding Customers}" AutoGenerateColumns="False" Name="addCustomers"
                                   Style="{DynamicResource DataGridStyle1}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="45" IsReadOnly="True"/>
@@ -240,7 +236,7 @@
                     <DataGrid ItemsSource="{Binding ShowSelectedServices}" AutoGenerateColumns="False"
                               Style="{DynamicResource DataGridStyle1}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="40" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="45" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Dịch vụ/Hàng hóa" Binding="{Binding DICHVU.TenDichVu}" Width="200" IsReadOnly="True"/>
                             <DataGridTemplateColumn Header="Số lượng" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -462,9 +458,9 @@
                 <ColumnDefinition Width="300"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Width="200" HorizontalAlignment="Right" Style="{StaticResource buttonMain}" Margin="0 0 10 0" Content="Hủy" Command="{Binding BackCommand}" CommandParameter="{Binding ElementName=bookingRoomWindow}"/>
+            <Button Grid.Column="0" Width="200" HorizontalAlignment="Right" Style="{StaticResource buttonMain}" Margin="0 0 10 0" Content="Hủy" Command="{Binding BackCommand}" CommandParameter="{Binding ElementName=editBookingRoomWindow}"/>
 
-            <Button Grid.Column="1" Width="200" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Đặt phòng" Command="{Binding BookingRoomCommand}" CommandParameter="{Binding ElementName=bookingRoomWindow}"/>
+            <Button Grid.Column="1" Width="200" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Cập nhật" Command="{Binding EditBookingRoomCommand}" CommandParameter="{Binding ElementName=editBookingRoomWindow}"/>
         </Grid>
     </Grid>
 </Window>

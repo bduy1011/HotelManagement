@@ -63,6 +63,7 @@ namespace Hotel_Management_System.Model
             get { return _ngayDi; }
             set { _ngayDi = value; OnPropertyChanged(); }
         }
+
         private int? _donGia;
         public int? DonGia
         {

@@ -4,6 +4,7 @@ using Hotel_Management_System.ViewModel.Other;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -117,13 +118,13 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
-        private ObservableCollection<KHACHHANG> _addCustomers;
-        public ObservableCollection<KHACHHANG> AddCustomers
+        private ObservableCollection<KHACHHANG> _customers;
+        public ObservableCollection<KHACHHANG> Customers
         {
-            get { return _addCustomers; }
+            get { return _customers; }
             set
             {
-                _addCustomers = value;
+                _customers = value;
                 OnPropertyChanged();
             }
         }
@@ -150,12 +151,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         }
 
         private string _remainingCosts;
-        private string _completelyPayment;
-        private string _downPayment;
-        private double _countDay;
-        private string _totalDayReservation;
-        private string _timeReserved;
-
         public string RemainingCosts
         {
             get { return _remainingCosts; }
@@ -169,6 +164,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _completelyPayment;
         public string CompletelyPayment
         {
             get { return _completelyPayment; }
@@ -182,6 +178,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _downPayment;
         public string DownPayment
         {
             get { return _downPayment; }
@@ -209,6 +206,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private double _countDay;
         public double CountDay
         {
             get { return _countDay; }
@@ -222,6 +220,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _totalDayReservation;
         public string TotalDayReservation
         {
             get { return _totalDayReservation; }
@@ -235,6 +234,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _timeReserved;
         public string TimeReserved
         {
             get { return _timeReserved; }
@@ -262,6 +262,8 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        public bool IsEditBookingRoom { get; set; }
+
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand LoadedServicesCommand { get; set; }
         public ICommand LoadedCommoditysCommand { get; set; }
@@ -278,74 +280,65 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         public ICommand SearchServicesCommand { get; set; }
         public ICommand SearchCommoditysCommand { get; set; }
         public ICommand BackCommand { get; set; }
-        public ICommand BookingRoomCommand { get; set; }
+        public ICommand EditBookingRoomCommand { get; set; }
 
-        public EditBookingRoomViewModel(PHONG room, DateTime dateTime) : this()
+        public EditBookingRoomViewModel(PHIEUDATPHONG ReservedBill) : this()
         {
-            ReservationBill = new PHIEUDATPHONG();
-            UsageBill = new PHIEUSUDUNG();
+            // Lấy thông tin phiếu đặt phòng
+            this.ReservationBill = ReservedBill;
+            // Lấy thông tin phiếu sử dụng
+            UsageBill = ReservedBill.PHIEUSUDUNG;
+            // Lấy thông tin phòng
+            Room = ReservedBill.PHONG;
+            // Lấy danh sách khách hàng
+            Customers = new ObservableCollection<KHACHHANG>();
+            foreach (KHACHHANG item in ReservedBill.KHACHHANGs) Customers.Add(item);
+            int t = 1;
+            foreach (var item in Customers)
+            {
+                item.STT = t++;
+            }
 
-            Room = room;
-            ReservationBill.NgayDen = dateTime;
+            ShowSelectedServices = new ObservableCollection<CT_PHIEUDICHVU>();
+            SelectedServices = new ObservableCollection<CT_PHIEUDICHVU>
+                (DataProvider.Ins.DB.CT_PHIEUDICHVU.Where(x => x.MaPhieuSuDung == UsageBill.MaPhieuSuDung));
+            SelectedCommoditys = new ObservableCollection<CT_PHIEUHANGHOA>
+                (DataProvider.Ins.DB.CT_PHIEUHANGHOA.Where(x => x.MaPhieuSuDung == UsageBill.MaPhieuSuDung));
 
-            RoomFee = "0";
-            SumFee = RoomFee;
-            RemainingCosts = RoomFee;
-            ServicesFee = "0";
-            DownPayment = "";
-            CompletelyPayment = "0";
-            TotalDayReservation = "#";
-            CountDay = 0;
+            foreach (var item in SelectedServices)
+            {
+                ShowSelectedServices.Add(item);
+            }
+
+            foreach (var item in SelectedCommoditys)
+            {
+                ShowSelectedServices.Add(ChangeToCT_PhieuDichVu(item));
+            }
+
+            int i = 1;
+            foreach (var item in ShowSelectedServices)
+            {
+                item.STT = i++;
+            }
+
+            // Tổng tiền dịch vụ/hàng hóa
+            int servicesFee = 0;
+            foreach (var item in SelectedServices) { servicesFee += (int)item.ThanhTien; }
+            foreach (var item in SelectedCommoditys) { servicesFee += (int)item.ThanhTien; }
+            ServicesFee = servicesFee.ToString();
+            // Tính số đêm ở khách sạn
+            TotalCountDay();
+            // Lấy số liệu
+            SumFee = (int.Parse(RoomFee) + int.Parse(ServicesFee)).ToString();
+            DownPayment = ReservationBill.TienCoc.ToString();
+            RemainingCosts = (int.Parse(SumFee) - int.Parse(DownPayment)).ToString();
+            Customers.CollectionChanged += AddCustomers_CollectionChanged;
+
+            IsEditBookingRoom = false;
         }
 
         public EditBookingRoomViewModel()
         {
-            LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
-            {
-                if (DataProvider.Ins.DB.PHIEUDATPHONGs.Count() > 0)
-                {
-                    string t = DataProvider.Ins.DB.PHIEUDATPHONGs.OrderByDescending(x => x.MaPhieuDatPhong).FirstOrDefault().MaPhieuDatPhong;
-
-                    ReservationBill.MaPhieuDatPhong = "PDP" + (int.Parse(t.Substring(3)) + 1);
-                }
-                else ReservationBill.MaPhieuDatPhong = "PDP10001";
-
-                if (DataProvider.Ins.DB.PHIEUSUDUNGs.Count() > 0)
-                {
-                    string t = DataProvider.Ins.DB.PHIEUSUDUNGs.OrderByDescending(x => x.MaPhieuSuDung).FirstOrDefault().MaPhieuSuDung;
-
-                    UsageBill.MaPhieuSuDung = "PSD" + (int.Parse(t.Substring(3)) + 1);
-                }
-                else UsageBill.MaPhieuSuDung = "PSD10001";
-
-                // Thiết lập thông tin phiếu đặt phòng
-                ReservationBill.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
-                ReservationBill.MaPhong = Room.MaPhong;
-                ReservationBill.NgayLap = DateTime.Now;
-                TimeReserved = ReservationBill.NgayDen.Value.ToString("HH:mm");
-
-                // Thiết lập thông tin phiếu sử dụng
-                UsageBill.NgayLap = ReservationBill.NgayLap;
-
-                SelectedServices = new ObservableCollection<CT_PHIEUDICHVU>();
-
-                SelectedCommoditys = new ObservableCollection<CT_PHIEUHANGHOA>();
-
-                ShowSelectedServices = new ObservableCollection<CT_PHIEUDICHVU>();
-
-                tmpServices = new ObservableCollection<DICHVU>();
-
-                tmpCommoditys = new ObservableCollection<HANGHOA>();
-
-                AddCustomers = new ObservableCollection<KHACHHANG>();
-
-                KHACHHANG kh = new KHACHHANG();
-                kh.STT = 1;
-                AddCustomers.Add(kh);
-
-                AddCustomers.CollectionChanged += AddCustomers_CollectionChanged;
-            });
-
             LoadedServicesCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 try
@@ -561,13 +554,13 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
             LoadedAddCustomerCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
-                for (int i = 0; i < AddCustomers.Count; i++)
+                for (int i = 0; i < Customers.Count; i++)
                 {
-                    var item = AddCustomers[i];
+                    var item = Customers[i];
                     var propertyInfo = item.GetType().GetProperty("IsLastRow");
                     if (propertyInfo != null)
                     {
-                        propertyInfo.SetValue(item, i == AddCustomers.Count - 1);
+                        propertyInfo.SetValue(item, i == Customers.Count - 1);
                     }
                 }
             });
@@ -575,72 +568,83 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             AddCustomerCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 // Giới hạn số người trong 1 phòng tối đa là 8
-                if (AddCustomers.Count < 8)
+                if (Customers.Count < 8)
                 {
                     KHACHHANG kh = new KHACHHANG();
-                    AddCustomers.Add(kh);
+                    Customers.Add(kh);
                     int t = 1;
-                    foreach (var item in AddCustomers)
+                    foreach (var item in Customers)
                     {
                         item.STT = t++;
                     }
                 }
             });
 
-            RemoveCustomerCommand = new RelayCommand<KHACHHANG>((p) => { return AddCustomers.Count > 1; }, (p) =>
+            RemoveCustomerCommand = new RelayCommand<KHACHHANG>((p) => { return Customers.Count > 1; }, (p) =>
             {
-                foreach (var item in AddCustomers)
+                foreach (var item in Customers)
                 {
                     if (item.STT == p.STT)
                     {
-                        AddCustomers.Remove(item);
+                        Customers.Remove(item);
                         break;
                     }
                 }
 
-                for (int i = 0; i < AddCustomers.Count; i++)
+                for (int i = 0; i < Customers.Count; i++)
                 {
-                    var item = AddCustomers[i];
-                    item.IsLastRow = (i == AddCustomers.Count - 1);
+                    var item = Customers[i];
+                    item.IsLastRow = (i == Customers.Count - 1);
                 }
 
                 int t = 1;
-                foreach (var item in AddCustomers)
+                foreach (var item in Customers)
                 {
                     item.STT = t++;
                 }
             });
 
-            BackCommand = new RelayCommand<BookingRoomView>((p) => { return true; }, (p) => { p.Close(); });
+            BackCommand = new RelayCommand<EditBookingRoomView>((p) => { return true; }, (p) => { p.Close(); });
 
-            BookingRoomCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            EditBookingRoomCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 if (CheckInformReservation())
                 {
-                    foreach (var item in AddCustomers)
+                    foreach (var item in Customers)
                     {
-                        // Nếu là khách hàng rỗng thì bỏ qua, không thêm vào CSDL
-                        if (item.TrangThai == null) continue;
                         // Check khách hàng trùng lặp
-                        if (!DataProvider.Ins.DB.KHACHHANGs.Select(x => x.CCCD).Contains(item.CCCD))
+                        if (item.MaKhachHang != null && item.MaKhachHang != "")
                         {
-                            string temp;
-                            try
-                            {
-                                temp = AddCustomers[AddCustomers.Count - 1].MaKhachHang;
-                            }
-                            catch
-                            {
-                                temp = "KH" + 10000.ToString();
-                            }
-                            item.MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
-                            ReservationBill.KHACHHANGs.Add(item);
+                            DataProvider.Ins.DB.KHACHHANGs.AddOrUpdate(item);
                         }
-                        else ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.CCCD == item.CCCD).SingleOrDefault());
+                        else
+                        {
+                            if (item.LoaiKhachHang == ">= 15 tuổi")
+                            {
+                                if (!DataProvider.Ins.DB.KHACHHANGs.Select(x => x.CCCD).Contains(item.CCCD))
+                                {
+                                    item.MaKhachHang = CreateIdCustomer();
+                                    ReservationBill.KHACHHANGs.Add(item);
+                                }
+                                else
+                                {
+                                    ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.CCCD == item.CCCD).SingleOrDefault());
+                                }
+                            }
+                            else if (item.LoaiKhachHang == "< 15 tuổi")
+                            {
+                                if (!DataProvider.Ins.DB.KHACHHANGs.Where(x => x.TenKhachHang == item.TenKhachHang).Select(x => x.NgaySinh).Contains(item.NgaySinh))
+                                {
+                                    item.MaKhachHang = CreateIdCustomer();
+                                    ReservationBill.KHACHHANGs.Add(item);
+                                }
+                                else ReservationBill.KHACHHANGs.Add(DataProvider.Ins.DB.KHACHHANGs.Where(x => x.TenKhachHang == item.TenKhachHang && x.NgaySinh == item.NgaySinh).SingleOrDefault());
+                            }
+                        }
                     }
+                    DataProvider.Ins.DB.SaveChanges();
 
                     UsageBill.TriGia = int.Parse(ServicesFee);
-                    UsageBill.TrangThai = "Chưa giao";
 
                     ReservationBill.DonGia = int.Parse(SumFee);
 
@@ -649,14 +653,26 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
                     ReservationBill.SoNguoi = (short)ReservationBill.KHACHHANGs.Count();
 
+                    // Xác định trạng thái của PDP
                     if (ReservationBill.NgayDen.Value.Date == DateTime.Now.Date) ReservationBill.TrangThai = "Được thuê";
                     else ReservationBill.TrangThai = "Được đặt";
 
                     Room.TrangThai = ReservationBill.TrangThai;
 
-                    DataProvider.Ins.DB.PHIEUSUDUNGs.Add(UsageBill);
+                    // Trả hàng hóa lại trước khi xóa các phiếu hàng hóa
+                    string maPSD = UsageBill.MaPhieuSuDung;
+                    foreach (CT_PHIEUHANGHOA item in DataProvider.Ins.DB.CT_PHIEUHANGHOA.Where(x => x.PHIEUSUDUNG.MaPhieuSuDung == maPSD))
+                    {
+                        item.HANGHOA.TonKho += item.SoLuong;
+                    }
+                    // Xóa các hàng hóa/dịch vụ cũ
+                    DataProvider.Ins.DB.CT_PHIEUDICHVU.RemoveRange(DataProvider.Ins.DB.CT_PHIEUDICHVU.Where(x => x.PHIEUSUDUNG.MaPhieuSuDung == maPSD));
+                    DataProvider.Ins.DB.CT_PHIEUHANGHOA.RemoveRange(DataProvider.Ins.DB.CT_PHIEUHANGHOA.Where(x => x.PHIEUSUDUNG.MaPhieuSuDung == maPSD));
+                    
+                    // Sửa PSD
+                    DataProvider.Ins.DB.PHIEUSUDUNGs.AddOrUpdate(UsageBill);
                     DataProvider.Ins.DB.SaveChanges();
-
+                    // Thêm hàng hóa/dịch vụ mới cập nhật
                     DataProvider.Ins.DB.CT_PHIEUDICHVU.AddRange(SelectedServices);
                     DataProvider.Ins.DB.CT_PHIEUHANGHOA.AddRange(SelectedCommoditys);
                     foreach (CT_PHIEUHANGHOA item in SelectedCommoditys)
@@ -664,9 +680,10 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                         item.HANGHOA.TonKho -= item.SoLuong;
                     }
 
-                    DataProvider.Ins.DB.PHIEUDATPHONGs.Add(ReservationBill);
+                    DataProvider.Ins.DB.PHIEUDATPHONGs.AddOrUpdate(ReservationBill);
                     DataProvider.Ins.DB.SaveChanges();
 
+                    IsEditBookingRoom = true;
                     p.Close();
                 }
             });
@@ -712,10 +729,10 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 // Update the IsLastRow property for each item in the AddCustomers collection
-                for (int i = 0; i < AddCustomers.Count; i++)
+                for (int i = 0; i < Customers.Count; i++)
                 {
-                    var item = AddCustomers[i];
-                    item.IsLastRow = (i == AddCustomers.Count - 1);
+                    var item = Customers[i];
+                    item.IsLastRow = (i == Customers.Count - 1);
                 }
             }
         }
@@ -755,7 +772,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 MessageBox.Show("Bạn chưa chọn ngày đến hoặc ngày đi!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            foreach (var item in AddCustomers)
+            foreach (var item in Customers)
             {
                 if (item.TenKhachHang == null || item.TenKhachHang.Trim(' ') == "")
                 {
@@ -798,6 +815,20 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 return false;
             }
             return true;
+        }
+
+        public string CreateIdCustomer()
+        {
+            string temp;
+            try
+            {
+                temp = DataProvider.Ins.DB.KHACHHANGs.OrderByDescending(cus => cus.MaKhachHang).FirstOrDefault().MaKhachHang;
+            }
+            catch
+            {
+                temp = "KH" + 10000.ToString();
+            }
+            return "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
         }
     }
 }

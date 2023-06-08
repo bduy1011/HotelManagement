@@ -98,12 +98,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         }
 
         private string _remainingCosts;
-        private string _completelyPayment;
-        private string _downPayment;
-        private double _countDay;
-        private string _totalDayReservation;
-        private string _timeReserved;
-
         public string RemainingCosts
         {
             get { return _remainingCosts; }
@@ -117,6 +111,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _completelyPayment;
         public string CompletelyPayment
         {
             get { return _completelyPayment; }
@@ -130,6 +125,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _downPayment;
         public string DownPayment
         {
             get { return _downPayment; }
@@ -143,6 +139,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private double _countDay;
         public double CountDay
         {
             get { return _countDay; }
@@ -156,6 +153,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _totalDayReservation;
         public string TotalDayReservation
         {
             get { return _totalDayReservation; }
@@ -169,6 +167,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _timeReserved;
         public string TimeReserved
         {
             get { return _timeReserved; }
