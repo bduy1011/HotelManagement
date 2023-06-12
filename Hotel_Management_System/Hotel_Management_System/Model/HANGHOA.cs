@@ -78,6 +78,13 @@ namespace Hotel_Management_System.Model
             set { _trangThai = value; OnPropertyChanged(); }
         }
 
+        private short _soLuongNhap;
+        public short SoLuongNhap
+        {
+            get { return _soLuongNhap; }
+            set { _soLuongNhap = value; OnPropertyChanged(); }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUHANGHOA> CT_PHIEUHANGHOA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

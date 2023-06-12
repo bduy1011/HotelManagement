@@ -9,13 +9,31 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
 
-    public partial class CT_HOADON
+    public partial class CT_HOADON : BaseViewModel
     {
-        public string MaHoaDon { get; set; }
-        public string MaPhieuDatPhong { get; set; }
-        public int? ThanhTien { get; set; }
+        private string _maHoaDon;
+        public string MaHoaDon
+        {
+            get { return _maHoaDon; }
+            set { _maHoaDon = value; OnPropertyChanged(); }
+        }
+
+        private string _maPhieuDatPhong;
+        public string MaPhieuDatPhong
+        {
+            get { return _maPhieuDatPhong; }
+            set { _maPhieuDatPhong = value; OnPropertyChanged(); }
+        }
+
+        private int? _thanhTien;
+        public int? ThanhTien
+        {
+            get { return _thanhTien; }
+            set { _thanhTien = value; OnPropertyChanged(); }
+        }
 
         public virtual HOADON HOADON { get; set; }
         public virtual PHIEUDATPHONG PHIEUDATPHONG { get; set; }

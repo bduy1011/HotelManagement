@@ -13,6 +13,19 @@ namespace Hotel_Management_System.ViewModel.LoginViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
+        private NHANVIEN _nhanvien;
+        public NHANVIEN nhanvien
+        {
+            get { return _nhanvien; }
+            set
+            {
+                if (_nhanvien != value)
+                {
+                    _nhanvien = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public bool IsLogin { get; set; }
         private string _username;
         private string _password;
@@ -53,12 +66,9 @@ namespace Hotel_Management_System.ViewModel.LoginViewModel
             {
                 return;
             }
-
-            //var query = DataProvider.Ins.DB.DICHVUs.Join(DataProvider.Ins.DB.CT_PHIEUDICHVU, dv => dv.MaDichVu, ctpdv => ctpdv.MaDichVu, (dv, ctpdv) => new { dv.MaDichVu, dv.TenDichVu, ctpdv.SoLuong });
-
-            //int account = DataProvider.Ins.DB.NHANVIENs.Where(x => x.TenTaiKhoan == Username && x.MatKhau == Password).Count();
-            int account = 1;
-            if (account > 0)
+            nhanvien = new NHANVIEN();
+            nhanvien = DataProvider.Ins.DB.NHANVIENs.Where(x => x.TenTaiKhoan != null && x.MatKhau != null && x.TenTaiKhoan == Username && x.MatKhau == Password).FirstOrDefault();
+            if (nhanvien != null)
             {
                 IsLogin = true;
                 p.Close();

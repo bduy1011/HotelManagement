@@ -181,10 +181,23 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _trangThaiPhong;
+        public string TrangThaiPhong
+        {
+            get { return _trangThaiPhong; }
+            set
+            {
+                if (_trangThaiPhong != value)
+                {
+                    _trangThaiPhong = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         ObservableCollection<CT_PHIEUDICHVU> ct_PHIEUDICHVU;
         ObservableCollection<CT_PHIEUHANGHOA> ct_PHIEUHANGHOA;
 
-        public ICommand LoadedWindowCommand { get; set; }
         public ICommand LoadedCustomerCommand { get; set; }
         public ICommand AddCustomerCommand { get; set; }
         public ICommand BackCommand { get; set; }
@@ -198,6 +211,8 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             UsageBill = ReservedBill.PHIEUSUDUNG;
             // Lấy thông tin phòng
             Room = ReservedBill.PHONG;
+            // Lấy trạng thái phòng
+            TrangThaiPhong = ReservedBill.TrangThai;
             // Lấy danh sách khách hàng
             Customers = new ObservableCollection<KHACHHANG>();
             foreach (KHACHHANG item in ReservedBill.KHACHHANGs) Customers.Add(item);
@@ -250,6 +265,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
                 ReservationBill.TrangThai = "Đã hủy";
                 ReservationBill.PHIEUSUDUNG.TrangThai = "Đã hủy";
+                ReservationBill.PHONG.TrangThai = "Trống";
                 DataProvider.Ins.DB.SaveChanges();
                 MessageBox.Show("Hủy thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 p.Close();

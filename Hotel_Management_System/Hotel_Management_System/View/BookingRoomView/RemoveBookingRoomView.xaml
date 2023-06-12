@@ -10,12 +10,6 @@
         Title="Booking Room" Height="750" Width="900"
         DataContext="{StaticResource RemoveBookingRoomVM}">
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -63,7 +57,7 @@
 
                         <Grid Grid.Column="2">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Trạng thái" VerticalAlignment="Top" Margin="0,0,0,19"/>
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Room.TrangThai}" VerticalAlignment="Bottom" Margin="0,19,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding TrangThaiPhong}" VerticalAlignment="Bottom" Margin="0,19,0,0"/>
                         </Grid>
 
                         <Grid Grid.Column="3">

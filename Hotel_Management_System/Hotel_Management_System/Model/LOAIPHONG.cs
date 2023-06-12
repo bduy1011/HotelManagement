@@ -9,10 +9,11 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
 
-    public partial class LOAIPHONG
+    public partial class LOAIPHONG : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LOAIPHONG()
@@ -21,10 +22,33 @@ namespace Hotel_Management_System.Model
             this.THONGKEs = new HashSet<THONGKE>();
         }
 
-        public string MaLoaiPhong { get; set; }
-        public string TenLoaiPhong { get; set; }
-        public int? DonGia { get; set; }
-        public string TrangThai { get; set; }
+        private string _maLoaiPhong;
+        public string MaLoaiPhong
+        {
+            get { return _maLoaiPhong; }
+            set { _maLoaiPhong = value; OnPropertyChanged(); }
+        }
+
+        private string _tenLoaiPhong;
+        public string TenLoaiPhong
+        {
+            get { return _tenLoaiPhong; }
+            set { _tenLoaiPhong = value; OnPropertyChanged(); }
+        }
+
+        private int? _donGia;
+        public int? DonGia
+        {
+            get { return _donGia; }
+            set { _donGia = value; OnPropertyChanged(); }
+        }
+
+        private string _trangThai;
+        public string TrangThai
+        {
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHONG> PHONGs { get; set; }

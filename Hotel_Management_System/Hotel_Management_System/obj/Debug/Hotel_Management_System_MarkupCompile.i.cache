@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\Backup\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\obj\Debug\
 Hotel_Management_System
 none
 false
 DEBUG;TRACE
-D:\Nam_2\HK2\Phân tích thiết kế HTTT\Backup\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\App.xaml
-162100422799
+D:\Nam_2\HK2\Phân tích thiết kế HTTT\DoAnPTTK\IS201.N22-Group8\Hotel_Management_System\Hotel_Management_System\App.xaml
+3731270128
 2-1797966213
-54-1236519684
-291581723539
-View\BookingRoomView\BookingRoomView.xaml;View\BookingRoomView\EditBookingRoomView.xaml;View\BookingRoomView\RemoveBookingRoomView.xaml;View\CustomerView\AddCustomerView.xaml;View\CustomerView\EditCustomerView.xaml;MainWindow.xaml;ResourceXAML\StylesResource.xaml;ResourceXAML\MainResource.xaml;View\CustomerView\CustomerView.xaml;View\CustomerView\RemoveCustomerView.xaml;View\LoginView\LoginView.xaml;View\RoomMapView\RoomMapView.xaml;View\StaffView\AddStaffView.xaml;View\StaffView\EditStaffView.xaml;View\StaffView\RemoveStaffView.xaml;View\StaffView\StaffView.xaml;
+96674781451
+29148006518
+View\AccountView\AccountView.xaml;View\BillView\AddBillView.xaml;View\BillView\BillView.xaml;View\BillView\RemoveBillView.xaml;View\BookingRoomView\BookingRoomView.xaml;View\BookingRoomView\EditBookingRoomView.xaml;View\BookingRoomView\RemoveBookingRoomView.xaml;View\CommodityView\AddCommodityView.xaml;View\CommodityView\CommodityView.xaml;View\CommodityView\EditCommodityView.xaml;View\CommodityView\ImportCommodityView.xaml;View\CommodityView\RemoveCommodityView.xaml;View\CustomerView\AddCustomerView.xaml;View\CustomerView\EditCustomerView.xaml;MainWindow.xaml;ResourceXAML\StylesResource.xaml;ResourceXAML\MainResource.xaml;View\CustomerView\CustomerView.xaml;View\CustomerView\RemoveCustomerView.xaml;View\LoginView\LoginView.xaml;View\RoomMapView\RoomMapView.xaml;View\RoomTypeView\AddRoomTypeView.xaml;View\RoomTypeView\EditRoomTypeView.xaml;View\RoomTypeView\RemoveRoomTypeView.xaml;View\RoomTypeView\RoomTypeView.xaml;View\RoomView\AddRoomView.xaml;View\RoomView\EditRoomView.xaml;View\RoomView\RemoveRoomView.xaml;View\RoomView\RoomView.xaml;View\ServiceView\AddServiceView.xaml;View\ServiceView\EditServiceView.xaml;View\ServiceView\RemoveServiceView.xaml;View\ServiceView\ServiceView.xaml;View\StaffView\AddStaffView.xaml;View\StaffView\EditStaffView.xaml;View\StaffView\RemoveStaffView.xaml;View\StaffView\StaffView.xaml;
 
 True
 

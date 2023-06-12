@@ -13,6 +13,24 @@
         xmlns:roommapviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomMapViewModel"
         xmlns:roommapview="clr-namespace:Hotel_Management_System.View.RoomMapView"
         
+        xmlns:roomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomViewModel"
+        xmlns:roomview="clr-namespace:Hotel_Management_System.View.RoomView"
+        
+        xmlns:roomtypeviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomTypeViewModel"
+        xmlns:roomtypeview="clr-namespace:Hotel_Management_System.View.RoomTypeView"
+        
+        xmlns:commodityviewmodel="clr-namespace:Hotel_Management_System.ViewModel.CommodityViewModel"
+        xmlns:commodityview="clr-namespace:Hotel_Management_System.View.CommodityView"
+        
+        xmlns:serviceviewmodel="clr-namespace:Hotel_Management_System.ViewModel.ServiceViewModel"
+        xmlns:serviceview="clr-namespace:Hotel_Management_System.View.ServiceView"
+        
+        xmlns:billviewmodel="clr-namespace:Hotel_Management_System.ViewModel.BillViewModel"
+        xmlns:billview="clr-namespace:Hotel_Management_System.View.BillView"
+        
+        xmlns:accountviewmodel="clr-namespace:Hotel_Management_System.ViewModel.AccountViewModel"
+        xmlns:accountview="clr-namespace:Hotel_Management_System.View.AccountView"
+        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         
@@ -27,7 +45,6 @@
         AllowsTransparency="True">
 
     <Window.Resources>
-
         <DataTemplate DataType="{x:Type staffviewmodel:StaffViewModel}">
             <staffview:StaffView/>
         </DataTemplate>
@@ -36,6 +53,24 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type roommapviewmodel:RoomMapViewModel}">
             <roommapview:RoomMapView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type roomviewmodel:RoomViewModel}">
+            <roomview:RoomView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type roomtypeviewmodel:RoomTypeViewModel}">
+            <roomtypeview:RoomTypeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commodityviewmodel:CommodityViewModel}">
+            <commodityview:CommodityView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type serviceviewmodel:ServiceViewModel}">
+            <serviceview:ServiceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type billviewmodel:BillViewModel}">
+            <billview:BillView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type accountviewmodel:AccountViewModel}">
+            <accountview:AccountView/>
         </DataTemplate>
     </Window.Resources>
 
@@ -57,10 +92,9 @@
         </Border.BorderBrush>
 
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <!--Navigation menu-->
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="230"/>
                 <!--Content section-->
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -99,26 +133,17 @@
                                  IsChecked="True"
                                  Command="{Binding ShowRoomMapViewCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Sơ đồ phòng" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Hotel" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Đặt phòng" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#8FD9C4"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowBillViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Receipt" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Hóa đơn" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#B1CAE9"
-                                 Command="{Binding ShowStaffViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="MoneyBills" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Phiếu dịch vụ" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
@@ -131,7 +156,6 @@
                         </StackPanel>
                     </RadioButton>
 
-
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F2B3BF"
                                  Command="{Binding ShowCustomerViewCommand}">
@@ -140,7 +164,6 @@
                             <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
-
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F99A9C"
@@ -153,7 +176,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#D7E7A9"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowCommodityViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Store" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Hàng hóa" Style="{StaticResource menuButtonText}"/>
@@ -162,7 +185,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#B5DDD1"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowServiceViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Servicestack" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Dịch vụ" Style="{StaticResource menuButtonText}"/>
@@ -171,16 +194,35 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#04D9D9"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowRoomViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Bed" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Phòng" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
-                    
+
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="#784DFD"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Tag="#04D9D9"
+                                 Command="{Binding ShowRoomTypeViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Loại phòng" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#B1CAE9"
+                                 Command="{Binding ShowAccountViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Tài khoản" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="#784DFD" Margin="0 90 0 0"
+                                 Command="{Binding LoadedWindowCommand}"
+                                 CommandParameter="{Binding ElementName=mainWindow}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="SignOut" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Đăng xuất" Style="{StaticResource menuButtonText}"/>
@@ -203,8 +245,6 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <!--Control bar-->
-                        <RowDefinition Height="35"/>
-                        <!--Header / Caption-->
                         <RowDefinition Height="35"/>
                         <!--Content section / Child views-->
                         <RowDefinition Height="*"/>

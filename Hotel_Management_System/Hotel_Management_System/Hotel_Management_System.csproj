@@ -155,9 +155,18 @@
     <Compile Include="Model\THONGKE.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AccountViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\BillViewModel\AddBillViewModel.cs" />
+    <Compile Include="ViewModel\BillViewModel\BillViewModel.cs" />
+    <Compile Include="ViewModel\BillViewModel\RemoveBillViewModel.cs" />
     <Compile Include="ViewModel\BookingRoomViewModel\BookingRoomViewModel.cs" />
     <Compile Include="ViewModel\BookingRoomViewModel\EditBookingRoomViewModel.cs" />
     <Compile Include="ViewModel\BookingRoomViewModel\RemoveBookingRoomViewModel.cs" />
+    <Compile Include="ViewModel\CommodityViewModel\AddCommodityViewModel.cs" />
+    <Compile Include="ViewModel\CommodityViewModel\CommodityViewModel.cs" />
+    <Compile Include="ViewModel\CommodityViewModel\EditCommodityViewModel.cs" />
+    <Compile Include="ViewModel\CommodityViewModel\ImportCommodityViewModel.cs" />
+    <Compile Include="ViewModel\CommodityViewModel\RemoveCommodityViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\EditCustomerViewModel.cs" />
@@ -166,10 +175,34 @@
     <Compile Include="ViewModel\Other\BaseViewModel.cs" />
     <Compile Include="ViewModel\Other\ViewModelCommand.cs" />
     <Compile Include="ViewModel\RoomMapViewModel\RoomMapViewModel.cs" />
+    <Compile Include="ViewModel\RoomTypeViewModel\AddRoomTypeViewModel.cs" />
+    <Compile Include="ViewModel\RoomTypeViewModel\EditRoomTypeViewModel.cs" />
+    <Compile Include="ViewModel\RoomTypeViewModel\RemoveRoomTypeViewModel.cs" />
+    <Compile Include="ViewModel\RoomTypeViewModel\RoomTypeViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel\AddRoomViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel\EditRoomViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel\RemoveRoomViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel\RoomViewModel.cs" />
+    <Compile Include="ViewModel\ServiceViewModel\AddServiceViewModel.cs" />
+    <Compile Include="ViewModel\ServiceViewModel\EditServiceViewModel.cs" />
+    <Compile Include="ViewModel\ServiceViewModel\RemoveServiceViewModel.cs" />
+    <Compile Include="ViewModel\ServiceViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel\AddStaffViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel\EditStaffViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel\RemoveStaffViewModel.cs" />
     <Compile Include="ViewModel\StaffViewModel\StaffViewModel.cs" />
+    <Compile Include="View\AccountView\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BillView\AddBillView.xaml.cs">
+      <DependentUpon>AddBillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BillView\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BillView\RemoveBillView.xaml.cs">
+      <DependentUpon>RemoveBillView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookingRoomView\BookingRoomView.xaml.cs">
       <DependentUpon>BookingRoomView.xaml</DependentUpon>
     </Compile>
@@ -178,6 +211,21 @@
     </Compile>
     <Compile Include="View\BookingRoomView\RemoveBookingRoomView.xaml.cs">
       <DependentUpon>RemoveBookingRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommodityView\AddCommodityView.xaml.cs">
+      <DependentUpon>AddCommodityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommodityView\CommodityView.xaml.cs">
+      <DependentUpon>CommodityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommodityView\EditCommodityView.xaml.cs">
+      <DependentUpon>EditCommodityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommodityView\ImportCommodityView.xaml.cs">
+      <DependentUpon>ImportCommodityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommodityView\RemoveCommodityView.xaml.cs">
+      <DependentUpon>RemoveCommodityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\AddCustomerView.xaml.cs">
       <DependentUpon>AddCustomerView.xaml</DependentUpon>
@@ -199,6 +247,42 @@
     <Compile Include="View\RoomMapView\RoomMapView.xaml.cs">
       <DependentUpon>RoomMapView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RoomTypeView\AddRoomTypeView.xaml.cs">
+      <DependentUpon>AddRoomTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomTypeView\EditRoomTypeView.xaml.cs">
+      <DependentUpon>EditRoomTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomTypeView\RemoveRoomTypeView.xaml.cs">
+      <DependentUpon>RemoveRoomTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomTypeView\RoomTypeView.xaml.cs">
+      <DependentUpon>RoomTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomView\AddRoomView.xaml.cs">
+      <DependentUpon>AddRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomView\EditRoomView.xaml.cs">
+      <DependentUpon>EditRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomView\RemoveRoomView.xaml.cs">
+      <DependentUpon>RemoveRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomView\RoomView.xaml.cs">
+      <DependentUpon>RoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ServiceView\AddServiceView.xaml.cs">
+      <DependentUpon>AddServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ServiceView\EditServiceView.xaml.cs">
+      <DependentUpon>EditServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ServiceView\RemoveServiceView.xaml.cs">
+      <DependentUpon>RemoveServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ServiceView\ServiceView.xaml.cs">
+      <DependentUpon>ServiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StaffView\AddStaffView.xaml.cs">
       <DependentUpon>AddStaffView.xaml</DependentUpon>
     </Compile>
@@ -211,6 +295,22 @@
     <Compile Include="View\StaffView\StaffView.xaml.cs">
       <DependentUpon>StaffView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AccountView\AccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BillView\AddBillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BillView\BillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BillView\RemoveBillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BookingRoomView\BookingRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,6 +320,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookingRoomView\RemoveBookingRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CommodityView\AddCommodityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CommodityView\CommodityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CommodityView\EditCommodityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CommodityView\ImportCommodityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CommodityView\RemoveCommodityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,6 +384,54 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RoomMapView\RoomMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomTypeView\AddRoomTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomTypeView\EditRoomTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomTypeView\RemoveRoomTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomTypeView\RoomTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomView\AddRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomView\EditRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomView\RemoveRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomView\RoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ServiceView\AddServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ServiceView\EditServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ServiceView\RemoveServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ServiceView\ServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,6 +506,7 @@
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

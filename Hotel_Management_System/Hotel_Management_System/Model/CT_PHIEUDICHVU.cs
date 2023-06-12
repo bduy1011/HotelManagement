@@ -74,6 +74,13 @@ namespace Hotel_Management_System.Model
             set { _trangThai = value; OnPropertyChanged(); }
         }
 
+        private string _tmpMaPDP;
+        public string tmpMaPDP
+        {
+            get { return _tmpMaPDP; }
+            set { _tmpMaPDP = value; OnPropertyChanged(); }
+        }
+
         public virtual DICHVU DICHVU { get; set; }
         public virtual PHIEUSUDUNG PHIEUSUDUNG { get; set; }
     }

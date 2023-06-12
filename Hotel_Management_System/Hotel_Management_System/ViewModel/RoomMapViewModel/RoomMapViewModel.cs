@@ -2,25 +2,25 @@
 using Hotel_Management_System.View.BookingRoomView;
 using Hotel_Management_System.ViewModel.Other;
 using Hotel_Management_System.ViewModel.BookingRoomViewModel;
-using MaterialDesignColors.ColorManipulation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using Hotel_Management_System.View.CustomerView;
-using Hotel_Management_System.ViewModel.CustomerViewModel;
-using System.Net.NetworkInformation;
 
 namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 {
     public class RoomMapViewModel : BaseViewModel
     {
+        static string TRONG = "Trống";
+        static string DUOC_THUE = "Được thuê";
+        static string DUOC_DAT = "Được đặt";
+        static string CHUA_THANH_TOAN = "Chưa thanh toán";
+        static string DA_THANH_TOAN = "Đã thanh toán";
+        static string DA_HUY = "Đã hủy";
+
         private string _vacant;
         public string Vacant
         {
@@ -177,8 +177,18 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             get { return _selectedCheckDate; }
             set
             {
-                _selectedCheckDate = value;
-                OnPropertyChanged();
+                if (_selectedCheckDate != value)
+                {
+                    _selectedCheckDate = value;
+                    DateTime dateTime;
+                    if (_selectedCheckDate.Value.Date == DateTime.Now.Date)
+                    {
+                        dateTime = _selectedCheckDate.Value.Date + DateTime.Now.TimeOfDay;
+                    }
+                    else dateTime = _selectedCheckDate.Value.Date + new TimeSpan(14, 0, 0);
+                    _selectedCheckDate = dateTime;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -240,6 +250,20 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             }
         }
 
+        private ObservableCollection<PHIEUDATPHONG> _tmpReservedBills;
+        public ObservableCollection<PHIEUDATPHONG> tmpReservedBills
+        {
+            get { return _tmpReservedBills; }
+            set
+            {
+                if (_tmpReservedBills != value)
+                {
+                    _tmpReservedBills = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private PHIEUDATPHONG _selectedReservedBillItem;
         public PHIEUDATPHONG SelectedReservedBillItem
         {
@@ -254,6 +278,16 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             }
         }
 
+        private ObservableCollection<PHONG> _items;
+        public ObservableCollection<PHONG> Items
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand BookingRoomCommand { get; set; }
@@ -261,10 +295,10 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
         public ICommand SearchDateSelectedDateChangedCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SearchReservedBillCommand { get; set; }
         public ICommand TraPhongCommand { get; set; }
         public ICommand HuyPhongCommand { get; set; }
         public ICommand NhanPhongCommand { get; set; }
-
 
         public int numberOfRoom;
         public int vacantNumber;
@@ -273,7 +307,6 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
         public RoomMapViewModel()
         {
-
             LoadedWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 Vacant = "#00DD00";
@@ -283,10 +316,12 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 OutOfOrderRoom = "#AF69EE"; 
 
                 SelectedCheckDate = DateTime.Now;
-
-                Rooms = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs);
-                ReservedBills = new ObservableCollection<PHIEUDATPHONG>(DataProvider.Ins.DB.PHIEUDATPHONGs);
-                
+                try
+                {
+                    Rooms = new ObservableCollection<PHONG>(DataProvider.Ins.DB.PHONGs);
+                }
+                catch { }
+                LoadReservedBill();
                 EmptyRoomList = new ObservableCollection<PHONG>();
 
                 UpdateRoomState();
@@ -294,54 +329,23 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 
             BookingRoomCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) => 
             {
-                switch (p.TrangThai)
+                if (p.TrangThai == TRONG)
                 {
-                    case "Trống":
-                        try
-                        {
-                            DateTime dateTime = DateTime.Now;
-                            if (SelectedCheckDate.Value.Date == DateTime.Now.Date)
-                            {
-                                dateTime = SelectedCheckDate.Value.Date + DateTime.Now.TimeOfDay;
-                            }
-                            else dateTime = SelectedCheckDate.Value.Date + new TimeSpan(14, 0, 0);
-                            BookingRoomView bookingRoomView = new BookingRoomView();
-                            bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p, dateTime);
-                            bookingRoomView.ShowDialog();
+                    try
+                    {
+                        BookingRoomView bookingRoomView = new BookingRoomView();
+                        bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p, (DateTime)SelectedCheckDate);
+                        bookingRoomView.ShowDialog();
 
-                            if (bookingRoomView.DataContext == null) return;
-                            var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
+                        if (bookingRoomView.DataContext == null) return;
+                        var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
 
-                            p.TrangThai = bookingRoomViewModel.Room.TrangThai;
-                            MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Đặt phòng không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        break;
-                    case "Được đặt":
-                        try
-                        {
-                            
-                            MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Hủy không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        break;
-                    case "Được thuê":
-                        try
-                        {
-
-                            MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Hủy không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        break;
+                        p.TrangThai = bookingRoomViewModel.Room.TrangThai;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Đặt phòng không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 UpdateRoomState();
                 LoadReservedBill();
@@ -354,8 +358,8 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                     RemoveBookingRoomView removeBookingRoomView = new RemoveBookingRoomView();
                     removeBookingRoomView.DataContext = new RemoveBookingRoomViewModel(SelectedReservedBillItem);
                     removeBookingRoomView.ShowDialog();
+                    UpdateRoomState();
                     LoadReservedBill();
-                    MessageBox.Show("Hủy thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch
                 {
@@ -421,11 +425,41 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                         }
                     }
                     else MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UpdateRoomState();
                     LoadReservedBill();
                 }
                 catch
                 {
                     MessageBox.Show("Cập nhật thông tin không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+
+            SearchReservedBillCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                if (string.IsNullOrEmpty(p.Text))
+                {
+                    LoadReservedBill();
+                }
+                else
+                {
+                    ObservableCollection<PHIEUDATPHONG> result = new ObservableCollection<PHIEUDATPHONG>();
+                    foreach (PHIEUDATPHONG item in DataProvider.Ins.DB.PHIEUDATPHONGs)
+                    {
+                        string t1 = item.NgayDen.Value.ToString("dd/MM/yyyy");
+                        string t2 = item.NgayDi.Value.ToString("dd/MM/yyyy");
+                        if (item.MaPhieuDatPhong.Contains(p.Text) || item.MaPhong.Contains(p.Text) || t1.Contains(p.Text) || t2.Contains(p.Text) || item.TrangThai.Contains(p.Text))
+                        {
+                            result.Add(item);
+                        }
+                    }
+                    
+                    ReservedBills = new ObservableCollection<PHIEUDATPHONG>();
+                    
+                    if (result == null) return;
+                    foreach (var item in result)
+                    {
+                        if (item != null) ReservedBills.Add(item);
+                    }
                 }
             });
 
@@ -441,7 +475,9 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                     DateOfCheckIn = DateOfCheckIn.Value.Date + new TimeSpan(14, 0, 0);
                     DateOfCheckOut = DateOfCheckOut.Value.Date + new TimeSpan(12, 0, 0);
                     var ListRoom = DataProvider.Ins.DB.PHIEUDATPHONGs.Where(
-                        x => x.TrangThai != "Đã hủy"
+                        x => x.TrangThai != DA_HUY 
+                          && x.TrangThai != CHUA_THANH_TOAN 
+                          && x.TrangThai != DA_THANH_TOAN 
                           && ((x.NgayDen < DateOfCheckIn && DateOfCheckIn < x.NgayDi) 
                           || (x.NgayDen < DateOfCheckOut && DateOfCheckOut < x.NgayDi)
                           || (x.NgayDen >= DateOfCheckIn && DateOfCheckOut >= x.NgayDi)
@@ -456,12 +492,58 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                 }
             });
 
-            TraPhongCommand = new RelayCommand<object>((p) => { return true; }, (p) => { MessageBox.Show("1"); });
+            TraPhongCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) =>
+            {
+                try
+                {
+                    PHIEUDATPHONG pdp = p.PHIEUDATPHONGs.Where(x => x.TrangThai == DUOC_THUE && x.NgayDen.Value <= SelectedCheckDate.Value && SelectedCheckDate.Value <= x.NgayDi.Value).FirstOrDefault();
+                    pdp.TrangThai = CHUA_THANH_TOAN;
+                    pdp.PHIEUSUDUNG.TrangThai = CHUA_THANH_TOAN;
+                    p.StateColor = "#00DD00";
+                    p.TrangThai = TRONG;
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Trả phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch { MessageBox.Show("Trả phòng không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error); }
+            });
 
-            HuyPhongCommand = new RelayCommand<object>((p) => { return true; }, (p) => { MessageBox.Show("2"); });
+            HuyPhongCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) => 
+            {
+                try
+                {
+                    PHIEUDATPHONG pdp = p.PHIEUDATPHONGs.Where(x => x.TrangThai == DUOC_DAT && x.NgayDen.Value <= SelectedCheckDate.Value && SelectedCheckDate.Value <= x.NgayDi.Value).FirstOrDefault();
+                    // Trả số lượng hàng hóa về kho
+                    try
+                    {
+                        foreach (CT_PHIEUHANGHOA item in pdp.PHIEUSUDUNG.CT_PHIEUHANGHOA)
+                        {
+                            item.HANGHOA.TonKho += item.SoLuong;
+                        }
+                    } catch { }
+                    
+                    pdp.TrangThai = DA_HUY;
+                    pdp.PHIEUSUDUNG.TrangThai = DA_HUY;
+                    p.StateColor = "#00DD00";
+                    p.TrangThai = TRONG;
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Hủy đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch { MessageBox.Show("Hủy phòng không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error); }
+            });
 
-            NhanPhongCommand = new RelayCommand<object>((p) => { return true; }, (p) => { MessageBox.Show("3"); });
-    }
+            NhanPhongCommand = new RelayCommand<PHONG>((p) => { return true; }, (p) => 
+            { 
+                try
+                {
+                    PHIEUDATPHONG pdp = p.PHIEUDATPHONGs.Where(x => x.TrangThai == DUOC_DAT && x.NgayDen.Value <= SelectedCheckDate.Value && SelectedCheckDate.Value <= x.NgayDi.Value).FirstOrDefault();
+                    p.StateColor = "#FF3333";
+                    pdp.TrangThai = DUOC_THUE;
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Nhận phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                } 
+                catch { MessageBox.Show("Nhận phòng không thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error); }
+            });
+        }
 
         public void UpdateRoomColor()
         {
@@ -487,6 +569,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                         occupiedNumber++;
                         break;
                     default:
+                        room.TrangThai = TRONG;
                         room.StateColor = Vacant;
                         vacantNumber++;
                         break;
@@ -497,7 +580,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
             NumberOfRoom = string.Format("Tất cả ({0})", numberOfRoom);
             VacantNumber = string.Format("Trống ({0})", vacantNumber);
-            OccupiedNumber = string.Format("Được thuê ({0})", occupiedNumber);
+            OccupiedNumber = string.Format("Được thuê ({0})", occupiedNumber); 
             ReservedNumber = string.Format("Được đặt ({0})", reservedNumber);
         }
 
@@ -505,16 +588,10 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
         {
             if (SelectedCheckDate != null)
             {
-                DateTime dateTime= DateTime.Now;
-                if (SelectedCheckDate.Value.Date == DateTime.Now.Date)
-                {
-                    dateTime = SelectedCheckDate.Value.Date + DateTime.Now.TimeOfDay;
-                }
-                else dateTime = SelectedCheckDate.Value.Date + new TimeSpan(14,0,0);
                 try
                 {
                     var ListRoomHaveReservedBillInCheckDate = DataProvider.Ins.DB.PHIEUDATPHONGs
-                        .Where(x => x.NgayDen <= dateTime && dateTime <= x.NgayDi)
+                        .Where(x => x.TrangThai != DA_HUY && x.TrangThai != CHUA_THANH_TOAN  && x.TrangThai != DA_THANH_TOAN && x.NgayDen.Value <= SelectedCheckDate.Value && SelectedCheckDate.Value <= x.NgayDi.Value)
                         .Select(x => new { x.MaPhong, x.TrangThai });
  
                     var RoomStatusList = DataProvider.Ins.DB.PHONGs
@@ -523,7 +600,7 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
                             x.MaPhong,
                             TrangThai = ListRoomHaveReservedBillInCheckDate
                                 .Any(y => y.MaPhong == x.MaPhong) ? ListRoomHaveReservedBillInCheckDate
-                                .Where(y => y.MaPhong == x.MaPhong).FirstOrDefault().TrangThai : "Trống"
+                                .Where(y => y.MaPhong == x.MaPhong).FirstOrDefault().TrangThai : TRONG
                         })
                         .ToList();
 
@@ -541,8 +618,11 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
 
         public void LoadReservedBill()
         {
-            ReservedBills.Clear();
-            ReservedBills = new ObservableCollection<PHIEUDATPHONG>(DataProvider.Ins.DB.PHIEUDATPHONGs);
+            if (ReservedBills != null) ReservedBills.Clear();
+            ReservedBills = new ObservableCollection<PHIEUDATPHONG>(DataProvider.Ins.DB.PHIEUDATPHONGs.Where(x => x.TrangThai == DUOC_THUE || x.TrangThai == DUOC_DAT));
+            foreach (PHIEUDATPHONG item in DataProvider.Ins.DB.PHIEUDATPHONGs.Where(x => x.TrangThai == CHUA_THANH_TOAN)) ReservedBills.Add(item);
+            foreach (PHIEUDATPHONG item in DataProvider.Ins.DB.PHIEUDATPHONGs.Where(x => x.TrangThai == DA_THANH_TOAN)) ReservedBills.Add(item);
+            foreach (PHIEUDATPHONG item in DataProvider.Ins.DB.PHIEUDATPHONGs.Where(x => x.TrangThai == DA_HUY)) ReservedBills.Add(item);
         }
     }
 }

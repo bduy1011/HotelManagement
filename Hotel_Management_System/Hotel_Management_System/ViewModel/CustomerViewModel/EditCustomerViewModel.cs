@@ -59,17 +59,6 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             }
         }
 
-        private bool _isTeenagersSelected;
-        public bool IsTeenagersSelected
-        {
-            get { return _isChildrenSelected; }
-            set
-            {
-                _isTeenagersSelected = value;
-                OnPropertyChanged();
-            }
-        }
-
         private bool _isAdultsSelected;
         public bool IsAdultsSelected
         {
@@ -113,17 +102,12 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
             }
             this.NgaySinh = SelectedCustomerItem.NgaySinh;
             this.LoaiKhachHang = SelectedCustomerItem.LoaiKhachHang;
-            if (this.LoaiKhachHang == "Trẻ em")
+            if (this.LoaiKhachHang == "< 15 tuổi")
             {
                 this.IsChildrenSelected = true;
             }
             else this.IsChildrenSelected = false;
-            if (this.LoaiKhachHang == "Trẻ vị thành niên")
-            {
-                this.IsTeenagersSelected = true;
-            }
-            else this.IsTeenagersSelected = false;
-            if (this.LoaiKhachHang == "Người lớn")
+            if (this.LoaiKhachHang == ">= 15 tuổi")
             {
                 this.IsAdultsSelected = true;
             }

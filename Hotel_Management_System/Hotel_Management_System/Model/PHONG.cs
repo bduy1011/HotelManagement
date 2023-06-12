@@ -9,9 +9,7 @@
 
 namespace Hotel_Management_System.Model
 {
-    using Hotel_Management_System.ViewModel;
     using Hotel_Management_System.ViewModel.Other;
-    using System;
     using System.Collections.Generic;
 
     public partial class PHONG : BaseViewModel

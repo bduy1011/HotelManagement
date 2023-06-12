@@ -22,6 +22,13 @@ namespace Hotel_Management_System.Model
             this.KHACHHANGs = new HashSet<KHACHHANG>();
         }
 
+        private int _stt;
+        public int STT
+        {
+            get { return _stt; }
+            set { _stt = value; OnPropertyChanged(); }
+        }
+
         private string _maPhieuDatPhong;
         public string MaPhieuDatPhong
         {

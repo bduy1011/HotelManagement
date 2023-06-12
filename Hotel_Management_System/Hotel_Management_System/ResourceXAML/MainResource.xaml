@@ -5,7 +5,13 @@
                     xmlns:customerviewmodel="clr-namespace:Hotel_Management_System.ViewModel.CustomerViewModel"
                     xmlns:staffviewmodel="clr-namespace:Hotel_Management_System.ViewModel.StaffViewModel"
                     xmlns:roommapviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomMapViewModel"
-                    xmlns:bookingroomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.BookingRoomViewModel">
+                    xmlns:bookingroomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.BookingRoomViewModel"
+                    xmlns:commodityviewmodel="clr-namespace:Hotel_Management_System.ViewModel.CommodityViewModel"
+                    xmlns:serviceviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.ServiceViewModel"
+                    xmlns:roomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomViewModel"
+                    xmlns:roomtypeviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.RoomTypeViewModel"
+                    xmlns:billviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.BillViewModel"
+                    xmlns:accountviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.AccountViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <loginviewmodel:LoginViewModel x:Key="LoginVM"></loginviewmodel:LoginViewModel>
     
@@ -24,4 +30,31 @@
     <bookingroomviewmodel:BookingRoomViewModel x:Key="BookingRoomVM"></bookingroomviewmodel:BookingRoomViewModel>
     <bookingroomviewmodel:RemoveBookingRoomViewModel x:Key="RemoveBookingRoomVM"></bookingroomviewmodel:RemoveBookingRoomViewModel>
     <bookingroomviewmodel:EditBookingRoomViewModel x:Key="EditBookingRoomVM"></bookingroomviewmodel:EditBookingRoomViewModel>
+
+    <commodityviewmodel:CommodityViewModel x:Key="CommodityVM"></commodityviewmodel:CommodityViewModel>
+    <commodityviewmodel:AddCommodityViewModel x:Key="AddCommodityVM"></commodityviewmodel:AddCommodityViewModel>
+    <commodityviewmodel:RemoveCommodityViewModel x:Key="RemoveCommodityVM"></commodityviewmodel:RemoveCommodityViewModel>
+    <commodityviewmodel:EditCommodityViewModel x:Key="EditCommodityVM"></commodityviewmodel:EditCommodityViewModel>
+    <commodityviewmodel:ImportCommodityViewModel x:Key="ImportCommodityVM"></commodityviewmodel:ImportCommodityViewModel>
+     
+    <serviceviewmodel:ServiceViewModel x:Key="ServiceVM"></serviceviewmodel:ServiceViewModel>
+    <serviceviewmodel:RemoveServiceViewModel x:Key="RemoveServiceVM"></serviceviewmodel:RemoveServiceViewModel>
+    <serviceviewmodel:EditServiceViewModel x:Key="EditServiceVM"></serviceviewmodel:EditServiceViewModel>
+    <serviceviewmodel:AddServiceViewModel x:Key="AddServiceVM"></serviceviewmodel:AddServiceViewModel>
+
+    <roomviewmodel:RoomViewModel x:Key="RoomVM"></roomviewmodel:RoomViewModel>
+    <roomviewmodel:AddRoomViewModel x:Key="AddRoomVM"></roomviewmodel:AddRoomViewModel>
+    <roomviewmodel:EditRoomViewModel x:Key="EditRoomVM"></roomviewmodel:EditRoomViewModel>
+    <roomviewmodel:RemoveRoomViewModel x:Key="RemoveRoomVM"></roomviewmodel:RemoveRoomViewModel>
+
+    <roomtypeviewmodel:RoomTypeViewModel x:Key="RoomTypeVM"></roomtypeviewmodel:RoomTypeViewModel>
+    <roomtypeviewmodel:AddRoomTypeViewModel x:Key="AddRoomTypeVM"></roomtypeviewmodel:AddRoomTypeViewModel>
+    <roomtypeviewmodel:EditRoomTypeViewModel x:Key="EditRoomTypeVM"></roomtypeviewmodel:EditRoomTypeViewModel>
+    <roomtypeviewmodel:RemoveRoomTypeViewModel x:Key="RemoveRoomTypeVM"></roomtypeviewmodel:RemoveRoomTypeViewModel>
+
+    <billviewmodel:BillViewModel x:Key="BillVM"></billviewmodel:BillViewModel>
+    <billviewmodel:AddBillViewModel x:Key="AddBillVM"></billviewmodel:AddBillViewModel>
+    <billviewmodel:RemoveBillViewModel x:Key="RemoveBillVM"></billviewmodel:RemoveBillViewModel>
+     
+     <accountviewmodel:AccountViewModel x:Key="AccountVM"></accountviewmodel:AccountViewModel>
 </ResourceDictionary>

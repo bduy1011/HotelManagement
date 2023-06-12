@@ -262,6 +262,22 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private string _trangThaiPhong;
+        public string TrangThaiPhong
+        {
+            get { return _trangThaiPhong; }
+            set
+            {
+                if (_trangThaiPhong != value)
+                {
+                    _trangThaiPhong = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int tmp = 0;
+
         public bool IsEditBookingRoom { get; set; }
 
         public ICommand LoadedWindowCommand { get; set; }
@@ -290,6 +306,8 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             UsageBill = ReservedBill.PHIEUSUDUNG;
             // Lấy thông tin phòng
             Room = ReservedBill.PHONG;
+            // Lấy trạng thái phòng
+            TrangThaiPhong = ReservedBill.TrangThai;
             // Lấy danh sách khách hàng
             Customers = new ObservableCollection<KHACHHANG>();
             foreach (KHACHHANG item in ReservedBill.KHACHHANGs) Customers.Add(item);
@@ -343,7 +361,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 try
                 {
-                    Services = new ObservableCollection<DICHVU>(DataProvider.Ins.DB.DICHVUs);
+                    Services = new ObservableCollection<DICHVU>(DataProvider.Ins.DB.DICHVUs.Where(x => x.TrangThai != "Ngừng hoạt động"));
                 }
                 catch
                 {
@@ -362,7 +380,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 try
                 {
-                    Commoditys = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs);
+                    Commoditys = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs.Where(x => x.TrangThai != "Ngừng hoạt động"));
                 }
                 catch
                 {
@@ -485,8 +503,9 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             DateOfCheckInSelectedDateChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
                 // Thiết lập giờ cho ngày đến
-                if (ReservationBill.NgayDen.Value.Date == DateTime.Now.Date)
+                if (ReservationBill.NgayDen.Value.Date == DateTime.Now.Date && tmp != 1)
                 {
+                    tmp++;
                     ReservationBill.NgayDen = ReservationBill.NgayDen.Value.Date + DateTime.Now.TimeOfDay;
                 }
                 else ReservationBill.NgayDen = ReservationBill.NgayDen.Value.Date + new TimeSpan(14, 0, 0);

@@ -105,7 +105,7 @@
 
                         <Grid Grid.Column="4">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Ngày lập" VerticalAlignment="Top" Margin="0,0,0,19"/>
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding ReservationBill.NgayLap}" VerticalAlignment="Bottom" Margin="0,19,0,0"/>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding ReservationBill.NgayLap, StringFormat='dd/MM/yyyy HH:mm:ss'}" VerticalAlignment="Bottom" Margin="0,19,0,0"/>
                         </Grid>
                     </Grid>
 
@@ -120,7 +120,7 @@
 
                         <Grid Grid.Column="0">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nhận phòng" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='dd/MM/yyyy'}">
+                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Bottom" SelectedDate="{Binding ReservationBill.NgayDen, StringFormat='dd/MM/yyy'}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">
                                         <i:InvokeCommandAction Command="{Binding DateOfCheckInSelectedDateChangedCommand}"/>
@@ -130,7 +130,7 @@
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding TimeReserved}" FontWeight="Bold"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="20" Text="{Binding ReservationBill.NgayDen, StringFormat='HH:mm'}" FontWeight="Bold"/>
                         </Grid>
 
                         <Grid Grid.Column="2">
@@ -141,7 +141,7 @@
 
                         <Grid Grid.Column="3">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Trả phòng" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Top" Margin="0,35,0,0" SelectedDate="{Binding ReservationBill.NgayDi}">
+                            <DatePicker HorizontalAlignment="Center" Width="80" VerticalAlignment="Top" Margin="0,35,0,0" SelectedDate="{Binding ReservationBill.NgayDi, StringFormat='dd/MM/yyy'}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectedDateChanged">
                                         <i:InvokeCommandAction Command="{Binding DateOfCheckOutSelectedDateChangedCommand}"/>
@@ -188,7 +188,7 @@
                                 <DataGridTemplateColumn Header="Ngày sinh" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding NgaySinh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                                            <DatePicker SelectedDate="{Binding NgaySinh, StringFormat='dd/MM/yyy', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

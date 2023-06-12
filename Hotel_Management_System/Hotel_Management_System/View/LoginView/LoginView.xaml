@@ -50,7 +50,7 @@
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Login"
+                    <TextBlock Text="Đăng nhập"
                                Foreground="DarkGray"
                                FontSize="10"
                                FontFamily="Montserrat"
@@ -137,7 +137,7 @@
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Tài khoản"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -165,7 +165,7 @@
                         </TextBox.Background>
                     </TextBox>
 
-                    <TextBlock Text="Password"
+                    <TextBlock Text="Mật khẩu"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -204,7 +204,7 @@
                             CommandParameter="{Binding ElementName=loginWindow}"
                             IsDefault="True"
                             BorderThickness="0"
-                            Content="LOG IN"
+                            Content="Đăng nhập"
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"

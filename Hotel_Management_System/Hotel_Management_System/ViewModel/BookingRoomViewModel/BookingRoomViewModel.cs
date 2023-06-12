@@ -262,6 +262,8 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        private int tmp = 0;
+
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand LoadedServicesCommand { get; set; }
         public ICommand LoadedCommoditysCommand { get; set; }
@@ -302,6 +304,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         {
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
+                tmp = 0;
                 if (DataProvider.Ins.DB.PHIEUDATPHONGs.Count() > 0)
                 {
                     string t = DataProvider.Ins.DB.PHIEUDATPHONGs.OrderByDescending(x => x.MaPhieuDatPhong).FirstOrDefault().MaPhieuDatPhong;
@@ -350,7 +353,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 try
                 {
-                    Services = new ObservableCollection<DICHVU>(DataProvider.Ins.DB.DICHVUs);
+                    Services = new ObservableCollection<DICHVU>(DataProvider.Ins.DB.DICHVUs.Where(x => x.TrangThai != "Ngừng kinh doanh"));
                 }
                 catch
                 {
@@ -369,7 +372,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 try
                 {
-                    Commoditys = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs);
+                    Commoditys = new ObservableCollection<HANGHOA>(DataProvider.Ins.DB.HANGHOAs.Where(x => x.TrangThai != "Ngừng kinh doanh"));
                 }
                 catch
                 {
@@ -437,6 +440,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                     {
                         if (item.MaHangHoa == p.MaDichVu)
                         {
+                            item.HANGHOA.TonKho += item.SoLuong;
                             SelectedCommoditys.Remove(item);
                             break;
                         }
@@ -492,8 +496,9 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             DateOfCheckInSelectedDateChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
                 // Thiết lập giờ cho ngày đến
-                if (ReservationBill.NgayDen.Value.Date == DateTime.Now.Date)
+                if (ReservationBill.NgayDen.Value.Date == DateTime.Now.Date && tmp != 1)
                 {
+                    tmp++;
                     ReservationBill.NgayDen = ReservationBill.NgayDen.Value.Date + DateTime.Now.TimeOfDay;
                 }
                 else ReservationBill.NgayDen = ReservationBill.NgayDen.Value.Date + new TimeSpan(14, 0, 0);
@@ -666,6 +671,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
                     DataProvider.Ins.DB.PHIEUDATPHONGs.Add(ReservationBill);
                     DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Đặt phòng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     p.Close();
                 }

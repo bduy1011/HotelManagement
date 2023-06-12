@@ -114,12 +114,12 @@
                                     <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
                                         <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                     </Border>
-
                                     <TextBlock Text="{Binding TenKhachHang}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="CCCD" Binding="{Binding CCCD}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SoDienThoai}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Loại khách" Binding="{Binding LoaiKhachHang}" IsReadOnly="True" Width="*"/>

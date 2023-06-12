@@ -9,10 +9,11 @@
 
 namespace Hotel_Management_System.Model
 {
+    using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
 
-    public partial class HOADON
+    public partial class HOADON : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HOADON()
@@ -20,12 +21,47 @@ namespace Hotel_Management_System.Model
             this.CT_HOADON = new HashSet<CT_HOADON>();
         }
 
-        public string MaHoaDon { get; set; }
-        public string MaNhanVien { get; set; }
-        public string MaKhachHang { get; set; }
-        public int? TriGia { get; set; }
-        public DateTime? NgayLap { get; set; }
-        public string TrangThai { get; set; }
+        private string _maHoaDon;
+        public string MaHoaDon
+        {
+            get { return _maHoaDon; }
+            set { _maHoaDon = value; OnPropertyChanged(); }
+        }
+
+        private string _maNhanVien;
+        public string MaNhanVien
+        {
+            get { return _maNhanVien; }
+            set { _maNhanVien = value; OnPropertyChanged(); }
+        }
+
+        private string _maKhachHang;
+        public string MaKhachHang
+        {
+            get { return _maKhachHang; }
+            set { _maKhachHang = value; OnPropertyChanged(); }
+        }
+
+        private int? _triGia;
+        public int? TriGia
+        {
+            get { return _triGia; }
+            set { _triGia = value; OnPropertyChanged(); }
+        }
+
+        private DateTime? _ngayLap;
+        public DateTime? NgayLap
+        {
+            get { return _ngayLap; }
+            set { _ngayLap = value; OnPropertyChanged(); }
+        }
+
+        private string _trangThai;
+        public string TrangThai
+        {
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOADON> CT_HOADON { get; set; }

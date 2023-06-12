@@ -1,0 +1,238 @@
+﻿<Window x:Class="Hotel_Management_System.View.BillView.AddBillView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Name="addBillWindow"
+        Title="Add Bill" Height="750" Width="1300"
+        DataContext="{StaticResource AddBillVM}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="15 0 5 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="THÔNG TIN HÓA ĐƠN" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Mã hóa đơn" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Bill.MaHoaDon}" VerticalAlignment="Bottom"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nhân viên" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Bill.NHANVIEN.TenNhanVien}" VerticalAlignment="Bottom"/>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Khách hàng" VerticalAlignment="Top"/>
+                            <ComboBox ItemsSource="{Binding CustomerList}"
+                                      DisplayMemberPath="TenKhachHang"
+                                      SelectedItem="{Binding Bill.KHACHHANG}"
+                                      VerticalAlignment="Bottom" Width="120"/>
+                        </Grid>
+
+                        <Grid Grid.Column="3">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Ngày lập" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Bill.NgayLap, StringFormat='dd/MM/yyyy HH:mm:ss'}" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="0 10 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="PHIẾU ĐẶT PHÒNG CẦN THANH TOÁN" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <DataGrid Grid.Row="1" ItemsSource="{Binding SelectedPDPs}" AutoGenerateColumns="False"
+                                  Style="{DynamicResource DataGridStyle1}"
+                                  Background="LightGray">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="45" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Mã PDP" Binding="{Binding MaPhieuDatPhong}" Width="80" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Mã phòng" Binding="{Binding MaPhong}" Width="100" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Ngày đến" Binding="{Binding NgayDen, StringFormat='dd/MM/yyyy HH:mm:ss'}" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Ngày đi" Binding="{Binding NgayDi, StringFormat='dd/MM/yyyy HH:mm:ss'}" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Số người" Binding="{Binding SoNguoi}" Width="90" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tiền cọc" Binding="{Binding TienCoc}" Width="90" IsReadOnly="True"/>
+                                <DataGridTemplateColumn IsReadOnly="True" Width="auto">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource gridRemoveButton}" 
+                                                    Command="{Binding DataContext.RemovePDPCommand, 
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                    CommandParameter="{Binding}">
+                                                <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 15 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="DANH SÁCH CÁC DỊCH VỤ VÀ HÀNG HÓA ĐÃ SỬ DỤNG" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <DataGrid ItemsSource="{Binding ShowSelectedServices}" AutoGenerateColumns="False"
+                              Style="{DynamicResource DataGridStyle1}"
+                              Background="LightGray">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="#" Binding="{Binding STT}" Width="45" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Mã PDP" Binding="{Binding tmpMaPDP}" Width="100" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Dịch vụ/Hàng hóa" Binding="{Binding DICHVU.TenDichVu}" Width="200" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}" Width="100" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Đơn vị" Binding="{Binding DICHVU.DonViTinh}" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Giá" Binding="{Binding DICHVU.DonGia}" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Thành tiền" Binding="{Binding ThanhTien}" Width="*" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" TextAlignment="Center" TextWrapping="Wrap" Text="Tổng tiền phòng: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding RoomFee}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+
+                        <TextBlock Grid.Column="2" TextAlignment="Center" TextWrapping="Wrap" Text="Tổng tiền dịch vụ: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBlock Grid.Column="3" Text="{Binding ServicesFee}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+
+                        <TextBlock Grid.Column="4" TextAlignment="Center" TextWrapping="Wrap" Text="Tổng tiền: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBlock Grid.Column="5" Text="{Binding SumFee}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="4" TextAlignment="Center" TextWrapping="Wrap" Text="Tổng tiền cọc: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBlock Grid.Column="5" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding DownPayment}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" TextAlignment="Center" TextWrapping="Wrap" Text="Số tiền còn lại cần thanh toán: " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBlock Grid.Column="1" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding RemainingCosts}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10 0 15 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Danh sách phiếu đặt phòng chưa thanh toán" Margin="20 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <DataGrid Grid.Row="1" x:Name="PDPDatagrid" Margin="0 0 0 20" 
+                          ItemsSource="{Binding PDPs}" AutoGenerateColumns="False"
+                          RowStyle="{DynamicResource DataGridRowStyle1}" 
+                          CellStyle="{DynamicResource DataGridCellStyle1}" 
+                          Style="{DynamicResource DataGridStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã" Binding="{Binding MaPhieuDatPhong}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Phòng" Binding="{Binding MaPhong}" Width="75" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ngày đến" Binding="{Binding NgayDen, StringFormat='dd/MM/yyyy'}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ngày đi" Binding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}" Width="100" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Chọn" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox Margin="5 0 0 0"
+                                            Command="{Binding DataContext.AddPDPCommand, 
+                                                      RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding}">
+                                        </CheckBox>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Width="200" HorizontalAlignment="Right" Style="{StaticResource buttonMain}" Margin="0 0 10 0" Content="Hủy" Command="{Binding BackCommand}" CommandParameter="{Binding ElementName=addBillWindow}"/>
+
+            <Button Grid.Column="1" Width="200" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Thanh toán" Command="{Binding AddBillCommand}" CommandParameter="{Binding ElementName=addBillWindow}"/>
+        </Grid>
+    </Grid>
+</Window>
