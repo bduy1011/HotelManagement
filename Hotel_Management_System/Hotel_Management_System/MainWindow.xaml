@@ -31,6 +31,9 @@
         xmlns:accountviewmodel="clr-namespace:Hotel_Management_System.ViewModel.AccountViewModel"
         xmlns:accountview="clr-namespace:Hotel_Management_System.View.AccountView"
         
+        xmlns:dashboardviewmodel="clr-namespace:Hotel_Management_System.ViewModel.DashBoardViewModel"
+        xmlns:dashboardview="clr-namespace:Hotel_Management_System.View.DashBoardView"
+        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         
@@ -71,6 +74,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type accountviewmodel:AccountViewModel}">
             <accountview:AccountView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dashboardviewmodel:DashBoardViewModel}">
+            <dashboardview:DashBoardView/>
         </DataTemplate>
     </Window.Resources>
 
@@ -149,7 +155,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#FFD8B9"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowDashBoardViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ChartColumn" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
@@ -158,7 +165,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F2B3BF"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Command="{Binding ShowCustomerViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
@@ -167,7 +175,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#F99A9C"
-                                 Command="{Binding ShowStaffViewCommand}">
+                                 Command="{Binding ShowStaffViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Nhân viên" Style="{StaticResource menuButtonText}"/>
@@ -176,7 +185,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#D7E7A9"
-                                 Command="{Binding ShowCommodityViewCommand}">
+                                 Command="{Binding ShowCommodityViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Store" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Hàng hóa" Style="{StaticResource menuButtonText}"/>
@@ -185,7 +195,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#B5DDD1"
-                                 Command="{Binding ShowServiceViewCommand}">
+                                 Command="{Binding ShowServiceViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Servicestack" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Dịch vụ" Style="{StaticResource menuButtonText}"/>
@@ -194,7 +205,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#04D9D9"
-                                 Command="{Binding ShowRoomViewCommand}">
+                                 Command="{Binding ShowRoomViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Bed" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Phòng" Style="{StaticResource menuButtonText}"/>
@@ -203,7 +215,8 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="#04D9D9"
-                                 Command="{Binding ShowRoomTypeViewCommand}">
+                                 Command="{Binding ShowRoomTypeViewCommand}"
+                                 IsEnabled="{Binding IsDecentralization}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Loại phòng" Style="{StaticResource menuButtonText}"/>

@@ -63,7 +63,7 @@
 
                         <Grid Grid.Column="1">
                             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nhân viên" VerticalAlignment="Top"/>
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Bill.NHANVIEN.TenNhanVien}" VerticalAlignment="Bottom"/>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding nhanvien.TenNhanVien}" VerticalAlignment="Bottom"/>
                         </Grid>
 
                         <Grid Grid.Column="2">

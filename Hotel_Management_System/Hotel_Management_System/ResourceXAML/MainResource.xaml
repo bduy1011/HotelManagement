@@ -11,7 +11,8 @@
                     xmlns:roomviewmodel="clr-namespace:Hotel_Management_System.ViewModel.RoomViewModel"
                     xmlns:roomtypeviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.RoomTypeViewModel"
                     xmlns:billviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.BillViewModel"
-                    xmlns:accountviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.AccountViewModel">
+                    xmlns:accountviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.AccountViewModel"
+                    xmlns:dashboardviewmodel ="clr-namespace:Hotel_Management_System.ViewModel.DashBoardViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <loginviewmodel:LoginViewModel x:Key="LoginVM"></loginviewmodel:LoginViewModel>
     
@@ -55,6 +56,8 @@
     <billviewmodel:BillViewModel x:Key="BillVM"></billviewmodel:BillViewModel>
     <billviewmodel:AddBillViewModel x:Key="AddBillVM"></billviewmodel:AddBillViewModel>
     <billviewmodel:RemoveBillViewModel x:Key="RemoveBillVM"></billviewmodel:RemoveBillViewModel>
+
+    <accountviewmodel:AccountViewModel x:Key="AccountVM"></accountviewmodel:AccountViewModel>
      
-     <accountviewmodel:AccountViewModel x:Key="AccountVM"></accountviewmodel:AccountViewModel>
+    <dashboardviewmodel:DashBoardViewModel x:Key="DashBoardVM"></dashboardviewmodel:DashBoardViewModel>
 </ResourceDictionary>

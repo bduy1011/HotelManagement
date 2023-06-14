@@ -89,8 +89,6 @@
             </Button>
         </Grid>
 
-
-
         <Border Grid.Row="1"
                 Background="#200F53"
                 CornerRadius="10" 
@@ -110,7 +108,7 @@
 
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MaPhong}"/>
+                    <DataGridTextColumn Header="Mã phòng" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MaPhong}"/>
                     <DataGridTemplateColumn Header="Mã loại phòng" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

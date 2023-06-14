@@ -23,7 +23,7 @@ namespace Hotel_Management_System.ViewModel.BillViewModel
 {
     public class BillViewModel : BaseViewModel
     {
-        private NHANVIEN _nhanvien;
+        public NHANVIEN _nhanvien;
         public NHANVIEN nhanvien
         {
             get { return _nhanvien; }

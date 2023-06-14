@@ -110,6 +110,8 @@ namespace Hotel_Management_System.ViewModel.BillViewModel
             }
         }
 
+        public int i = 0;
+
         private HOADON _bill;
         public HOADON Bill
         {
@@ -143,19 +145,15 @@ namespace Hotel_Management_System.ViewModel.BillViewModel
         public ICommand BackCommand { get; set; }
         public ICommand AddBillCommand { get; set; }
 
+       
         public AddBillViewModel(NHANVIEN nv) : this()
         {
-            //nhanvien = new NHANVIEN();
-            //nhanvien.MaNhanVien = nv.MaNhanVien;
-            //nhanvien.TenNhanVien = nv.TenNhanVien;
-            //nhanvien.ChucVu = nv.ChucVu;
-            //nhanvien.BoPhan = nv.BoPhan;
-            //nhanvien.NgaySinh = nv.NgaySinh;
-            //nhanvien.CCCD = nv.CCCD;
+            nhanvien = nv;
         }
 
         public AddBillViewModel()
         {
+          
             LoadedWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 Bill = new HOADON();
@@ -183,7 +181,6 @@ namespace Hotel_Management_System.ViewModel.BillViewModel
                         return;
                     }
                 }
-                
                 SelectedPDPs.Add(p);
                 Update();
             });
@@ -287,7 +284,6 @@ namespace Hotel_Management_System.ViewModel.BillViewModel
             {
                 item.STT = t++;
             }
-
             RoomFee = roomFee.ToString();
             ServicesFee = servicesFee.ToString();
             SumFee = sumFee.ToString();
@@ -297,9 +293,10 @@ namespace Hotel_Management_System.ViewModel.BillViewModel
 
         public void Clear()
         {
-
-            ShowSelectedServices.Clear();
-            CustomerList.Clear();
+            if (ShowSelectedServices != null)
+                ShowSelectedServices.Clear();
+            if (ShowSelectedServices != null) 
+                CustomerList.Clear();
             nhanvien = null;
         }
     }

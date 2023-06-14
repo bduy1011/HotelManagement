@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel_Management_System.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;

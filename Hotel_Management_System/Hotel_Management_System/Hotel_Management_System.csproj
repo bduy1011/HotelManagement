@@ -49,6 +49,12 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
     </Reference>
@@ -171,6 +177,7 @@
     <Compile Include="ViewModel\CustomerViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\EditCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\RemoveCustomerViewModel.cs" />
+    <Compile Include="ViewModel\DashBoardViewModel\DashBoardViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\Other\BaseViewModel.cs" />
     <Compile Include="ViewModel\Other\ViewModelCommand.cs" />
@@ -240,6 +247,9 @@
     </Compile>
     <Compile Include="View\CustomerView\RemoveCustomerView.xaml.cs">
       <DependentUpon>RemoveCustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DashBoardView\DashBoardView.xaml.cs">
+      <DependentUpon>DashBoardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -376,6 +386,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomerView\RemoveCustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DashBoardView\DashBoardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

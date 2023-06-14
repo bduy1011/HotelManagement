@@ -1,4 +1,5 @@
 ﻿using Hotel_Management_System.Model;
+using Hotel_Management_System.View.AccountView;
 using Hotel_Management_System.View.StaffView;
 using Hotel_Management_System.ViewModel.Other;
 using System;
@@ -7,6 +8,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
@@ -23,16 +25,75 @@ namespace Hotel_Management_System.ViewModel.AccountViewModel
         private bool _isCheckedMale;
         private bool _isCheckedFemale;
 
-        public string MaNhanVien { get; set; }
-        public string TenNhanVien { get; set; }
-        public string CCCD { get; set; }
-        public string GioiTinh { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string SoDienThoai { get; set; }
-        public string ChucVu { get; set; }
-        public string BoPhan { get; set; }
-        public string TenTaiKhoan { get; set; }
-        public string MatKhau { get; set; }
+        private string _maNhanVien;
+        public string MaNhanVien
+        {
+            get { return _maNhanVien; }
+            set { _maNhanVien = value; OnPropertyChanged(); }
+        }
+
+        private string _tenNhanVien;
+        public string TenNhanVien
+        {
+            get { return _tenNhanVien; }
+            set { _tenNhanVien = value; OnPropertyChanged(); }
+        }
+
+        private string _cCCD;
+        public string CCCD
+        {
+            get { return _cCCD; }
+            set { _cCCD = value; OnPropertyChanged(); }
+        }
+
+        private string _gioiTinh;
+        public string GioiTinh
+        {
+            get { return _gioiTinh; }
+            set { _gioiTinh = value; OnPropertyChanged(); }
+        }
+
+        private Nullable<System.DateTime> _ngaySinh;
+        public Nullable<System.DateTime> NgaySinh
+        {
+            get { return _ngaySinh; }
+            set { _ngaySinh = value; OnPropertyChanged(); }
+        }
+
+        private string _soDienThoai;
+        public string SoDienThoai
+        {
+            get { return _soDienThoai; }
+            set { _soDienThoai = value; OnPropertyChanged(); }
+        }
+
+        private string _chucVu;
+        public string ChucVu
+        {
+            get { return _chucVu; }
+            set { _chucVu = value; OnPropertyChanged(); }
+        }
+
+        private string _boPhan;
+        public string BoPhan
+        {
+            get { return _boPhan; }
+            set { _boPhan = value; OnPropertyChanged(); }
+        }
+
+        private string _tenTaiKhoan;
+        public string TenTaiKhoan
+        {
+            get { return _tenTaiKhoan; }
+            set { _tenTaiKhoan = value; OnPropertyChanged(); }
+        }
+
+        private string _matKhau;
+        public string MatKhau
+        {
+            get { return _matKhau; }
+            set { _matKhau = value; OnPropertyChanged(); }
+        }
 
         private string _password;
         public string Password
@@ -64,11 +125,9 @@ namespace Hotel_Management_System.ViewModel.AccountViewModel
 
         public AccountViewModel()
         {
-            EditStaffCommand = new RelayCommand<object>((p) => { return Check(); }, (p) => { EditStaff(); });
+            EditStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) => { EditStaff(); });
 
-            BackCommand = new RelayCommand<EditStaffView>((p) => { return true; }, (p) => { p.Close(); });
-
-            ClosedWindowCommand = new RelayCommand<EditStaffView>((p) => { return true; }, (p) => { Clear(); });
+            ClosedWindowCommand = new RelayCommand<AccountView>((p) => { return true; }, (p) => { Clear(); });
 
             ClickGenderMaleCommand = new RelayCommand<ToggleButton>((p) => { return true; }, (p) => { p.IsChecked = IsCheckedFemale = false; GioiTinh = "Nam"; });
 
@@ -76,6 +135,43 @@ namespace Hotel_Management_System.ViewModel.AccountViewModel
         }
 
         public AccountViewModel(NHANVIEN SelectedStaffItem) : this()
+        {
+            Load(SelectedStaffItem);
+        } 
+
+        public void EditStaff()
+        {
+            //var result = DataProvider.Ins.DB.NHANVIENs.Where(x => x.MaNhanVien.CompareTo(this.MaNhanVien) == 0).FirstOrDefault();
+
+            //result.TenNhanVien = this.TenNhanVien;
+            //result.CCCD = this.CCCD;
+            //result.GioiTinh = this.GioiTinh;
+            //result.TenTaiKhoan = this.TenTaiKhoan;
+            //result.NgaySinh = this.NgaySinh;
+            //result.SoDienThoai = this.SoDienThoai;
+            //result.BoPhan = this.BoPhan;
+            //result.ChucVu = this.ChucVu;
+            //result.MatKhau = this.MatKhau;
+
+            //DataProvider.Ins.DB.NHANVIENs.AddOrUpdate(result);
+            //DataProvider.Ins.DB.SaveChanges();
+            MessageBox.Show("Cập nhật thành công", "Thông báo",MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public void Clear()
+        {
+            this.TenNhanVien = null;
+            this.CCCD = null;
+            this.NgaySinh = null;
+            this.GioiTinh = null;
+            this.ChucVu = null;
+            this.SoDienThoai = null;
+            this.BoPhan = null;
+            this.TenTaiKhoan = null;
+            this.MatKhau = null;
+        }
+
+        public void Load(NHANVIEN SelectedStaffItem)
         {
             this.SelectedStaffItem = SelectedStaffItem;
             this.MaNhanVien = SelectedStaffItem.MaNhanVien;
@@ -99,46 +195,6 @@ namespace Hotel_Management_System.ViewModel.AccountViewModel
             if (MatKhau != null) this.Password = new string('*', MatKhau.Length);
             this.BoPhan = SelectedStaffItem.BoPhan;
             this.ChucVu = SelectedStaffItem.ChucVu;
-        }
-
-        public void EditStaff()
-        {
-            var result = DataProvider.Ins.DB.NHANVIENs.Where(x => x.MaNhanVien.CompareTo(this.MaNhanVien) == 0).Single();
-
-            result.TenNhanVien = this.TenNhanVien;
-            result.CCCD = this.CCCD;
-            result.GioiTinh = this.GioiTinh;
-            result.TenTaiKhoan = this.TenTaiKhoan;
-            result.NgaySinh = this.NgaySinh;
-            result.SoDienThoai = this.SoDienThoai;
-            result.BoPhan = this.BoPhan;
-            result.ChucVu = this.ChucVu;
-            result.MatKhau = this.MatKhau;
-
-            DataProvider.Ins.DB.NHANVIENs.AddOrUpdate(result);
-            DataProvider.Ins.DB.SaveChanges();
-        }
-
-
-        public bool Check()
-        {
-            if (TenNhanVien != "" && CCCD != "" && (IsCheckedFemale == true || IsCheckedMale == true) && NgaySinh != null && SoDienThoai != ""
-                && TenTaiKhoan != "" && MatKhau != "" && ChucVu != "" && BoPhan != "")
-                return true;
-            else return false;
-        }
-
-        public void Clear()
-        {
-            this.TenNhanVien = null;
-            this.CCCD = null;
-            this.NgaySinh = null;
-            this.GioiTinh = null;
-            this.ChucVu = null;
-            this.SoDienThoai = null;
-            this.BoPhan = null;
-            this.TenTaiKhoan = null;
-            this.MatKhau = null;
         }
     }
 }
