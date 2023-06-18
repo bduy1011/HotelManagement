@@ -14,14 +14,14 @@ Phần mềm quản lý khách sạn được thiết kế nhằm hỗ trợ kh�
 | 3	|[Nguyễn Phước Thiện](mailto:21521462@gm.uit.edu.vn)	| 21521462	|
 | 4	|[Nguyễn Duy Đạt](mailto:21521936@gm.uit.edu.vn)	| 21521936	| 
 
-**Giáo viên hướng dẫn:** Nguyễn Đình Loan Phương
+**Giáo viên hướng dẫn:** Lê Võ Đình Kha
 
 ### Công cụ:
 
-- **IDE:** 
+- **IDE:** Visual Studio Community 2022
 - **Ngôn ngữ lập trình:** C#
-- **Framework & Library:** 
-- **Design Pattern:** 
-- **Database**: 
+- **Framework & Library:** WPF
+- **Design Pattern:** StarUML
+- **Database**: Microsoft SQL Sever 2019
 
 ### Tính năng:
